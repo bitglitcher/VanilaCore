@@ -1,0 +1,53 @@
+//3:51AM Arithmetic Logic Unit for the RISC V RV32I implementation
+
+module alu
+(
+    input  [31:0] ra_d,
+    input  [31:0] rb_d,
+    output [31:0] rd_d,
+    input [2:0] func3,
+    input [6:0] func7,
+);
+
+wire signed [31:0] signed_ra = ra_d; 
+wire signed [31:0] signed_rb = rb_d; 
+
+//R type
+paramter ADD = 10'b0000000000;
+paramter SUB = 10'b0100000000;
+paramter SLL = 10'b0000000001;
+paramter SLT = 10'b0000000010;
+paramter SLTU = 10'b0000000011;
+paramter XOR = 10'b0000000100;
+paramter SRL = 10'b0000000101;
+paramter SRA = 10'b0100000101;
+paramter OR = 10'b0000000110;
+paramter AND = 10'b0000000111;
+//I type
+//parameter ADDI = 10'b0000000000;
+//parameter SLTI = 10'b0000000010;
+//parameter SLTIU = 10'b0000000011;
+//parameter XORI = 10'b0000000100;
+//parameter ORI = 10'b0000000110;
+//parameter ANDI = 10'b0000000111;
+//parameter SLLI = 10'b0000000001;
+//parameter SRLI = 10'b0000000101;
+//parameter SRAI = 10'b0100000101;
+
+always_comb
+begin
+    case({func7, func3})
+        ADD: rd_d = signed_ra_d + signed_rb_d;
+        SUB: rd_d = signed_ra_d - signed_rb_d;
+        SLL: rd_d = ra_d << rb_d;
+        SLT: rd_d = (signed_ra < signed_rb) ? 31'b1 : 32'b0;
+        SLTU: rd_d = (ra_d < rb_d) ? 31'b1 : 32'b0;
+        XOR: rd_d = ra_d ^ rb_d;
+        SRL: rd_d = ra_d >> rb_d;
+        SRA: rd_d = ra_d >>> rb_d;
+        OR: rd_d = ra_d | rb_d;
+        AND: rd_d = ra_d  & rb_d;
+    endcase
+end
+
+endmodule

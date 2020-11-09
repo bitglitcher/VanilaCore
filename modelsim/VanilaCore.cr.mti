@@ -1,0 +1,134 @@
+C:/Users/camin/Documents/VanilaCore/core/console_test.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/console_test.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module console_test
+
+Top level modules:
+	console_test
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/alu.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/alu.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module alu
+
+Top level modules:
+	alu
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/seven_segment.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/seven_segment.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module seven_segment
+
+Top level modules:
+	seven_segment
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/branch_unit.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/branch_unit.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module branch_unit
+
+Top level modules:
+	branch_unit
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/testbench/core_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/testbench/core_tb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module core_tb
+
+Top level modules:
+	core_tb
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module cross_bar
+
+Top level modules:
+	cross_bar
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/regfile.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/regfile.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module regfile
+
+Top level modules:
+	regfile
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/wishbone.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/wishbone.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling interface WB4
+
+Top level modules:
+	--none--
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/load_window.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/load_window.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module load_window
+
+Top level modules:
+	load_window
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/seven_segment_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/seven_segment_tb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module seven_segment_tb
+
+Top level modules:
+	seven_segment_tb
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/ram.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/ram.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module ram
+
+Top level modules:
+	ram
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/ram_wb.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/ram_wb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module ram_wb
+
+Top level modules:
+	ram_wb
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/core.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/core.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module core
+
+Top level modules:
+	core
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/store_window_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/store_window_tb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module store_window_tb
+
+Top level modules:
+	store_window_tb
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/console.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/console.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module console
+
+Top level modules:
+	console
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/testbench/ram_wb_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/testbench/ram_wb_tb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module ram_wb_tb
+
+Top level modules:
+	ram_wb_tb
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/debounce.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/debounce.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module debounce
+
+Top level modules:
+	debounce
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/testbench/test_ram.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/testbench/test_ram.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module test_ram
+
+Top level modules:
+	test_ram
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/console_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/console_tb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module console_tb
+
+Top level modules:
+	console_tb
+
+} {} {}}

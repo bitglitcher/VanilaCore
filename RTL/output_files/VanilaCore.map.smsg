@@ -1,0 +1,7 @@
+Warning (10268): Verilog HDL information at cross_bar.sv(43): always construct contains both blocking and non-blocking assignments File: C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv Line: 43
+Warning (10268): Verilog HDL information at core.sv(53): always construct contains both blocking and non-blocking assignments File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 53
+Warning (10268): Verilog HDL information at core.sv(187): always construct contains both blocking and non-blocking assignments File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 187
+Warning (10268): Verilog HDL information at core.sv(540): always construct contains both blocking and non-blocking assignments File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 540
+Info (10281): Verilog HDL Declaration information at core.sv(137): object "j_imm" differs only in case from object "J_IMM" in the same scope File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 137
+Info (10281): Verilog HDL Declaration information at core.sv(130): object "b_imm" differs only in case from object "B_IMM" in the same scope File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 130
+Info (10281): Verilog HDL Declaration information at core.sv(497): object "DATA_BUS_STATE" differs only in case from object "data_bus_state" in the same scope File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 497

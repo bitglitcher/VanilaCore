@@ -1,0 +1,62 @@
+
+
+
+module cross_bar
+(
+    //Define master
+    WB4.master cpu,
+    WB4.master memory, //New masters
+    WB4.master uart //New masters
+);
+
+parameter MEMORY_START = 32'h00000000;
+parameter MEMORY_END = 32'h0000ffff;
+parameter UART_START = 32'h00010000;
+parameter UART_END = 32'h00010000;
+
+
+always_comb
+begin
+    memory.ADR = cpu.ADR;
+    memory.DAT_O = cpu.DAT_O;
+    memory.WE = cpu.WE; 
+    memory.CYC = cpu.CYC;
+    uart.ADR = cpu.ADR;
+    uart.DAT_O = cpu.DAT_O;
+    uart.WE = cpu.WE; 
+    uart.CYC = cpu.CYC;
+end
+
+
+
+
+//address decoding
+always_comb
+begin
+        if((cpu.ADR <= MEMORY_END) & (cpu.ADR >= MEMORY_START)) 
+        begin
+            cpu.DAT_I = memory.DAT_O;
+            memory.STB <= cpu.STB;
+            uart.STB <= 0;
+            cpu.ACK <= memory.ACK;
+        end
+        else if((cpu.ADR <= UART_END) & (cpu.ADR >= UART_START))  
+        begin
+            cpu.DAT_I = uart.DAT_O;
+            uart.STB <= cpu.STB;
+            memory.STB <= 0;
+            cpu.ACK <= uart.ACK;
+        end
+        else
+        begin
+            cpu.DAT_I = 0;
+            uart.STB <= 0;
+            memory.STB <= 0;
+            cpu.ACK <= 1;
+        end
+end
+
+
+
+
+endmodule

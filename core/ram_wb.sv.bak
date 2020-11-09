@@ -1,0 +1,62 @@
+//8:48AM Wishbone compatible RAM wrapper
+//Author: Benjamin Herrera Navarro
+//10/31/2020
+
+
+//All wishbone modules have to be reseted on the positive edge of the clock
+
+interface WB4(input clk, input rst);
+    logic ACK;
+    logic STB;
+    logic ADR;
+    logic CYC;
+    logic DAT_I;
+    logic DAT_O;
+    logic WE;
+    modport slave(input clk, rst,
+    input STB,
+    input ADR,
+    input CYC,
+    output DAT_I,
+    input DAT_O,
+    output ACK,
+    input WE);
+    modport master(input clk, rst,
+    output STB,
+    output ADR,
+    output CYC,
+    input DAT_I,
+    output DAT_O,
+    input ACK,
+    output WE);
+endinterface //WB4
+
+
+
+module ram_wb(WB4.slave wb);
+
+ram RAM_0
+#(32, 10)
+(
+    .clk(wb.clk),
+	.we(wb.WE & wb.STB)
+	.data(wb.DAT_O),
+	.addr(wb.ADR),
+	.q(wb.DAT_I)
+);
+
+//Sample signals at the rising edge
+always@(posedge wb.clk)
+begin
+    if(wb.CYC & wb.STB)
+    begin
+        wb.ACK = 1'b1;
+    end
+    else
+    begin
+        wb.ACK = 1'b0;
+    end
+end
+
+
+endmodule
