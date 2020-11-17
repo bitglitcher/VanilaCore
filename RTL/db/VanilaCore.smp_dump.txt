@@ -10,7 +10,7 @@ data_bus_state.UWRITE1 0 0 1 0 0 0 0 1
 data_bus_state.UWRITE2 0 1 0 0 0 0 0 1 
 data_bus_state.IGNORE 1 0 0 0 0 0 0 1 
 
-State Machine - |soc|core:CORE_0|state
+State Machine - |soc|core:CORE_0|fetch_stm:fetch_stm_0|state
 Name state.READ state.EXEC state.INC 
 state.READ 0 0 0 
 state.INC 1 0 1 

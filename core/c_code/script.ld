@@ -10,7 +10,7 @@ OUTPUT_ARCH(riscv)
 MEMORY
 {
    /* qemu-system-risc64 virt machine */
-   RAM (rwx)  : ORIGIN = 0x000000, LENGTH = 8K
+   RAM (rwx)  : ORIGIN = 0x000000, LENGTH = 128K
 }
 /* >>> End of our addition. <<< */
 ENTRY(_start)

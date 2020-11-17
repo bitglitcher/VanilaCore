@@ -7,20 +7,10 @@ logic rst;
 
 WB4 inst_bus(clk, rst);
 WB4 data_bus(clk, rst);
-WB4 memory_wb(clk, rst);
-WB4 uart_wb(clk, rst);
 
 
-cross_bar cross_bar_0 
-(
-    //Define master
-    .cpu(data_bus),
-    .memory(memory_wb),
-    .uart(uart_wb)
-);
-
-ram_wb MEMORY_INST(.wb(memory_wb));
-ram_wb MEMORY_DATA(.wb(uart_wb));
+ram_wb MEMORY_INST(.wb(inst_bus));
+ram_wb MEMORY_DATA(.wb(data_bus));
 
 core CORE_0
     (

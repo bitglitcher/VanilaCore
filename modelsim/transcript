@@ -1,0 +1,185 @@
+# Compile of fetch_stm.sv failed with 2 errors.
+# Compile of fetch_stm.sv was successful.
+# Compile of core.sv was successful.
+# Compile of fetch_stm.sv was successful.
+# Compile of core.sv was successful.
+# Compile of fetch_stm.sv was successful.
+# Compile of control_unit.sv failed with 2 errors.
+# Compile of global_pkg.sv was successful.
+# Compile of control_unit.sv failed with 2 errors.
+# Compile of control_unit.sv failed with 2 errors.
+# Compile of control_unit.sv failed with 82 errors.
+# Compile of decode.sv failed with 1 errors.
+# Compile of decode.sv was successful.
+# Compile of decode.sv failed with 2 errors.
+# Compile of decode.sv was successful.
+# Compile of decoder.sv failed with 1 errors.
+# Compile of decoder.sv was successful.
+# Compile of core.sv failed with 10 errors.
+# Compile of control_unit.sv failed with 81 errors.
+# Compile of control_unit.sv failed with 81 errors.
+# Compile of control_unit.sv failed with 81 errors.
+# Compile of control_unit.sv failed with 81 errors.
+# Compile of global_pkg.sv was successful.
+# Compile of control_unit.sv failed with 58 errors.
+# Compile of control_unit.sv failed with 58 errors.
+# Compile of global_pkg.sv was successful.
+# Compile of control_unit.sv failed with 47 errors.
+# Compile of control_unit.sv failed with 25 errors.
+# Compile of control_unit.sv failed with 14 errors.
+# Compile of control_unit.sv failed with 1 errors.
+# Compile of control_unit.sv failed with 2 errors.
+# Compile of control_unit.sv failed with 22 errors.
+# Compile of control_unit.sv failed with 3 errors.
+# Compile of control_unit.sv failed with 1 errors.
+# Compile of control_unit.sv failed with 22 errors.
+# Compile of control_unit.sv was successful.
+# Compile of control_unit.sv failed with 1 errors.
+# Compile of control_unit.sv was successful.
+# Compile of core.sv failed with 1 errors.
+# Compile of global_pkg.sv was successful.
+# Compile of core.sv failed with 1 errors.
+# Compile of core.sv failed with 1 errors.
+# Compile of core.sv failed with 1 errors.
+# Compile of core.sv was successful.
+vsim work.core_tb
+# vsim work.core_tb 
+# Start time: 19:08:50 on Nov 16,2020
+# Loading sv_std.std
+# Loading work.core_tb
+# Loading work.WB4
+# Loading work.cross_bar
+# Loading work.ram_wb
+# Loading work.ram
+# Loading work.global_pkg
+# Loading work.core_sv_unit
+# Loading work.core
+# Loading work.fetch_stm
+# Loading work.decode
+# Loading work.decoder
+# ** Fatal: (vsim-3695) C:/Users/camin/Documents/VanilaCore/core/testbench/core_tb.sv(14): The interface port 'seven_segments' must be passed an actual interface.
+#    Time: 0 ps  Iteration: 0  Instance: /core_tb/cross_bar_0 File: C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv
+# FATAL ERROR while loading design
+# Error loading design
+# End time: 19:08:51 on Nov 16,2020, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
+# Compile of ram_wb_tb.sv was successful.
+# Compile of alu.sv was successful.
+# Compile of core.sv was successful.
+# Compile of ram.sv was successful.
+# Compile of ram_wb.sv was successful.
+# Compile of regfile.sv was successful.
+# Compile of wishbone.sv was successful.
+# Compile of test_ram.sv was successful.
+# Compile of core_tb.sv was successful.
+# Compile of load_window.sv was successful.
+# Compile of branch_unit.sv was successful.
+# Compile of console.sv was successful.
+# Compile of cross_bar.sv was successful.
+# Compile of soc.sv was successful.
+# Compile of console_test.sv was successful.
+# Compile of console_tb.sv was successful.
+# Compile of seven_segment_tb.sv was successful.
+# Compile of seven_segment.sv was successful.
+# Compile of store_window_tb.sv was successful.
+# Compile of debounce.sv was successful.
+# Compile of vga.sv was successful.
+# Compile of vga_controller.sv was successful.
+# Compile of decoder.sv was successful.
+# Compile of fetch_stm.sv was successful.
+# Compile of global_pkg.sv was successful.
+# Compile of control_unit.sv was successful.
+# Compile of decode.sv was successful.
+# 27 compiles, 0 failed with no errors.
+vsim work.core_tb
+# vsim work.core_tb 
+# Start time: 19:09:38 on Nov 16,2020
+# Loading sv_std.std
+# Loading work.core_tb
+# Loading work.WB4
+# Loading work.cross_bar
+# Loading work.ram_wb
+# Loading work.ram
+# Loading work.global_pkg
+# Loading work.core_sv_unit
+# Loading work.core
+# Loading work.fetch_stm
+# Loading work.decode
+# Loading work.decoder
+# ** Fatal: (vsim-3695) C:/Users/camin/Documents/VanilaCore/core/testbench/core_tb.sv(12): The interface port 'memory' must be passed an actual interface.
+#    Time: 0 ps  Iteration: 0  Instance: /core_tb/cross_bar_0 File: C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv
+# FATAL ERROR while loading design
+# Error loading design
+# End time: 19:09:38 on Nov 16,2020, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
+# Compile of core_tb.sv was successful.
+vsim work.core_tb
+# vsim work.core_tb 
+# Start time: 19:10:25 on Nov 16,2020
+# Loading sv_std.std
+# Loading work.core_tb
+# Loading work.WB4
+# Loading work.ram_wb
+# Loading work.ram
+# Loading work.global_pkg
+# Loading work.core_sv_unit
+# Loading work.core
+# Loading work.fetch_stm
+# Loading work.decode
+# Loading work.decoder
+# ** Warning: (vsim-3015) C:/Users/camin/Documents/VanilaCore/core/ram_wb.sv(7): [PCDPC] - Port size (13) does not match connection size (32) for port 'addr'. The port definition is at: C:/Users/camin/Documents/VanilaCore/core/ram.sv(8).
+#    Time: 0 ps  Iteration: 0  Instance: /core_tb/MEMORY_INST/RAM_0 File: C:/Users/camin/Documents/VanilaCore/core/ram.sv
+# ** Warning: (vsim-3015) C:/Users/camin/Documents/VanilaCore/core/ram_wb.sv(7): [PCDPC] - Port size (13) does not match connection size (32) for port 'addr'. The port definition is at: C:/Users/camin/Documents/VanilaCore/core/ram.sv(8).
+#    Time: 0 ps  Iteration: 0  Instance: /core_tb/MEMORY_DATA/RAM_0 File: C:/Users/camin/Documents/VanilaCore/core/ram.sv
+add wave -position insertpoint sim:/core_tb/*
+add wave -position insertpoint sim:/core_tb/CORE_0/*
+ls
+# ROM.hex  ROM.hex.bak  VanilaCore.cr.mti  VanilaCore.mpf  modelsim.ini  transcript  vsim.wlf          
+# 
+# work:
+# _info          _lib1_235.qpg  _lib1_29.qpg  _lib1_45.qpg  _lib1_64.qpg  
+# _lib.qdb       _lib1_235.qtl  _lib1_29.qtl  _lib1_45.qtl  _lib1_64.qtl  
+# _lib1_235.qdb  _lib1_29.qdb   _lib1_45.qdb  _lib1_64.qdb  _vmake        
+claer
+# invalid command name "claer"
+las
+# wrong # args: should be "lassign list varName ?varName ...?"
+clear
+# invalid command name "clear"
+ls
+# ROM.hex  ROM.hex.bak  VanilaCore.cr.mti  VanilaCore.mpf  modelsim.ini  transcript  vsim.wlf          
+# 
+# work:
+# _info          _lib1_235.qpg  _lib1_29.qpg  _lib1_45.qpg  _lib1_64.qpg  
+# _lib.qdb       _lib1_235.qtl  _lib1_29.qtl  _lib1_45.qtl  _lib1_64.qtl  
+# _lib1_235.qdb  _lib1_29.qdb   _lib1_45.qdb  _lib1_64.qdb  _vmake        
+clear
+# invalid command name "clear"
+ls
+# ROM.hex  ROM.hex.bak  VanilaCore.cr.mti  VanilaCore.mpf  modelsim.ini  transcript  vsim.wlf          
+# 
+# work:
+# _info          _lib1_235.qpg  _lib1_29.qpg  _lib1_45.qpg  _lib1_64.qpg  
+# _lib.qdb       _lib1_235.qtl  _lib1_29.qtl  _lib1_45.qtl  _lib1_64.qtl  
+# _lib1_235.qdb  _lib1_29.qdb   _lib1_45.qdb  _lib1_64.qdb  _vmake        
+restart
+# ** Warning: (vsim-3015) C:/Users/camin/Documents/VanilaCore/core/ram_wb.sv(7): [PCDPC] - Port size (13) does not match connection size (32) for port 'addr'. The port definition is at: C:/Users/camin/Documents/VanilaCore/core/ram.sv(8).
+#    Time: 0 ps  Iteration: 0  Instance: /core_tb/MEMORY_INST/RAM_0 File: C:/Users/camin/Documents/VanilaCore/core/ram.sv
+# ** Warning: (vsim-3015) C:/Users/camin/Documents/VanilaCore/core/ram_wb.sv(7): [PCDPC] - Port size (13) does not match connection size (32) for port 'addr'. The port definition is at: C:/Users/camin/Documents/VanilaCore/core/ram.sv(8).
+#    Time: 0 ps  Iteration: 0  Instance: /core_tb/MEMORY_DATA/RAM_0 File: C:/Users/camin/Documents/VanilaCore/core/ram.sv
+run 1000
+# Init memory
+# Init memory
+# ** Warning: (vsim-8315) C:/Users/camin/Documents/VanilaCore/core/fetch_stm.sv(55): No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Instance: /core_tb/CORE_0/fetch_stm_0
+add wave -position insertpoint sim:/core_tb/CORE_0/fetch_stm_0/*
+restart
+# ** Warning: (vsim-3015) C:/Users/camin/Documents/VanilaCore/core/ram_wb.sv(7): [PCDPC] - Port size (13) does not match connection size (32) for port 'addr'. The port definition is at: C:/Users/camin/Documents/VanilaCore/core/ram.sv(8).
+#    Time: 0 ps  Iteration: 0  Instance: /core_tb/MEMORY_INST/RAM_0 File: C:/Users/camin/Documents/VanilaCore/core/ram.sv
+# ** Warning: (vsim-3015) C:/Users/camin/Documents/VanilaCore/core/ram_wb.sv(7): [PCDPC] - Port size (13) does not match connection size (32) for port 'addr'. The port definition is at: C:/Users/camin/Documents/VanilaCore/core/ram.sv(8).
+#    Time: 0 ps  Iteration: 0  Instance: /core_tb/MEMORY_DATA/RAM_0 File: C:/Users/camin/Documents/VanilaCore/core/ram.sv
+run 1000
+# Init memory
+# Init memory
+# ** Warning: (vsim-8315) C:/Users/camin/Documents/VanilaCore/core/fetch_stm.sv(55): No condition is true in the unique/priority if/case statement.
+#    Time: 0 ps  Iteration: 0  Instance: /core_tb/CORE_0/fetch_stm_0

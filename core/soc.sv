@@ -9,15 +9,16 @@ module soc
     output [3:0] select
 );
 
+
+logic new_clock;
+logic new_rst;
+
 //logic clk;
 //logic rst;
 //logic uart_tx;
 //logic [6:0] display_data;
 //logic [3:0] select;
-
-
-logic new_clock;
-logic new_rst;
+//assign new_rst = rst;
 
 initial begin
     new_clock = 0;
@@ -33,14 +34,12 @@ debounce debounce_rst
     .debounce(~rst),
     .debounced(new_rst)
 );
-//assign new_rst = rst;
 
 WB4 inst_bus(new_clock, new_rst);
 WB4 data_bus(new_clock, new_rst);
 WB4 memory_wb(new_clock, new_rst);
 WB4 uart_wb(new_clock, new_rst);
 WB4 seven_segment_wb(new_clock, new_rst);
-
 
 cross_bar cross_bar_0 
 (
@@ -60,6 +59,7 @@ seven_segment seven_segment_0(
     .display_data(display_data),
     .select(select)
     );
+
 
 
 core CORE_0

@@ -1,7 +1,8 @@
+Warning (10268): Verilog HDL information at fetch_stm.sv(55): always construct contains both blocking and non-blocking assignments File: C:/Users/camin/Documents/VanilaCore/core/fetch_stm.sv Line: 55
 Warning (10268): Verilog HDL information at cross_bar.sv(43): always construct contains both blocking and non-blocking assignments File: C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv Line: 43
-Warning (10268): Verilog HDL information at core.sv(53): always construct contains both blocking and non-blocking assignments File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 53
-Warning (10268): Verilog HDL information at core.sv(187): always construct contains both blocking and non-blocking assignments File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 187
-Warning (10268): Verilog HDL information at core.sv(540): always construct contains both blocking and non-blocking assignments File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 540
-Info (10281): Verilog HDL Declaration information at core.sv(137): object "j_imm" differs only in case from object "J_IMM" in the same scope File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 137
-Info (10281): Verilog HDL Declaration information at core.sv(130): object "b_imm" differs only in case from object "B_IMM" in the same scope File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 130
-Info (10281): Verilog HDL Declaration information at core.sv(497): object "DATA_BUS_STATE" differs only in case from object "data_bus_state" in the same scope File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 497
+Warning (10268): Verilog HDL information at core.sv(111): always construct contains both blocking and non-blocking assignments File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 111
+Warning (10268): Verilog HDL information at core.sv(468): always construct contains both blocking and non-blocking assignments File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 468
+Info (10281): Verilog HDL Declaration information at core.sv(41): object "j_imm" differs only in case from object "J_IMM" in the same scope File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 41
+Info (10281): Verilog HDL Declaration information at core.sv(39): object "b_imm" differs only in case from object "B_IMM" in the same scope File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 39
+Info (10281): Verilog HDL Declaration information at core.sv(37): object "i_imm" differs only in case from object "I_IMM" in the same scope File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 37
+Info (10281): Verilog HDL Declaration information at core.sv(425): object "DATA_BUS_STATE" differs only in case from object "data_bus_state" in the same scope File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 425
