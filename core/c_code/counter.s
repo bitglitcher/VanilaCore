@@ -22,7 +22,7 @@ _start:
 
     addi x6, zero, 0
     .wait1: #Wait
-    li x5, 0xffff
+    li x5, 0xf
     addi x6, x6, 1
     bge x5, x6, .wait1
 

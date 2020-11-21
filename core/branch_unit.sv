@@ -5,6 +5,7 @@ module branch_unit
     input [31:0] rs1_d,
     input [31:0] rs2_d,
     input [2:0] funct3,
+    input enable,
     output logic branch
 );
 
@@ -29,8 +30,7 @@ assign BLT_S = ((32'(signed'(rs1_d)) < 32'(signed'(rs2_d))) & (funct3 == BLT))? 
 assign BGE_S = ((32'(signed'(rs1_d)) >= 32'(signed'(rs2_d))) & (funct3 == BGE))? 1 : 0;
 assign BLTU_S = ((rs1_d < rs2_d) & funct3 == BLTU)? 1 : 0;
 assign BGEU_S = ((rs1_d >= rs2_d) & funct3 == BGEU)? 1 : 0;
-assign branch = (BEQ_S | BNE_S | BLT_S | BGE_S | BLTU_S | BGEU_S)? 1 : 0;
-
+assign branch = ((BEQ_S | BNE_S | BLT_S | BGE_S | BLTU_S | BGEU_S) & enable)? 1 : 0;
 
 
 endmodule

@@ -1,5 +1,5 @@
 Flow report for VanilaCore
-Mon Nov 16 18:04:15 2020
+Sat Nov 21 07:07:13 2020
 Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
 
 
@@ -41,17 +41,17 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Mon Nov 16 18:04:15 2020       ;
+; Flow Status                        ; Successful - Sat Nov 21 07:07:13 2020       ;
 ; Quartus Prime Version              ; 19.1.0 Build 670 09/22/2019 SJ Lite Edition ;
 ; Revision Name                      ; VanilaCore                                  ;
 ; Top-level Entity Name              ; soc                                         ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE6E22C8                                 ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 4,917                                       ;
-;     Total combinational functions  ; 3,861                                       ;
-;     Dedicated logic registers      ; 1,289                                       ;
-; Total registers                    ; 1289                                        ;
+; Total logic elements               ; 4,878                                       ;
+;     Total combinational functions  ; 3,814                                       ;
+;     Dedicated logic registers      ; 1,367                                       ;
+; Total registers                    ; 1367                                        ;
 ; Total pins                         ; 14                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 131,072                                     ;
@@ -65,7 +65,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/16/2020 18:03:50 ;
+; Start date & time ; 11/21/2020 07:06:58 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; VanilaCore          ;
 +-------------------+---------------------+
@@ -76,7 +76,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+----------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 929355256320.160556782919132           ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 929355256320.160596041819640           ; --            ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --          ; --         ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                      ; --            ; --          ; --         ;
@@ -98,8 +98,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:25     ; 1.0                     ; 4829 MB             ; 00:00:41                           ;
-; Total                ; 00:00:25     ; --                      ; --                  ; 00:00:41                           ;
+; Analysis & Synthesis ; 00:00:14     ; 1.0                     ; 4836 MB             ; 00:00:24                           ;
+; Total                ; 00:00:14     ; --                      ; --                  ; 00:00:24                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

@@ -24,7 +24,7 @@ struct TestCase
 };
 
 TestCase test_cases[] {
-    { .name = "add", .rs1 = 0, .rs2 = 0, .expected = 0, .func3 = 0b000, .func7 = 0b0000000},
+        { .name = "add", .rs1 = 0, .rs2 = 0, .expected = 0, .func3 = 0b000, .func7 = 0b0000000},
         { .name = "sub", .rs1 = 0, .rs2 = 0, .expected = 0, .func3 = 0b000, .func7 = 0b0100000}, 
         { .name = "sll", .rs1 = 0, .rs2 = 0, .expected = 0, .func3 = 0b001, .func7 = 0b0000000}, 
         { .name = "slt", .rs1 = 0, .rs2 = 0, .expected = 0, .func3 = 0b010, .func7 = 0b0000000}, 
@@ -41,71 +41,227 @@ int main(int argc, char **argv, char **env) {
     Valu* alu = new Valu;
     alu->eval();
 
-    printf("Testing ALU: test cases %u\n", UINT16_MAX);
-    printf("Testing signed addition\n");
-    //Testing ADD
-    TestCase *test_case = &test_cases[0];
-    for(uint32_t i = 0; i < UINT16_MAX;i += 512)
+    printf("Testing ALU..\n");
+
+    for (size_t i = 0; i < INT16_MAX; i++)
     {
-        for(uint32_t x = 0; x < UINT16_MAX;x += 512)
+        //Testing ADD
+        TestCase* test_case;
+        test_case = &test_cases[0];
+        alu->ra_d  = i;
+        alu->rb_d  = i;	
+        alu->func3  = test_case->func3;  	
+        alu->func7  = test_case->func7;  	
+        alu->eval();
+
+        if(alu->rd_d == (i + i))
         {
+            printf("ADD: pass\n");
+        }
+        else
+        {
+            printf("Got %d expected %d\n", alu->rd_d, (i + i));
+            printf("ADD: fail\n");
+        }
 
-            alu->ra_d  = i;
-            alu->rb_d  = x;	
-            alu->func3  = test_case->func3;  	
-            alu->func7  = test_case->func7;  	
-            alu->eval();
+        //Testing ADD
+        test_case = &test_cases[0];
+        alu->ra_d  = -i;
+        alu->rb_d  = i;	
+        alu->func3  = test_case->func3;  	
+        alu->func7  = test_case->func7;  	
+        alu->eval();
 
-            if (alu->rd_d != (i + x)) {
-                printf("%s: fail (expected %04X but was %04X)\n",
-                        test_case->name, (i + x),
-                        alu->rd_d);
-            }
+        if(alu->rd_d == (i + (-i)))
+        {
+            printf("ADD: pass\n");
+        }
+        else
+        {
+            printf("Got %d expected %d\n", alu->rd_d, (-i + i));
+            printf("ADD: fail\n");
+        }
+
+        //Testing SUB
+        test_case = &test_cases[1];
+        alu->ra_d  = i;
+        alu->rb_d  = i;	
+        alu->func3  = test_case->func3;  	
+        alu->func7  = test_case->func7;  	
+        alu->eval();
+
+        if(alu->rd_d == (i - i))
+        {
+            printf("SUB: pass\n");
+        }
+        else
+        {
+            printf("Got %d expected %d\n", alu->rd_d, (i - i));
+            printf("SUB: fail\n");
+        }
+        //Testing SUB
+        test_case = &test_cases[1];
+        alu->ra_d  = -i;
+        alu->rb_d  = i;	
+        alu->func3  = test_case->func3;  	
+        alu->func7  = test_case->func7;  	
+        alu->eval();
+
+        if(alu->rd_d == (-i - i))
+        {
+            printf("SUB: pass\n");
+        }
+        else
+        {
+            printf("Got %d expected %d\n", alu->rd_d, (-i - i));
+            printf("SUB: fail\n");
+        }
+        
+        //Testing SLL
+        test_case = &test_cases[2];
+        alu->ra_d  = i;
+        alu->rb_d  = i;	
+        alu->func3  = test_case->func3;  	
+        alu->func7  = test_case->func7;  	
+        alu->eval();
+
+        if(alu->rd_d == (1 << 2))
+        {
+            printf("SLL: pass\n");
+        }
+        else
+        {
+            printf("Got %d expected %d\n", alu->rd_d, (i << i));
+            printf("SLL: fail\n");
+        }
+
+        //Testing SLT
+        test_case = &test_cases[3];
+        alu->ra_d  = -i;
+        alu->rb_d  = 23214;	
+        alu->func3  = test_case->func3;  	
+        alu->func7  = test_case->func7;  	
+        alu->eval();
+
+        if(alu->rd_d == 1)
+        {
+            printf("STL: pass\n");
+        }
+        else
+        {
+            printf("Got %d expected %d\n", alu->rd_d, ((-i < 23214) ? 1 : 0));
+            printf("STL: fail\n");
+        }
+
+        //Testing SLTU
+        test_case = &test_cases[4];
+        alu->ra_d  = 1;
+        alu->rb_d  = 2;	
+        alu->func3  = test_case->func3;  	
+        alu->func7  = test_case->func7;  	
+        alu->eval();
+
+        if(alu->rd_d == 1)
+        {
+            printf("STLU: pass\n");
+        }
+        else
+        {
+            printf("Got %d expected %d\n", alu->rd_d, 1);
+            printf("STLU: fail\n");
+        }
+
+        //Testing XOR
+        test_case = &test_cases[5];
+        alu->ra_d  = 1;
+        alu->rb_d  = 2;	
+        alu->func3  = test_case->func3;  	
+        alu->func7  = test_case->func7;  	
+        alu->eval();
+
+        if(alu->rd_d == (1 ^ 2))
+        {
+            printf("XOR: pass\n");
+        }
+        else
+        {
+            printf("Got %d expected %d\n", alu->rd_d, (1 ^ 2));
+            printf("XOR: fail\n");
+        }
+
+        //Testing SRL
+        test_case = &test_cases[6];
+        alu->ra_d  = 1;
+        alu->rb_d  = 2;	
+        alu->func3  = test_case->func3;  	
+        alu->func7  = test_case->func7;  	
+        alu->eval();
+
+        if(alu->rd_d == (1 >> 2))
+        {
+            printf("SRL: pass\n");
+        }
+        else
+        {
+            printf("Got %d expected %d\n", alu->rd_d, (1 >> 2));
+            printf("SRL: fail\n");
+        }
+
+        //Testing SRA
+        test_case = &test_cases[7];
+        alu->ra_d  = 1;
+        alu->rb_d  = 2;	
+        alu->func3  = test_case->func3;  	
+        alu->func7  = test_case->func7;  	
+        alu->eval();
+
+        if(alu->rd_d == (1 >> 2))
+        {
+            printf("SRA: pass\n");
+        }
+        else
+        {
+            printf("Got %d expected %d\n", alu->rd_d, (1 >> 2));
+            printf("SRA: fail\n");
+        }
+
+        //Testing OR
+        test_case = &test_cases[8];
+        alu->ra_d  = 1;
+        alu->rb_d  = 2;	
+        alu->func3  = test_case->func3;  	
+        alu->func7  = test_case->func7;  	
+        alu->eval();
+
+        if(alu->rd_d == (1 | 2))
+        {
+            printf("OR: pass\n");
+        }
+        else
+        {
+            printf("Got %d expected %d\n", alu->rd_d, (1 | 2));
+            printf("OR: fail\n");
+        }
+
+        //Testing AND
+        test_case = &test_cases[9];
+        alu->ra_d  = 1;
+        alu->rb_d  = 2;	
+        alu->func3  = test_case->func3;  	
+        alu->func7  = test_case->func7;  	
+        alu->eval();
+
+        if(alu->rd_d == (1 & 2))
+        {
+            printf("AND: pass\n");
+        }
+        else
+        {
+            printf("Got %d expected %d\n", alu->rd_d, (1 & 2));
+            printf("AND: fail\n");
         }
     }
-    printf("ADD: pass\n");
-    //Testing SUB
-    test_case = &test_cases[1];
-    for(uint32_t i = 0; i < UINT16_MAX;i += 512)
-    {
-        for(uint32_t x = 0; x < UINT16_MAX;x += 512)
-        {
-
-            alu->ra_d  = i;
-            alu->rb_d  = x;	
-            alu->func3  = test_case->func3;  	
-            alu->func7  = test_case->func7;  	
-            alu->eval();
-
-            if (alu->rd_d != (i - x)) {
-                printf("%s: fail (expected %04X but was %04X)\n",
-                        test_case->name, (i + x),
-                        alu->rd_d);
-            }
-        }
-    }
-    printf("SUB: pass\n");
-    //Testing SSL
-    test_case = &test_cases[2];
-    for(uint32_t i = 0; i < 10;i += 1)
-    {
-        for(uint32_t x = 0; x < 10;x += 1)
-        {
-
-            alu->ra_d  = i;
-            alu->rb_d  = x;	
-            alu->func3  = test_case->func3;  	
-            alu->func7  = test_case->func7;  	
-            alu->eval();
-
-            if (alu->rd_d != (i << (x & 0b11111))) {
-                printf("%s: fail (expected %04X but was %04X)\n",
-                        test_case->name, (i + x),
-                        alu->rd_d);
-            }
-        }
-    }
-    printf("SSL: pass\n");
+    
     // while (!Verilated::gotFinish()) { 
     //int num_test_cases = sizeof(test_cases)/sizeof(TestCase);
 //

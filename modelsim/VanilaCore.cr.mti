@@ -5,19 +5,19 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	vga_controller
 
-} {} {}} C:/Users/camin/Documents/VanilaCore/core/console_test.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/console_test.sv
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module console_test
-
-Top level modules:
-	console_test
-
 } {} {}} C:/Users/camin/Documents/VanilaCore/core/alu.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/alu.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module alu
 
 Top level modules:
 	alu
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/console_test.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/console_test.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module console_test
+
+Top level modules:
+	console_test
 
 } {} {}} C:/Users/camin/Documents/VanilaCore/core/seven_segment.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/seven_segment.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
@@ -39,6 +39,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 
 Top level modules:
 	branch_unit
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/testbench/core_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/testbench/core_tb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module core_tb
+
+Top level modules:
+	core_tb
 
 } {} {}} C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
@@ -121,12 +128,28 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	store_window_tb
 
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/memory_access.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/memory_access.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling package memory_access_sv_unit
+-- Importing package global_pkg
+-- Compiling module memory_access
+
+Top level modules:
+	memory_access
+
 } {} {}} C:/Users/camin/Documents/VanilaCore/core/global_pkg.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/global_pkg.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling package global_pkg
 
 Top level modules:
 	--none--
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/decoder_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/decoder_tb.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module decoder_tb
+
+Top level modules:
+	decoder_tb
 
 } {} {}} C:/Users/camin/Documents/VanilaCore/core/console.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/console.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
@@ -135,19 +158,19 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	console
 
-} {} {}} C:/Users/camin/Documents/VanilaCore/core/decode.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/decode.sv
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling interface decode
-
-Top level modules:
-	--none--
-
 } {} {}} C:/Users/camin/Documents/VanilaCore/core/testbench/ram_wb_tb.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/testbench/ram_wb_tb.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module ram_wb_tb
 
 Top level modules:
 	ram_wb_tb
+
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/decode.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/decode.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling interface decode
+
+Top level modules:
+	--none--
 
 } {} {}} C:/Users/camin/Documents/VanilaCore/core/fetch_stm.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/fetch_stm.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016

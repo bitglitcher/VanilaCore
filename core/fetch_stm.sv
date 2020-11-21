@@ -8,8 +8,7 @@ module fetch_stm
     output logic execute, //Wire to signal the execute cycle
     input logic [31:0] jump_target,
     input logic jump,
-    input  logic stop_cycle,
-    output logic exit_ignore
+    input logic ins_busy //Instructions busy
 );
 
 logic [31:0] next_pc;
@@ -35,7 +34,7 @@ begin
     end
     else
     begin
-        if(stop_cycle)
+        if(ins_busy)
         begin
             state = state;
             PC = PC;
@@ -66,7 +65,6 @@ begin
                 next_state <= INC;
             end
             //next_pc <= PC + 4;
-            exit_ignore <= 0;
             inst_bus.CYC <= 1'b0; //Begin transaction
             inst_bus.STB <= 1'b0;
             inst_bus.WE <= 1'b0; //Read
@@ -78,7 +76,6 @@ begin
         INC:
         begin
             next_pc <= PC + 4;
-            exit_ignore <= 0;
             inst_bus.CYC <= 1'b0; //Begin transaction
             inst_bus.STB <= 1'b0;
             inst_bus.WE <= 1'b0; //Read
@@ -90,7 +87,6 @@ begin
         end
         READ:
         begin
-            exit_ignore <= 1;
             execute <= 1'b0;
             if(inst_bus.ACK)
             begin

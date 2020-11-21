@@ -1,7 +1,27 @@
 
+import global_pkg::*;
+
 module memory_access_stm
 (
+    input clk,
+    input rst,
 
+    //Command
+    input memory_operation_t memory_operation,
+    
+    output ACK, //Acknowledge operation
+    output BUSY, //Busy or operation in proccess
+    input CYC, //Begin operation
+
+    input [31:0] wr_addr_bus,
+    input [31:0] data,
+    output [31:0] data_out,
+
+    //External interface
+    WB4.master data_bus,
+    
+    //Operation code
+    input [2:0] funct3
 );
 
 //Memory access 
@@ -54,6 +74,10 @@ wire [31:0] ALIGNED_HALF_WORD = 32'(signed'(aligned_data [15:0]));
 wire [31:0] ALIGNED_U_HALF_WORD = {16'h0, aligned_data [15:0]};
 wire [31:0] ALIGNED_WORD_BUS = aligned_data;
 
+
+//Output bus, data that goes into register file
+assign data_out = aligned_data;
+
 //Store decode mask
 logic [31:0] mask;
 always_comb
@@ -69,7 +93,7 @@ wire [4:0] shift_amount = {wr_addr_bus [1:0], 3'b000};
 wire [63:0] masked_window = mask << shift_amount;
 
 //Create new data, this shift the data to the desired bytes 
-wire [63:0] new_data_window = rs2_d << shift_amount;
+wire [63:0] new_data_window = data << shift_amount;
 
 //New bus bus the new data
 wire [7:0] modified_window [7:0];
@@ -130,15 +154,17 @@ end
 
 assign ra_d = rs1_d; //Always from register
 
+///////////////////////////////////////////////////////////
+
 
 typedef enum logic [3:0] { NO_CMD, READ1, READ2, READ_W1, READ_W2, UWRITE1, UWRITE2, IGNORE } DATA_BUS_STATE;
 DATA_BUS_STATE data_bus_state, data_bus_next_state;
 
 logic [31:0] next_read_data_1, next_read_data_2;
 
-always@(posedge inst_bus.clk)
+always@(posedge clk)
 begin
-    if(inst_bus.rst)
+    if(rst)
     begin
         data_bus_state = NO_CMD;
         data_1 = 32'h00000000;
@@ -181,7 +207,7 @@ begin
             data_bus.ADR <= wr_addr_bus [31:0];
             next_read_data_1 <= data_1;
             next_read_data_2 <= data_2;
-            if(load_data) //Load data from memory
+            if(memory_operation == LOAD_DATA) //Load data from memory
             begin
                 stop_cycle <= 1'b1;
                 data_bus_next_state <= READ1;
@@ -189,7 +215,7 @@ begin
                 data_bus.CYC <= 1'b0;
                 data_bus.WE <= 1'b0;
             end
-            else if(store_data) //Store data from memory
+            else if(memory_operation == STORE_DATA) //Store data from memory
             begin
                 stop_cycle <= 1'b1;
                 if(unaligned) //If unaligned read first bytes

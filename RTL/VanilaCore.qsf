@@ -76,6 +76,10 @@ set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
 set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
 set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_global_assignment -name SYSTEMVERILOG_FILE ../core/memory_access.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../core/decode.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../core/control_unit.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../core/global_pkg.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../core/fetch_stm.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../core/decoder.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../core/vga.sv
