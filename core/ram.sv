@@ -5,7 +5,7 @@ module ram
 #(parameter DATA_WIDTH=32, parameter ADDR_WIDTH=20)
 (
 	input [(DATA_WIDTH-1):0] data,
-	input [(ADDR_WIDTH-1):0] addr,
+	input [(ADDR_WIDTH+1):0] addr,
 	input we, clk,
 	output [(DATA_WIDTH-1):0] q
 );
@@ -20,9 +20,9 @@ module ram
 	begin
 		// Write
 		if (we)
-			ram[addr [(ADDR_WIDTH-1):2]] <= data;
+			ram[addr [(ADDR_WIDTH+1):2]] <= data;
 
-		addr_reg <= addr [(ADDR_WIDTH-1):2];
+		addr_reg <= addr [(ADDR_WIDTH+1):2];
 	end
 
 	// Continuous assignment implies read returns NEW data.

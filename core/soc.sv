@@ -2,23 +2,23 @@
 
 module soc
 (
-	//input logic clk,
-	//input logic rst,
-    //output logic uart_tx,
-    //output [6:0] display_data,
-    //output [3:0] select
+	input logic clk,
+	input logic rst,
+    output logic uart_tx,
+    output [6:0] display_data,
+    output [3:0] select
 );
 
 
 logic new_clock;
 logic new_rst;
 
-logic clk;
-logic rst;
-logic uart_tx;
-logic [6:0] display_data;
-logic [3:0] select;
-assign new_rst = rst;
+//logic clk;
+//logic rst;
+//logic uart_tx;
+//logic [6:0] display_data;
+//logic [3:0] select;
+//assign new_rst = rst;
 
 initial begin
     new_clock = 0;
@@ -69,21 +69,25 @@ core CORE_0
     );
 
     
-initial begin
-    //Begin of reset secuence
-    clk <= 0;
-    rst <= 0;
-    #10
-    clk <= 1;
-    rst <= 1;
-    #10
-    clk <= 0;
-    #10
-    clk <= 1;
-    rst <= 0;
-    //End of reset secuence
-    repeat(100000000) #10 clk = ~clk;
-end
+//initial begin
+//    //Begin of reset secuence
+//    clk <= 0;
+//    rst <= 0;
+//    #10
+//    clk <= 1;
+//    rst <= 1;
+//    #10
+//    clk <= 0;
+//    #10
+//    clk <= 1;
+//    #10
+//    clk <= 0;
+//    #10
+//    clk <= 1;
+//    rst <= 0;
+//    //End of reset secuence
+//    repeat(100000000) #10 clk = ~clk;
+//end
 
 
 endmodule

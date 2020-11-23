@@ -5,7 +5,13 @@
 
 //All wishbone modules have to be reseted on the positive edge of the clock
 
-module console(WB4.slave wb, output logic tx);
+module console
+(
+    WB4.slave wb,
+    output logic tx,
+    input logic rx
+);
+
 parameter FREQUENCY = 25000000;
 parameter BAUD_RATE = 115200;
 parameter DELAY_CLOCKS = FREQUENCY/BAUD_RATE;
@@ -114,5 +120,10 @@ begin
     end
 end
 
+//Read UART controller
+always@(posedge wb.clk)
+begin
+    
+end
 
 endmodule

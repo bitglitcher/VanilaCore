@@ -1,17 +1,21 @@
+#include <stdlib.h>
 
 int main()
 {
   int* display = 0x10004;
   char* string = "Hello World RISCV!";
-
+  print(string);
+  char buffer [50];
 
   int cnt = 0;
   while(1)
   {
     *display = cnt;
     cnt++;
-    print(string);
-    for (int i = 0; i < 0xffff; i++)
+    //char *  itoa ( int value, char * str, int base );
+    itoa(cnt, buffer, 10);
+    print(buffer);
+    for (int i = 0; i < 0x1; i++)
     {
       /* code */
     }

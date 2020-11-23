@@ -3,19 +3,19 @@ Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow 1200mV 85C Model Setup 'new_clock'
-Slack : -25.082
-TNS   : -27284.467
+Slack : -17.677
+TNS   : -20003.277
 
 Type  : Slow 1200mV 85C Model Setup 'clk'
-Slack : -2.336
-TNS   : -33.669
+Slack : -2.334
+TNS   : -33.773
 
 Type  : Slow 1200mV 85C Model Setup 'seven_segment:seven_segment_0|cnt[15]'
-Slack : -0.003
-TNS   : -0.003
+Slack : -0.001
+TNS   : -0.001
 
 Type  : Slow 1200mV 85C Model Hold 'new_clock'
-Slack : 0.445
+Slack : 0.444
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'seven_segment:seven_segment_0|cnt[15]'
@@ -23,12 +23,12 @@ Slack : 0.453
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'clk'
-Slack : 0.466
+Slack : 0.465
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'new_clock'
 Slack : -3.201
-TNS   : -2006.121
+TNS   : -2294.428
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk'
 Slack : -3.000
@@ -43,15 +43,15 @@ Slack : -1.487
 TNS   : -1.487
 
 Type  : Slow 1200mV 0C Model Setup 'new_clock'
-Slack : -23.997
-TNS   : -26022.103
+Slack : -16.823
+TNS   : -18887.416
 
 Type  : Slow 1200mV 0C Model Setup 'clk'
-Slack : -1.952
-TNS   : -27.952
+Slack : -1.950
+TNS   : -28.036
 
 Type  : Slow 1200mV 0C Model Setup 'seven_segment:seven_segment_0|cnt[15]'
-Slack : 0.090
+Slack : 0.094
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'new_clock'
@@ -59,7 +59,7 @@ Slack : 0.397
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'seven_segment:seven_segment_0|cnt[15]'
-Slack : 0.401
+Slack : 0.403
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'clk'
@@ -68,7 +68,7 @@ TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'new_clock'
 Slack : -3.201
-TNS   : -2006.121
+TNS   : -2294.428
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
 Slack : -3.000
@@ -83,15 +83,15 @@ Slack : -1.487
 TNS   : -1.487
 
 Type  : Fast 1200mV 0C Model Setup 'new_clock'
-Slack : -10.633
-TNS   : -11428.183
+Slack : -7.500
+TNS   : -8264.932
 
 Type  : Fast 1200mV 0C Model Setup 'clk'
-Slack : -0.531
-TNS   : -3.605
+Slack : -0.494
+TNS   : -3.608
 
 Type  : Fast 1200mV 0C Model Setup 'seven_segment:seven_segment_0|cnt[15]'
-Slack : 0.564
+Slack : 0.567
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'new_clock'
@@ -103,16 +103,16 @@ Slack : 0.187
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'clk'
-Slack : 0.193
+Slack : 0.194
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
 Slack : -3.000
-TNS   : -27.496
+TNS   : -27.473
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'new_clock'
 Slack : -1.000
-TNS   : -1303.000
+TNS   : -1460.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'seven_segment:seven_segment_0|cnt[15]'
 Slack : -1.000

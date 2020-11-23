@@ -15,17 +15,28 @@ ram #(32, 13) RAM_0
 
 //All wishbone modules have to be reseted on the positive edge of the clock
 //Sample signals at the rising edge
+logic ack_s; //Signal for the ack line
+
 always@(posedge wb.clk)
 begin
-    if(wb.CYC & wb.STB)
+    if(wb.rst)
     begin
-        wb.ACK = 1'b1;
+        ack_s = 1'b0;
     end
     else
     begin
-        wb.ACK = 1'b0;
+        if(wb.CYC & wb.STB)
+        begin
+            ack_s = 1'b1;
+        end
+        else
+        begin
+            ack_s = 1'b0;
+        end
     end
 end
 
+//Only valid if CYC.
+assign wb.ACK = ack_s & wb.CYC;
 
 endmodule

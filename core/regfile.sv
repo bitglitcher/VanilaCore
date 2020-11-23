@@ -1,4 +1,4 @@
-//3:23AM Implementation of a simple sinfle cycle RISC V RV32I core
+//3:23AM Implementation of a simple single cycle RISC V RV32I core
 //Author: Benjamin Herrera Navarro
 //10/31/2020
 

@@ -9,6 +9,11 @@ data_bus_state.READ_W2 0 0 1 0 0 0 1
 data_bus_state.UWRITE1 0 1 0 0 0 0 1 
 data_bus_state.UWRITE2 1 0 0 0 0 0 1 
 
+State Machine - |soc|core:CORE_0|control_unit:control_unit_0|load_state
+Name load_state.RECIEVE_DATA 
+load_state.SEND_CMD 0 
+load_state.RECIEVE_DATA 1 
+
 State Machine - |soc|core:CORE_0|fetch_stm:fetch_stm_0|state
 Name state.READ state.EXEC state.INC 
 state.READ 0 0 0 

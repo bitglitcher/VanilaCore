@@ -11,8 +11,6 @@ module fetch_stm
     input logic ins_busy //Instructions busy
 );
 
-logic [31:0] next_pc;
-logic [31:0] next_ir;
 reg [31:0] PC; //Program Counter
 reg [31:0] IR; //Instruction register
 assign PC_O = PC;
@@ -22,7 +20,7 @@ parameter PC_RESET_VECTOR = 32'h00000000;
 //Wishbone memory read state machine 
 typedef enum  logic [3:0] { READ, INC, EXEC, EXEC_2 } INS_BUS_STATE;
 
-INS_BUS_STATE state, next_state;
+INS_BUS_STATE state;
 
 always@(posedge inst_bus.clk)
 begin
@@ -42,9 +40,65 @@ begin
         end
         else
         begin
-            state = next_state;
-            PC = next_pc;
-            IR = next_ir;
+            unique case(state)
+                EXEC:
+                begin
+                    if(jump)
+                    begin
+                        PC = jump_target;
+                        state = READ;
+                    end
+                    else
+                    begin
+                        PC = PC;
+                        state = INC;
+                    end
+                    //PC = PC + 4;
+                    inst_bus.CYC = 1'b0; //Begin transaction
+                    inst_bus.STB = 1'b0;
+                    inst_bus.WE = 1'b0; //Read
+                    inst_bus.ADR = PC [31:0];
+                    inst_bus.DAT_O = 32'b0; //Always 0 because we don't write to this memory
+                    IR = IR;
+                end    
+                INC:
+                begin
+                    PC = PC + 4;
+                    inst_bus.CYC = 1'b0; //Begin transaction
+                    inst_bus.STB = 1'b0;
+                    inst_bus.WE = 1'b0; //Read
+                    inst_bus.ADR = PC [31:0];
+                    inst_bus.DAT_O = 32'b0; //Always 0 because we don't write to this memory
+                    state = READ;
+                    IR = IR;
+                end
+                READ:
+                begin
+                    if(inst_bus.ACK)
+                    begin
+                        PC = PC;
+                        inst_bus.CYC = 1'b0; //Begin transaction
+                        inst_bus.STB = 1'b0;
+                        inst_bus.WE = 1'b0; //Read
+                        inst_bus.ADR = PC [31:0];
+                        inst_bus.DAT_O = 32'b0; //Always 0 because we don't write to this memory
+                        IR = inst_bus.DAT_I;
+                        //$display("data read -> A: %x, D: %x", PC, inst_bus.DAT_I);
+                        state = EXEC;
+                    end
+                    else
+                    begin
+                        PC = PC;
+                        inst_bus.CYC = 1'b1; //Begin transaction
+                        inst_bus.STB = 1'b1;
+                        inst_bus.WE = 1'b0; //Read
+                        inst_bus.ADR = PC [31:0];
+                        inst_bus.DAT_O = 32'b0; //Always 0 because we don't write to this memory
+                        state = READ;
+                        IR = IR;
+                    end
+                end
+            endcase
         end
     end
 end
@@ -54,66 +108,17 @@ begin
     unique case(state)
         EXEC:
         begin
-            if(jump)
-            begin
-                next_pc <= jump_target;
-                next_state <= READ;
-            end
-            else
-            begin
-                next_pc <= PC;
-                next_state <= INC;
-            end
-            //next_pc <= PC + 4;
-            inst_bus.CYC <= 1'b0; //Begin transaction
-            inst_bus.STB <= 1'b0;
-            inst_bus.WE <= 1'b0; //Read
-            inst_bus.ADR <= PC [31:0];
-            execute <= 1'b1;
-            inst_bus.DAT_O <= 32'b0; //Always 0 because we don't write to this memory
-            next_ir <= IR;
+            execute = 1'b1;
         end    
         INC:
         begin
-            next_pc <= PC + 4;
-            inst_bus.CYC <= 1'b0; //Begin transaction
-            inst_bus.STB <= 1'b0;
-            inst_bus.WE <= 1'b0; //Read
-            inst_bus.ADR <= PC [31:0];
-            execute <= 1'b0;
-            inst_bus.DAT_O <= 32'b0; //Always 0 because we don't write to this memory
-            next_state <= READ;
-            next_ir <= IR;
+            execute = 1'b0;
         end
         READ:
         begin
-            execute <= 1'b0;
-            if(inst_bus.ACK)
-            begin
-                next_pc <= PC;
-                inst_bus.CYC <= 1'b0; //Begin transaction
-                inst_bus.STB <= 1'b0;
-                inst_bus.WE <= 1'b0; //Read
-                inst_bus.ADR <= PC [31:0];
-                inst_bus.DAT_O <= 32'b0; //Always 0 because we don't write to this memory
-                next_ir = inst_bus.DAT_I;
-                //$display("data read -> A: %x, D: %x", PC, inst_bus.DAT_I);
-                next_state <= EXEC;
-            end
-            else
-            begin
-                next_pc <= PC;
-                inst_bus.CYC <= 1'b1; //Begin transaction
-                inst_bus.STB <= 1'b1;
-                inst_bus.WE <= 1'b0; //Read
-                inst_bus.ADR <= PC [31:0];
-                inst_bus.DAT_O <= 32'b0; //Always 0 because we don't write to this memory
-                next_state <= READ;
-                next_ir <= IR;
-            end
+            execute = 1'b0;
         end
     endcase
 end
-
 
 endmodule 

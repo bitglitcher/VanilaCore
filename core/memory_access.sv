@@ -10,6 +10,7 @@ module memory_access
     input  memory_operation_t memory_operation,
     input  logic cyc,
     output logic ack,
+    output logic data_valid, //This is needed for the load instruction
     input  logic [2:0] funct3,
 
     //Data
@@ -20,6 +21,10 @@ module memory_access
     //Wishbone interface
     WB4 data_bus
 );
+
+//Registers to latch the address and data buses
+reg [31:0] store_data_reg;
+reg [31:0] address_reg;
 
 //Load and store cycles are atomic so its fine to allow the execution of another
 //instruction instead of halting the whole CPU, but when the CPU wants to load or store
@@ -51,7 +56,7 @@ begin
     endcase
 end
 
-wire unaligned = ((address [1:0] >= 3) & (access_size != BYTE))? 1 : 0;
+wire unaligned = ((address_reg [1:0] >= 3) & (access_size != BYTE))? 1 : 0;
 
 ////////////////////////////////////////////////////////
 // Most of the following logic is used to align data  //
@@ -74,10 +79,10 @@ assign access_window [7] = data_2 [31:24];
 
 //Aligned data bus
 wire [31:0] aligned_data;
-assign aligned_data [7:0] = access_window [address [1:0] + 0];
-assign aligned_data [15:8] = access_window [address [1:0] + 1];
-assign aligned_data [23:16] = access_window [address [1:0] + 2];
-assign aligned_data [31:24] = access_window [address [1:0] + 3];
+assign aligned_data [7:0] = access_window [address_reg [1:0] + 0];
+assign aligned_data [15:8] = access_window [address_reg [1:0] + 1];
+assign aligned_data [23:16] = access_window [address_reg [1:0] + 2];
+assign aligned_data [31:24] = access_window [address_reg [1:0] + 3];
 
 //Signed and unsigned new data buses
 wire [31:0] ALIGNED_BYTE = 32'(signed'(aligned_data [7:0]));
@@ -102,11 +107,11 @@ begin
     endcase
 end
 //Shift amount
-wire [4:0] shift_amount = {address [1:0], 3'b000};
+wire [4:0] shift_amount = {address_reg [1:0], 3'b000};
 wire [63:0] masked_window = mask << shift_amount;
 
 //Create new data, this shifts the data to the desired bytes 
-wire [63:0] new_data_window = store_data << shift_amount;
+wire [63:0] new_data_window = store_data_reg << shift_amount;
 
 //Modified window contains the new data that will be stored
 wire [7:0] modified_window [7:0];
@@ -192,6 +197,8 @@ begin
         data_bus_state = NO_CMD;
         data_1 = 32'h00000000;
         data_2 = 32'h00000000;
+        store_data_reg = 32'h00000000;
+        address_reg = 32'h00000000;
     end
     else
     begin
@@ -199,15 +206,19 @@ begin
             NO_CMD:
             begin
                 data_bus.DAT_O <= 32'h0;
-                data_bus.ADR <= address [31:0];
+                data_bus.ADR <= address_reg [31:0];
                 data_1 <= data_1;
                 data_2 <= data_2;
                 data_bus.STB <= 1'b0;
                 data_bus.CYC <= 1'b0;
                 data_bus.WE <= 1'b0;
+                data_valid = 1'b0;
                 if(cyc)
                 begin
                     ack = 1'b1; //Acknowledge the request
+                    //Latch data and address
+                    store_data_reg = store_data;
+                    address_reg = address;
                     unique case(memory_operation)
                         LOAD_DATA:
                         begin
@@ -245,7 +256,7 @@ begin
             begin
                 ack = 1'b0;
                 data_bus.DAT_O <= 32'h0;
-                data_bus.ADR <= address [31:0];
+                data_bus.ADR <= address_reg [31:0];
                 if(data_bus.ACK)
                 begin
                     data_1 <= data_bus.DAT_I;
@@ -256,9 +267,12 @@ begin
                     if(unaligned)
                     begin
                         data_bus_state <= READ2;
+                        data_valid = 1'b0;
                     end
                     else
                     begin
+                        //Done with the read operation. The data is valid now
+                        data_valid = 1'b1; 
                         data_bus_state <= NO_CMD;
                     end
                 end
@@ -270,13 +284,14 @@ begin
                     data_bus.STB <= 1'b1;
                     data_bus.CYC <= 1'b1;
                     data_bus.WE <= 1'b0;
+                    data_valid = 1'b0;
                 end
             end
             READ2:
             begin
                 ack = 1'b0;
                 data_bus.DAT_O <= 32'h0;
-                data_bus.ADR <= address [31:0] + 32'b100;
+                data_bus.ADR <= address_reg [31:0] + 32'b100;
                 if(data_bus.ACK)
                 begin
                     data_1 <= data_1;
@@ -285,9 +300,12 @@ begin
                     data_bus.STB <= 1'b0;
                     data_bus.CYC <= 1'b0;
                     data_bus.WE <= 1'b0;
+                    //Done with the read operation. The data is valid now
+                    data_valid = 1'b1; 
                 end
                 else
                 begin
+                    data_valid = 1'b0; 
                     data_bus_state = READ2;
                     data_1 <= data_1;
                     data_2 <= data_2;
@@ -298,9 +316,10 @@ begin
             end
             READ_W1:
             begin
+                data_valid = 1'b0;
                 ack = 1'b0;
                 data_bus.DAT_O <= 32'h0;
-                data_bus.ADR <= address [31:0];
+                data_bus.ADR <= address_reg [31:0];
                 if(data_bus.ACK)
                 begin
                     data_1 <= data_bus.DAT_I;
@@ -329,9 +348,10 @@ begin
             end
             READ_W2:
             begin
+                data_valid = 1'b0;
                 ack = 1'b0;
                 data_bus.DAT_O <= 32'h0;
-                data_bus.ADR <= address [31:0] + 32'b100;
+                data_bus.ADR <= address_reg [31:0] + 32'b100;
                 if(data_bus.ACK)
                 begin
                     data_1 <= data_bus.DAT_I;
@@ -354,8 +374,9 @@ begin
             end
             UWRITE1:
             begin
+                data_valid = 1'b0;
                 ack = 1'b0;
-                data_bus.ADR <= address [31:0];
+                data_bus.ADR <= address_reg [31:0];
                 data_bus.DAT_O <= new_data_1;
                 if(data_bus.ACK)
                 begin
@@ -385,8 +406,9 @@ begin
             end
             UWRITE2:
             begin
+                data_valid = 1'b0;
                 ack = 1'b0;
-                data_bus.ADR <= address [31:0] + 32'b100;
+                data_bus.ADR <= address_reg [31:0] + 32'b100;
                 data_bus.DAT_O <= new_data_2;
                 if(data_bus.ACK)
                 begin
@@ -409,9 +431,10 @@ begin
             end
     		default:
     		  begin
+                data_valid = 1'b0;
                 ack = 1'b0;
                 data_bus.DAT_O <= 32'h0;
-                data_bus.ADR <= address [31:0];
+                data_bus.ADR <= address_reg [31:0];
                 data_1 <= data_1;
                 data_2 <= data_2;
                 data_bus.STB <= 1'b0;

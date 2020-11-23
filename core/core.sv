@@ -54,10 +54,15 @@ logic uncoditional_jump;
 memory_operation_t memory_operation;
 logic cyc;
 logic ack;
+logic data_valid;
+
+//ALU immediate instructions signal
+logic imm_t;
 
 control_unit control_unit_0
 (
     .clk(inst_bus.clk),
+    .rst(inst_bus.rst),
     .execute(execute),
     .busy(busy), ///<-
     .sr2_src(sr2_src),
@@ -69,7 +74,9 @@ control_unit control_unit_0
     .enable_branch(enable_branch), //Signal to enable branching 
     .memory_operation(memory_operation),
     .cyc(cyc),
-    .ack(ack)
+    .ack(ack),
+    .data_valid(data_valid),
+    .imm_t(imm_t)
 );
 
 //Data buses that come from the register file
@@ -92,7 +99,7 @@ begin
         ALU_INPUT: rd_d <=  rd_alu;
         U_IMM_SRC: rd_d <= decode_bus.u_imm;
         AUIPC_SRC: rd_d <= decode_bus.u_imm + PC;
-        PC_SRC: rd_d <= PC;
+        PC_SRC: rd_d <= PC + 4;
         LOAD_SRC: rd_d <= load_data;
     endcase
 end
@@ -114,7 +121,7 @@ regfile regfile_0
 always_comb
 begin
     unique case(sr2_src)
-        REG_SRC: alu_src2 <= rd_d; //From register file
+        REG_SRC: alu_src2 <= rs2_d; //From register file
         I_IMM_SRC: alu_src2 <= 32'(signed'(decode_bus.i_imm)); //I IMM extended
     endcase
 end
@@ -125,7 +132,8 @@ alu alu_0
     .rb_d(alu_src2),
     .rd_d(rd_alu),
     .func3(decode_bus.funct3),
-    .func7(decode_bus.funct7)
+    .func7(decode_bus.funct7),
+    .imm_t(imm_t)
 );
 
 //Signal that says if the branch will be taken
@@ -182,6 +190,7 @@ memory_access memory_access_0
     .memory_operation(memory_operation),
     .cyc(cyc),
     .ack(ack),
+    .data_valid(data_valid),
     .funct3(decode_bus.funct3),
 
     //Data
