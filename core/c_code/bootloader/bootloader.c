@@ -11,7 +11,7 @@ char banner[] =
                                                   
 void print(char* string)
 {
-  int* terminal = (int*)0x10000;
+  int* terminal = (int*)0x100000;
   char* ptr = string;
   while(*ptr != '\0')
   {

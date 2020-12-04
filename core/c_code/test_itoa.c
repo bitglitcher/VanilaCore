@@ -2,7 +2,7 @@
 
 void print(char* string)
 {
-  int* terminal = (int*)0x10000;
+  int* terminal = (int*)0x100000;
   char* ptr = string;
   while(*ptr != '\0')
   {
@@ -19,7 +19,7 @@ void printl(char* string)
 
 int main()
 {
-  int* display = 0x10004;
+  int* display = (int*)0x1000000;
   char buffer [50];
 
   for(int i = 0;i <= 50;i++) buffer [i] = 0;

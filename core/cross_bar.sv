@@ -11,11 +11,11 @@ module cross_bar
 );
 
 parameter MEMORY_START = 32'h00000000;
-parameter MEMORY_END = 32'h0000ffff;
-parameter UART_START = 32'h00010000;
-parameter UART_END = 32'h00010000;
-parameter DISPLAY_START = 32'h00010004;
-parameter DISPLAY_END = 32'h00010004;
+parameter MEMORY_END =   32'h000fffff;
+parameter UART_START =   32'h00100000;
+parameter UART_END =     32'h00100000;
+parameter DISPLAY_START =32'h01000000;
+parameter DISPLAY_END =  32'h01000000;
 
 
 always_comb

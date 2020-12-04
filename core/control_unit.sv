@@ -250,9 +250,10 @@ begin
                             endcase
                         end
                         //CSR Instructions
-                        CSRRW:
+                        CSRRW: //Read and write
                         begin
-                            
+                            regfile_wr = 1'b1;
+                            regfile_src = CSR_SRC;
                         end
                         CSRRS:
                         begin
@@ -275,6 +276,14 @@ begin
                             
                         end
                     endcase
+                    imm_t = 1'b0;
+                    sr2_src = I_IMM_SRC;
+                    jmp_target_src = J_IMM;
+                    enable_branch = 1'b0;
+                    jump = 1'b0;
+                    cyc = 1'b0;
+                    memory_operation = MEM_NONE;
+                    busy = 1'b0;
                 end
                 default:
                 begin

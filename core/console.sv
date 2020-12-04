@@ -56,7 +56,7 @@ begin
                     begin
                         current_state = IDDLE;                    
                     end
-                    $display("DATA CONSOLE: %d", wb.DAT_O [7:0]);
+                    $display("DATA CONSOLE: %s", wb.DAT_O [7:0]);
                 end
                 else
                 begin

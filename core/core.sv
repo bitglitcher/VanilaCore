@@ -5,7 +5,36 @@ module core
 (
     WB4.master inst_bus,
     WB4.master data_bus
+
+`ifdef RISCV_FORMAL
+	,output reg        rvfi_valid,
+	output reg [63:0] rvfi_order,
+	output reg [31:0] rvfi_insn,
+	output reg        rvfi_trap,
+	output reg        rvfi_halt,
+	output reg        rvfi_intr,
+	output reg [ 1:0] rvfi_mode,
+	output reg [ 1:0] rvfi_ixl,
+	output reg [ 4:0] rvfi_rs1_addr,
+	output reg [ 4:0] rvfi_rs2_addr,
+	output reg [31:0] rvfi_rs1_rdata,
+	output reg [31:0] rvfi_rs2_rdata,
+	output reg [ 4:0] rvfi_rd_addr,
+	output reg [31:0] rvfi_rd_wdata,
+	output reg [31:0] rvfi_pc_rdata,
+	output reg [31:0] rvfi_pc_wdata,
+	output reg [31:0] rvfi_mem_addr,
+	output reg [ 3:0] rvfi_mem_rmask,
+	output reg [ 3:0] rvfi_mem_wmask,
+	output reg [31:0] rvfi_mem_rdata,
+	output reg [31:0] rvfi_mem_wdata
+`endif
+
 );
+
+`ifdef RISCV_FORMAL
+logic pre_execution;
+`endif
 
 logic [31:0] PC;
 logic [31:0] IR;
@@ -23,6 +52,9 @@ fetch_stm fetch_stm_0
     .jump_target(jump_target),
     .jump(jump), //Jump signal
     .ins_busy(busy)
+    `ifdef RISCV_FORMAL
+    , .pre_execution(pre_execution)
+    `endif
 );
 
 
@@ -201,5 +233,51 @@ memory_access memory_access_0
     //Wishbone interface
     .data_bus(data_bus)
 );
+
+`ifdef RISCV_FORMAL
+reg [63:0] order;
+
+always@(posedge clk)
+begin
+    if(inst_bus.rst)
+    begin
+        order = 0;
+    end
+    else
+    begin
+        if(execute)
+        begin
+            order = order + 1;           
+        end
+    end
+end
+
+	assign rvfi_valid = execute & !(ins_busy);
+	assign rvfi_order = order;
+	assign rvfi_insn = IR;
+	assign rvfi_trap = 0;
+	assign rvfi_halt = 0;
+	assign rvfi_intr = 0;
+	assign rvfi_mode = 0;
+	assign rvfi_ixl = 0;
+
+	assign rvfi_rs1_addr = decode_bus.rs1;
+	assign rvfi_rs2_addr = decode_bus.rs2;
+
+	assign rvfi_rs1_rdata = rs1_d;
+	assign rvfi_rs2_rdata = rs2_d;
+
+	assign rvfi_rd_addr = decode_bus.rd;
+	assign rvfi_rd_wdata = rd_d;
+
+	assign rvfi_pc_rdata = PC;
+	assign rvfi_pc_wdata = (jump)? jump_target : PC + 4;
+
+	assign rvfi_mem_addr = address_ld;
+	assign rvfi_mem_rmask = 0;
+	assign rvfi_mem_wmask = 0;
+	assign rvfi_mem_rdata = load_data;
+	assign rvfi_mem_wdata = rs2_d;
+`endif
 
 endmodule 

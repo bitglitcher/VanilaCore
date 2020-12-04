@@ -3,19 +3,19 @@ Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow 1200mV 85C Model Setup 'new_clock'
-Slack : -17.677
-TNS   : -20003.277
+Slack : 4.434
+TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Setup 'clk'
-Slack : -2.334
-TNS   : -33.773
+Slack : 14.311
+TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Setup 'seven_segment:seven_segment_0|cnt[15]'
-Slack : -0.001
-TNS   : -0.001
+Slack : 998.953
+TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'new_clock'
-Slack : 0.444
+Slack : 0.452
 TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Hold 'seven_segment:seven_segment_0|cnt[15]'
@@ -26,72 +26,72 @@ Type  : Slow 1200mV 85C Model Hold 'clk'
 Slack : 0.465
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Minimum Pulse Width 'new_clock'
-Slack : -3.201
-TNS   : -2294.428
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'seven_segment:seven_segment_0|cnt[15]'
+Slack : 0.286
+TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk'
-Slack : -3.000
-TNS   : -37.201
+Slack : 9.783
+TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Minimum Pulse Width 'seven_segment:seven_segment_0|cnt[15]'
-Slack : -1.487
-TNS   : -2.974
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'new_clock'
+Slack : 19.682
+TNS   : 0.000
 
 Type  : Slow 1200mV 85C Model Minimum Pulse Width 'debounce:debounce_rst|new_slow_clock[21]'
-Slack : -1.487
-TNS   : -1.487
+Slack : 4999.793
+TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'new_clock'
-Slack : -16.823
-TNS   : -18887.416
+Slack : 5.239
+TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'clk'
-Slack : -1.950
-TNS   : -28.036
+Slack : 14.789
+TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Setup 'seven_segment:seven_segment_0|cnt[15]'
-Slack : 0.094
+Slack : 999.053
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'new_clock'
-Slack : 0.397
+Slack : 0.401
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'seven_segment:seven_segment_0|cnt[15]'
-Slack : 0.403
+Slack : 0.402
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Hold 'clk'
-Slack : 0.417
+Slack : 0.416
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'seven_segment:seven_segment_0|cnt[15]'
+Slack : 0.274
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
+Slack : 9.773
 TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'new_clock'
-Slack : -3.201
-TNS   : -2294.428
-
-Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
-Slack : -3.000
-TNS   : -37.201
-
-Type  : Slow 1200mV 0C Model Minimum Pulse Width 'seven_segment:seven_segment_0|cnt[15]'
-Slack : -1.487
-TNS   : -2.974
+Slack : 19.711
+TNS   : 0.000
 
 Type  : Slow 1200mV 0C Model Minimum Pulse Width 'debounce:debounce_rst|new_slow_clock[21]'
-Slack : -1.487
-TNS   : -1.487
+Slack : 4999.789
+TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'new_clock'
-Slack : -7.500
-TNS   : -8264.932
+Slack : 12.978
+TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'clk'
-Slack : -0.494
-TNS   : -3.608
+Slack : 17.433
+TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Setup 'seven_segment:seven_segment_0|cnt[15]'
-Slack : 0.567
+Slack : 999.542
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'new_clock'
@@ -99,27 +99,27 @@ Slack : 0.184
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'seven_segment:seven_segment_0|cnt[15]'
-Slack : 0.187
+Slack : 0.186
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Hold 'clk'
-Slack : 0.194
+Slack : 0.193
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'seven_segment:seven_segment_0|cnt[15]'
+Slack : 0.330
 TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
-Slack : -3.000
-TNS   : -27.473
+Slack : 9.435
+TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'new_clock'
-Slack : -1.000
-TNS   : -1460.000
-
-Type  : Fast 1200mV 0C Model Minimum Pulse Width 'seven_segment:seven_segment_0|cnt[15]'
-Slack : -1.000
-TNS   : -2.000
+Slack : 19.710
+TNS   : 0.000
 
 Type  : Fast 1200mV 0C Model Minimum Pulse Width 'debounce:debounce_rst|new_slow_clock[21]'
-Slack : -1.000
-TNS   : -1.000
+Slack : 4999.786
+TNS   : 0.000
 
 ------------------------------------------------------------
