@@ -1,5 +1,7 @@
 
 
+`include "debug_def.sv"
+
 module fetch_stm
 (
     WB4.master inst_bus,
@@ -9,6 +11,10 @@ module fetch_stm
     input logic [31:0] jump_target,
     input logic jump,
     input logic ins_busy //Instructions busy
+    `ifdef DEBUG_PORT
+    ,output logic post_execution,
+    output logic pre_execution
+    `endif
 );
 
 reg [31:0] PC; //Program Counter
@@ -108,15 +114,21 @@ begin
     unique case(state)
         EXEC:
         begin
+            pre_execution = 1'b1;
+            post_execution = 1'b0;
             execute = 1'b1;
         end    
         INC:
         begin
             execute = 1'b0;
+            pre_execution = 1'b0;
+            post_execution = 1'b1;
         end
         READ:
         begin
             execute = 1'b0;
+            pre_execution = 1'b0;
+            post_execution = 1'b0;
         end
     endcase
 end

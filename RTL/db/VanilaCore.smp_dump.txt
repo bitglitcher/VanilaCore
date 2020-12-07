@@ -26,3 +26,15 @@ current_state.IDDLE 0 0 0 0
 current_state.START 0 0 1 1 
 current_state.BIT_S 0 1 0 1 
 current_state.STOP 1 0 0 1 
+
+State Machine - |soc|console:console_0|wb_states
+Name wb_states.TAKE_WB 
+wb_states.IDDLE_WB 0 
+wb_states.TAKE_WB 1 
+
+State Machine - |soc|uart_slave:uart_slave_0|current_state
+Name current_state.STOP current_state.BIT_S current_state.START current_state.IDDLE 
+current_state.IDDLE 0 0 0 0 
+current_state.START 0 0 1 1 
+current_state.BIT_S 0 1 0 1 
+current_state.STOP 1 0 0 1 

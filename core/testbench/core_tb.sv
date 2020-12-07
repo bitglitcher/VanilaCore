@@ -18,7 +18,9 @@ core CORE_0
         .data_bus(data_bus)
     );
 
-
+task automatic Probe(arguments);
+    
+endtask//Probe
 
 initial begin
     //Begin of reset secuence

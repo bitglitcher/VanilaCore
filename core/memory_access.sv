@@ -47,12 +47,13 @@ typedef enum logic [1:0] { BYTE, HALF_WORD, WORD } access_size_t;
 access_size_t access_size; 
 always_comb
 begin
-    unique case(funct3)
+    case(funct3)
         LB: access_size = BYTE;
         LH: access_size = HALF_WORD;
         LW: access_size = WORD;
         LBU: access_size = BYTE;
         LHU: access_size = HALF_WORD;
+        default: access_size = WORD; //Just so modelsim stops bitching
     endcase
 end
 

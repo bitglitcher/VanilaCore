@@ -1,6 +1,7 @@
 //3:23AM Implementation of a simple single cycle RISC V RV32I core
 //Author: Benjamin Herrera Navarro
 //10/31/2020
+`include "debug_def.sv"
 
 module regfile
 (
@@ -13,12 +14,17 @@ module regfile
     output [31:0] rb_d,
     input [31:0] rd_d,
     input wr
+    `ifdef DEBUG_PORT
+    ,output logic [31:0] reg_debug [31:0]
+    `endif
 );
 
 //32, 32bit registers
 reg [31:0] REGS [31:0]; 
 
-
+`ifdef DEBUG_PORT
+    assign reg_debug = REGS;
+`endif
 
 always@(posedge clk)
 begin

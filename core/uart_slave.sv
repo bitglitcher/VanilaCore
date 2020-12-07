@@ -2,14 +2,14 @@
 //Memory MAP
 
 //Address Usecase  Read Write
-//0x0000  DATA     Y    N
-//0x0001  Count    Y    N
+//0x000  DATA     Y    N
+//0x004  Count    Y    N
 
 //Count hold the number of available bytes to read
 
 module uart_slave
 (
-    WB4.slave wb
+    WB4.slave wb,
     input logic rx
 );
 
@@ -22,19 +22,83 @@ typedef enum logic [3:0] { IDDLE, START, BIT_S, STOP, DONE } states;
 
 states current_state;
 
-reg [DATA_WIDTH:0] data;
+reg [DATA_WIDTH-1:0] data;
 reg [2:0] n_bit;
 reg [31:0] delay_count;
 reg [2:0] shamnt;
 
-assign wb.DAT_I = {24'h0, data [7:0]};
 
-reg [7:0] write_pointer;
-//buffer mem
-reg [7:0] buffer [(2**8)-1:0];
+logic wr;
+logic rd;
+logic empty;
+logic full;
+logic [6:0] dout;
+logic [$clog2(32)-1:0] count;
 
-//Wishbone ack signal
+fifo #(.DATA_WIDTH(7), .MEMORY_DEPTH(32)) fifo_0
+(
+    //Syscon
+    .clk(wb.clk),
+    .rst(wb.rst),
 
+    //Status
+    .empty(empty),
+    .full(full),
+    .count(count),
+
+    //Read
+    .rd(rd),
+    .dout(dout),
+
+    //Write
+    .wr(wr),
+    .din(data)
+);
+
+//Wishbone address decoder
+always_comb
+begin
+    casez (wb.ADR)
+        32'b????_????_????_????_????_????_????_?000: wb.DAT_I = dout;
+        32'b????_????_????_????_????_????_????_?100: wb.DAT_I = count;
+        default: wb.DAT_I = 32'b0;
+    endcase
+end
+
+//Wishbone control logic
+logic ack_s;
+
+always@(posedge wb.clk)
+begin
+    if(wb.STB & wb.CYC)
+    begin
+        casez (wb.ADR)
+            32'b????_????_????_????_????_????_????_?000:
+            begin
+                rd = 1;
+                ack_s = 1'b1;
+                $display("READING DATA FROM UART RECIEVER");
+            end
+            32'b????_????_????_????_????_????_????_?100:
+            begin
+                rd = 0;
+                ack_s = 1'b1;
+            end
+            default:
+            begin
+                rd = 0;
+                ack_s = 1'b1;
+            end
+        endcase
+    end
+    else
+    begin
+        rd = 0;
+        ack_s = 1'b0;
+    end
+end
+
+assign wb.ACK = ack_s & wb.CYC & wb.STB;
 
 //Sample signals at the rising edge
 always@(posedge wb.clk)
@@ -50,6 +114,7 @@ begin
         case(current_state)
             IDDLE:
             begin
+                wr = 1'b0;
                 delay_count = 0;
                 shamnt = 0;
 
@@ -60,6 +125,7 @@ begin
             end
             START:
             begin
+                wr = 1'b0;
                 shamnt = 0;
                 if(delay_count == DELAY_CLOCKS)
                 begin
@@ -73,8 +139,11 @@ begin
             end
             BIT_S:
             begin
-                data = {data [DATA_WIDTH-1:0], rx};
-
+                wr = 1'b0;
+                if(delay_count == (DELAY_CLOCKS/2))
+                begin
+                    data <= {rx, data [DATA_WIDTH-1:1]}; 
+                end
                 if(delay_count == DELAY_CLOCKS)
                 begin
                     if(shamnt == DATA_WIDTH-1)
@@ -99,7 +168,11 @@ begin
                 shamnt = 0;
                 if(delay_count == DELAY_CLOCKS)
                 begin
-                    current_state = IDDLE;
+                    wr = 1'b1;
+                    if(!full)
+                    begin
+                        current_state = IDDLE;                    
+                    end
                     delay_count = 0;    
                 end
                 else

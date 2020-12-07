@@ -1,3 +1,4 @@
-Warning (10268): Verilog HDL information at memory_access.sv(193): always construct contains both blocking and non-blocking assignments File: C:/Users/camin/Documents/VanilaCore/core/memory_access.sv Line: 193
-Info (10281): Verilog HDL Declaration information at memory_access.sv(187): object "DATA_BUS_STATE" differs only in case from object "data_bus_state" in the same scope File: C:/Users/camin/Documents/VanilaCore/core/memory_access.sv Line: 187
-Warning (10268): Verilog HDL information at cross_bar.sv(43): always construct contains both blocking and non-blocking assignments File: C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv Line: 43
+Warning (10268): Verilog HDL information at uart_slave.sv(104): always construct contains both blocking and non-blocking assignments File: C:/Users/camin/Documents/VanilaCore/core/uart_slave.sv Line: 104
+Warning (10268): Verilog HDL information at memory_access.sv(194): always construct contains both blocking and non-blocking assignments File: C:/Users/camin/Documents/VanilaCore/core/memory_access.sv Line: 194
+Info (10281): Verilog HDL Declaration information at memory_access.sv(188): object "DATA_BUS_STATE" differs only in case from object "data_bus_state" in the same scope File: C:/Users/camin/Documents/VanilaCore/core/memory_access.sv Line: 188
+Warning (10268): Verilog HDL information at cross_bar.sv(50): always construct contains both blocking and non-blocking assignments File: C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv Line: 50

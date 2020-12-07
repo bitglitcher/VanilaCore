@@ -1,40 +1,26 @@
 
 import global_pkg::*;
 
+`include "debug_def.sv"
+
 module core
 (
     WB4.master inst_bus,
     WB4.master data_bus
-
-`ifdef RISCV_FORMAL
-	,output reg        rvfi_valid,
-	output reg [63:0] rvfi_order,
-	output reg [31:0] rvfi_insn,
-	output reg        rvfi_trap,
-	output reg        rvfi_halt,
-	output reg        rvfi_intr,
-	output reg [ 1:0] rvfi_mode,
-	output reg [ 1:0] rvfi_ixl,
-	output reg [ 4:0] rvfi_rs1_addr,
-	output reg [ 4:0] rvfi_rs2_addr,
-	output reg [31:0] rvfi_rs1_rdata,
-	output reg [31:0] rvfi_rs2_rdata,
-	output reg [ 4:0] rvfi_rd_addr,
-	output reg [31:0] rvfi_rd_wdata,
-	output reg [31:0] rvfi_pc_rdata,
-	output reg [31:0] rvfi_pc_wdata,
-	output reg [31:0] rvfi_mem_addr,
-	output reg [ 3:0] rvfi_mem_rmask,
-	output reg [ 3:0] rvfi_mem_wmask,
-	output reg [31:0] rvfi_mem_rdata,
-	output reg [31:0] rvfi_mem_wdata
+`ifdef DEBUG_PORT
+    ,
+    output logic [31:0] debug_registers [31:0],
+    output logic pre_execution,
+    output logic post_execution,
+    output logic [31:0] pc_debug
+    //output [4:0] debug_rd,
+    //output [4:0] debug_rs1,
+    //output [4:0] debug_rs2,
+    //output [6:0] debug_opcode
 `endif
 
 );
 
-`ifdef RISCV_FORMAL
-logic pre_execution;
-`endif
 
 logic [31:0] PC;
 logic [31:0] IR;
@@ -52,11 +38,15 @@ fetch_stm fetch_stm_0
     .jump_target(jump_target),
     .jump(jump), //Jump signal
     .ins_busy(busy)
-    `ifdef RISCV_FORMAL
-    , .pre_execution(pre_execution)
+    `ifdef DEBUG_PORT
+    ,.post_execution(post_execution),
+    .pre_execution(pre_execution)
     `endif
 );
 
+`ifdef DEBUG_PORT
+    assign pc_debug = PC;
+`endif
 
 decode decode_bus();
 
@@ -147,6 +137,9 @@ regfile regfile_0
     .rb_d(rs2_d),
     .rd_d(rd_d),
     .wr(regfile_wr)
+    `ifdef DEBUG_PORT
+    ,.reg_debug(debug_registers)
+    `endif
 );
 
 //Multiplexer for the sr2 alu input bus

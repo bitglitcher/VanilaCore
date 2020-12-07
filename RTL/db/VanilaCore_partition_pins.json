@@ -58,6 +58,10 @@
 				{
 					"name" : "rst",
 					"strict" : false
+				},
+				{
+					"name" : "uart_rx",
+					"strict" : false
 				}
 			]
 		}
