@@ -10,7 +10,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "riscv.h"
-#include "display.h"
 #include "string.h"
 #include "memory.h"
 
@@ -34,6 +33,8 @@ uint32_t pc;
 static uint8_t  stalled;
 static uint8_t  read_dispatched;
 static uint8_t  fetch_in_progress;
+
+static unsigned long int cycle_cnt;
 
 /* Misc info */
 uint32_t stalled_count;
@@ -317,15 +318,16 @@ static void trace(char *fmt, uint32_t a, uint32_t b, uint32_t c) {
     return;
   sprintf(buffer,"%08X:%c",pc, stalled ? '*' : ' ');
   sprintf(buffer+10, fmt, a, b, c);
-  display_trace(buffer);
+  printf("%s\n",buffer);
 }	
 
 /****************************************************************************/
 void riscv_reset(void) {
   memory_reset();
-  memset(regs,0xFF,sizeof(regs));
+  cycle_cnt = 0;
+  memset(regs,0x00,sizeof(regs));
   regs[0] = 0;
-  pc = 0x20400000;
+  pc = 0x00000;
   //display_log("RISC-V reset");
 }
 
@@ -498,7 +500,7 @@ static int op_unified(void) {
 static int do_op(void) {
   int i;
   if((pc & 3) != 0) {
-    //display_log("Attempt to execute unaligned code");
+    printf("Attempt to execute unaligned code");
     return 0;
   }
 
@@ -506,7 +508,7 @@ static int do_op(void) {
     /* Fetch */
     if(!fetch_in_progress) {
       if(!memory_fetch_request(pc)) {
-        //display_log("Unable to fetch instruction");
+        printf("Unable to fetch instruction");
         return 0;
       }
       fetch_in_progress = 1;
@@ -525,7 +527,8 @@ static int do_op(void) {
   }
 
   if(fetch_in_progress) {
-    //display_trace("Fetch in progress");
+    cycle_cnt++;
+    printf("Fetch in progress\n");
     return 1;
   }
 
@@ -570,6 +573,34 @@ int riscv_run(void) {
     //display_log(buffer);
   }
   return 0;
+}
+
+unsigned long int get_cycle()
+{
+  return cycle_cnt;
+}
+
+void run_cycle()
+{
+  printf("Executing Cycle\n");
+  unsigned long int old_cycle = get_cycle();
+  if(old_cycle == 0)
+  {
+    do
+    {
+      memory_run();
+      riscv_run();
+    } while (get_cycle() == old_cycle+1);
+  }
+  else
+  {
+    do
+    {
+      memory_run();
+      riscv_run();
+    } while (get_cycle() == old_cycle);
+  }
+  printf("Finish Executing Cycle\n\n");
 }
 /****************************************************************************/
 void riscv_dump(void) {

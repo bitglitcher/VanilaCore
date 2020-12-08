@@ -12,13 +12,6 @@
 #include <memory.h>
 #include "region.h"
 #include "ram.h"
-#include "rom.h"
-#include "prci.h"
-#include "gpio.h"
-#include "uart.h"
-#include "spi.h"
-#include "clint.h"
-#include "display.h"
 
 struct region *first_region = NULL;
 
@@ -76,13 +69,13 @@ int memorymap_aligned_read(uint32_t address, uint32_t *value) {
    if(r == NULL) {
      char buffer[128];
      sprintf(buffer, "Read of invalid address %08X",address);
-     display_log(buffer);
+     //display_log(buffer);
      return 0;
    }
 
    /* Trap a currently unhandled error */
    if(address+4 > r->base + r->size) {
-     display_log("Need to split the read of address as it crosses boundary");
+     //display_log("Need to split the read of address as it crosses boundary");
      return 0;
    }
    return r->get(r, address-r->base, value);
@@ -103,13 +96,13 @@ int memorymap_aligned_write(uint32_t address, uint8_t mask, uint32_t value) {
    if(r == NULL) {
      char buffer[128];
      sprintf(buffer, "Write of invalid address %08X",address);
-     display_log(buffer);
+     //display_log(buffer);
      return 0;
    }
 
    /* Trap a currently unhandled error */
    if(address+4 > r->base + r->size) {
-     display_log("Write to split the read of address as it crosses boundary");
+     //display_log("Write to split the read of address as it crosses boundary");
      return 0;
    }
    return r->set(r, address-r->base, mask, value);
@@ -118,49 +111,9 @@ int memorymap_aligned_write(uint32_t address, uint8_t mask, uint32_t value) {
 /****************************************************************************/
 int memorymap_initialise(char *image) {
   struct region *r;
-  if(!add_region(0x20400000, 118476, ROM_init, ROM_get, ROM_set, ROM_free, ROM_dump)) {
-    display_log("Unable to add regions");
-    return 0;
-  }
 
-  if(!add_region(0x80000000, 0x4000, RAM_init, RAM_get, RAM_set, RAM_free, RAM_dump)) {
-    display_log("Unable to add regions");
-    return 0;
-  }
- 
-  // AON
-  if(!add_region(0x10000000, 0x0170, RAM_init, RAM_get, RAM_set, RAM_free, RAM_dump)) {
-    display_log("Unable to add regions");
-    return 0;
-  }
-
-  // PRCI
-  if(!add_region(0x10008000, 0x0FFF, PRCI_init, PRCI_get, PRCI_set, PRCI_free, PRCI_dump)) {
-    display_log("Unable to add regions");
-    return 0;
-  }
-
-  // GPIO 
-  if(!add_region(0x10012000, 0x0FFF, GPIO_init, GPIO_get, GPIO_set, GPIO_free, GPIO_dump)) {
-    display_log("Unable to add regions");
-    return 0;
-  }
-  
-  // UART 
-  if(!add_region(0x10013000, 0x0FFF, UART_init, UART_get, UART_set, UART_free, UART_dump)) {
-    display_log("Unable to add regions");
-    return 0;
-  }
-  
-  // SPI  
-  if(!add_region(0x10014000, 0x0080, SPI_init, SPI_get, SPI_set, SPI_free, SPI_dump)) {
-    display_log("Unable to add regions");
-    return 0;
-  }
-  
-
-  if(!add_region(0x02000000, 0x10000, CLINT_init, CLINT_get, CLINT_set, CLINT_free, CLINT_dump)) {
-    display_log("Unable to add regions");
+  if(!add_region(0x00000000, 0xfffff, RAM_init, RAM_get, RAM_set, RAM_free, RAM_dump)) {
+    //display_log("Unable to add regions");
     return 0;
   }
 
@@ -172,7 +125,7 @@ int memorymap_initialise(char *image) {
     }
     r = r->next;
   } 
-  display_log("Memory map initialized");
+  //display_log("Memory map initialized");
   return 1;
 }
 
@@ -192,7 +145,7 @@ int memorymap_read(uint32_t address, uint8_t width, uint32_t *value) {
        mask = 0xFFFFFFFF;
        break; 
      default:
-       display_log("Invalid read width at address 0x%08x");
+       //display_log("Invalid read width at address 0x%08x");
        return 0;
    }
 
@@ -303,7 +256,7 @@ int memorymap_write(uint32_t address, uint32_t width, uint32_t value) {
        }
        break;
    }
-   display_log("Invalid write at address 0x%08x width %i value 0x%08x");
+   //display_log("Invalid write at address 0x%08x width %i value 0x%08x");
    return 0;
 }
 

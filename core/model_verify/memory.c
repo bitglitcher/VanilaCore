@@ -10,7 +10,6 @@
 #include <stdint.h> 
 #include "memorymap.h"
 #include "memory.h"
-#include "display.h"
 
 #define FIFO_SIZE (8)
 
@@ -74,7 +73,7 @@ void memory_reset(void) {
   read_request_fifo.count      = 0;
   read_request_fifo.read_ptr   = 0;
   read_request_fifo.write_ptr  = 0;
-  display_log("Memory reset");
+  //display_log("Memory reset");
 }
 
 /****************************************************************************/
@@ -118,7 +117,7 @@ uint32_t memory_fetch_data_empty(void) {
 uint32_t memory_read_data(void) {
   uint32_t rtn;
   if(read_data_fifo.count == 0) {
-    display_log("Attempt to read empty FIFO read_data");
+    //display_log("Attempt to read empty FIFO read_data");
     return 0;
   }
 
@@ -132,7 +131,7 @@ uint32_t memory_read_data(void) {
 uint32_t memory_fetch_data(void) {
   uint32_t rtn;
   if(fetch_data_fifo.count == 0) {
-    display_log("Attempt to read empty FIFO fetch_data");
+    //display_log("Attempt to read empty FIFO fetch_data");
     return 0;
   }
 

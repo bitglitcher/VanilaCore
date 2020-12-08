@@ -4,7 +4,7 @@
 
 module ram_wb(WB4.slave wb);
 
-ram #(32, 12) RAM_0
+ram #(32, 16) RAM_0
 (
     .clk(wb.clk),
 	.we(wb.WE & wb.STB & wb.CYC),

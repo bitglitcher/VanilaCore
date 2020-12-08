@@ -32,7 +32,7 @@ parameter XORI =  10'b???????100;
 parameter ORI =   10'b???????110;
 parameter ANDI =  10'b???????111;
 parameter SLLI =  10'b???????001;
-parameter SRLI =  10'b???????101;
+parameter SRLI =  10'b0000000101;
 parameter SRAI =  10'b0100000101;
 
 always_comb
@@ -48,7 +48,7 @@ begin
             ANDI: rd_d = ra_d & rb_d;
             SLLI: rd_d = ra_d << rb_d [4:0];
             SRLI: rd_d = ra_d >> rb_d [4:0];
-            SRAI: rd_d = ra_d >>> rb_d [4:0];
+            SRAI: rd_d = signed'(ra_d) >>> rb_d [4:0];
             default: rd_d = 32'h00000000;
         endcase
     end
@@ -62,7 +62,7 @@ begin
             SLTU: rd_d = (ra_d < rb_d) ? 32'h00000001 : 32'h00000000;
             XOR: rd_d = ra_d ^ rb_d;
             SRL: rd_d = ra_d >> rb_d [4:0];
-            SRA: rd_d = ra_d >>> rb_d [4:0];
+            SRA: rd_d = signed'(ra_d) >>> rb_d [4:0];
             OR: rd_d = ra_d | rb_d;
             AND: rd_d = ra_d & rb_d;
             default: rd_d = 32'h00000000;

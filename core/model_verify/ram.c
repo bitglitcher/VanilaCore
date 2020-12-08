@@ -12,36 +12,35 @@
 #include <stdint.h>
 #include <memory.h>
 #include "region.h"
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 #include "ram.h"
-#include "display.h"
 
 /****************************************************************************/
 static void attempt_to_read(struct region *r) {
   uint32_t *data;
-  char *fname;
+  char fname [] = "/mnt/c/Users/camin/Documents/VanilaCore/core/model_verify/c_test/ROM.hex";
   FILE *f;
   int a = 0;
   int i;
 
   data = (uint32_t *)(r->data);
 
-  if(asprintf(&fname, "ram_%08x.img",r->base) < 1) {
-    display_log("Unable to print file name to memory region");
-    return;
-  }
+
+  /////////////////
+  //FILE READ HERE
 
   if(fname == NULL) {
-    display_log("Unable to allocate memory to read region");
+    //display_log("Unable to allocate memory to read region");
     return;
   }
 
   f = fopen(fname,"rb");
   if( f == NULL) {
     fprintf(stderr, "File '%s' not present\n",fname);
-    free(fname);
     return;
   }
-  free(fname);
 
   while(1) {
     int c;
@@ -81,12 +80,12 @@ static void attempt_to_read(struct region *r) {
         d += c - 'a' + 10;
       } else if(c == ' ' || c == '\t' || c == '\n') {
 	if(a*4+3 >= r->size) {
-          display_log("Too much data for memory region");
+          //display_log("Too much data for memory region");
           return;
 	}
 	break;
       } else {
-        display_log("unexpected characters in file");
+        //display_log("unexpected characters in file");
         return;
       }
     }
@@ -106,7 +105,7 @@ int RAM_init(struct region *r) {
   uint32_t *data;
 
   if(r->data != NULL) {
-    display_log("RAM already initialized");
+    //display_log("RAM already initialized");
     return 0;
   }
  
@@ -117,7 +116,7 @@ int RAM_init(struct region *r) {
   r->data = (void *)data;
   memset(r->data, 0, r->size);
   attempt_to_read(r);
-  display_log("Set up memory region");
+  //display_log("Set up memory region");
   return 1;
 }
 
@@ -132,7 +131,7 @@ int RAM_set(struct region *r, uint32_t address, uint8_t mask, uint32_t value) {
    if((address & 3) != 0) {
      fprintf(stderr,"Unaligned memory write 0x%08x\n", r->base+address);
    }
-#if 0
+#if 1
    fprintf(stderr, "Write %08x %x, 0x%08x\n", address, mask, value);
 #endif
    if(mask & 1) {
@@ -191,7 +190,7 @@ void RAM_dump(struct region *r) {
 void RAM_free(struct region *r) {
    char buffer[100];
    sprintf(buffer, "Releasing RAM at 0x%08x", r->base);
-   display_log(buffer);
+   //display_log(buffer);
    if(r->data != NULL) 
      free(r->data);
 }

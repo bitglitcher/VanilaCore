@@ -28,6 +28,7 @@ typedef enum  logic [3:0] { READ, INC, EXEC, EXEC_2 } INS_BUS_STATE;
 
 INS_BUS_STATE state;
 
+
 always@(posedge inst_bus.clk)
 begin
     //$display("PC: %x", PC);
@@ -114,23 +115,81 @@ begin
     unique case(state)
         EXEC:
         begin
-            pre_execution = 1'b1;
-            post_execution = 1'b0;
             execute = 1'b1;
         end    
         INC:
         begin
             execute = 1'b0;
-            pre_execution = 1'b0;
-            post_execution = 1'b1;
         end
         READ:
         begin
             execute = 1'b0;
-            pre_execution = 1'b0;
-            post_execution = 1'b0;
         end
     endcase
 end
+
+`ifdef DEBUG_PORT
+    //Flip Flop to hold a pulse from the jump signal
+    logic jump_hold_s;
+
+    always@(posedge inst_bus.clk)
+    begin
+        //$display("PC: %x", PC);
+        if(inst_bus.rst)
+        begin
+                 
+        end
+        else
+        begin
+            if(ins_busy)
+            begin         
+            end
+            else
+            begin
+                unique case(state)
+                    EXEC:
+                    begin
+                        if(jump)
+                        begin
+                            jump_hold_s = 1'b1;
+                        end
+                        else
+                        begin
+                            jump_hold_s = 1'b0;
+                        end
+                    end    
+                    INC:
+                    begin
+                            jump_hold_s = 1'b0;
+                    end
+                    READ:
+                    begin
+                            jump_hold_s = 1'b0;
+                    end
+                endcase
+            end
+        end
+    end
+    always_comb
+    begin
+        unique case(state)
+            EXEC:
+            begin
+                pre_execution = 1'b1;
+                post_execution = 1'b0;
+            end    
+            INC:
+            begin
+                pre_execution = 1'b0;
+                post_execution = 1'b1;
+            end
+            READ:
+            begin
+                pre_execution = 1'b0;
+                post_execution = jump_hold_s;
+            end
+        endcase
+    end
+`endif
 
 endmodule 

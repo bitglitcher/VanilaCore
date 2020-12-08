@@ -1,0 +1,59 @@
+VERSION 10 1 1
+SYM_BEGIN 14
+7 16
+riscv_initialise
+3 17
+memory_initialise
+1 72
+C:/Users/camin/Documents/VanilaCore/core/model_verify/model_verify_tb.sv
+6 12
+riscv_finish
+4 10
+memory_run
+2 13
+memory_finish
+13 9
+run_cycle
+10 2
+p0
+11 11
+riscv_reset
+9 9
+riscv_reg
+0 9
+get_cycle
+8 8
+riscv_pc
+12 9
+riscv_run
+5 10
+riscv_dump
+SYM_END
+TYPEDEF_BEGIN 0
+TYPEDEF_END 
+TF_BEGIN 12
+0 68 
+0 -1 -1 4 0 1 0 0x0 1 0 12 0 -1 4 278571 32 0 31 31 0 32 0x1 1 1 17  
+2 33 
+2 -1 -1 4 0 1 0 0x0 0 0x1 1 1 13  
+3 67 
+3 -1 -1 4 0 1 0 0x0 1 0 12 0 -1 4 278571 32 0 31 31 0 32 0x1 1 1 7  
+4 33 
+4 -1 -1 4 0 1 0 0x0 0 0x1 1 1 11  
+5 33 
+5 -1 -1 4 0 1 0 0x0 0 0x1 1 1 10  
+6 33 
+6 -1 -1 4 0 1 0 0x0 0 0x1 1 1 12  
+7 67 
+7 -1 -1 4 0 1 0 0x0 1 0 12 0 -1 4 278571 32 0 31 31 0 32 0x1 1 1 6  
+8 68 
+8 -1 -1 4 0 1 0 0x0 1 0 12 0 -1 4 278571 32 0 31 31 0 32 0x1 1 1 15  
+9 120 
+9 -1 -1 4 1 1 0 0x0 1 0 12 0 -1 4 278571 32 0 31 31 0 32 0x1 0 10 0x0 1 0 12 0 -1 4 278571 32 0 31 31 0 32 0x1 1 1 1 14  
+11 33 
+11 -1 -1 4 0 1 0 0x0 0 0x1 1 1 9  
+12 33 
+12 -1 -1 4 0 1 0 0x0 0 0x1 1 1 8  
+13 34 
+13 -1 -1 4 0 1 0 0x0 0 0x1 1 1 16  
+TF_END 

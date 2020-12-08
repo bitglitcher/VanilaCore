@@ -13,7 +13,7 @@
 #include "riscv.h"
 #include "memory.h"
 #include "memorymap.h"
-#include "display.h"
+
 
 int main(int argc, char *argv[]) {
 
@@ -29,11 +29,10 @@ int main(int argc, char *argv[]) {
 
 
   //Run for N machine cycles
-  for(int i = 0;i < 10000;i++)
+  for(int i = 0;i < 20;i++)
   {
-    memory_run();
-    riscv_run();
-    riscv_dump();
+    run_cycle();
+    //riscv_dump();
   }
 
 

@@ -2,6 +2,8 @@
 #define RISCV_H
 int riscv_initialise(void);
 int riscv_run(void);
+void run_cycle();
+unsigned long int get_cycle();
 void riscv_reset(void);
 void riscv_dump(void);
 uint32_t riscv_cycle_count(void);

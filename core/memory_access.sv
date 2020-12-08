@@ -116,14 +116,14 @@ wire [63:0] new_data_window = store_data_reg << shift_amount;
 
 //Modified window contains the new data that will be stored
 wire [7:0] modified_window [7:0];
-assign modified_window [0] = ((~(masked_window [7:0]) & access_window [0]) | new_data_window [7:0]);
-assign modified_window [1] = ((~(masked_window [15:8]) & access_window [1]) | new_data_window [15:8]);
-assign modified_window [2] = ((~(masked_window [23:16]) & access_window [2]) | new_data_window [23:16]);
-assign modified_window [3] = ((~(masked_window [31:24]) & access_window [3]) | new_data_window [31:24]);
-assign modified_window [4] = ((~(masked_window [39:32]) & access_window [4]) | new_data_window [39:32]);
-assign modified_window [5] = ((~(masked_window [47:40]) & access_window [5]) | new_data_window [47:40]);
-assign modified_window [6] = ((~(masked_window [55:48]) & access_window [6]) | new_data_window [55:48]);
-assign modified_window [7] = ((~(masked_window [63:56]) & access_window [7]) | new_data_window [63:56]);
+assign modified_window [0] = ((~masked_window [7:0] & access_window [0]) | (new_data_window [7:0] & masked_window [7:0]));
+assign modified_window [1] = ((~masked_window [15:8] & access_window [1]) | (new_data_window [15:8] & masked_window [15:8]));
+assign modified_window [2] = ((~masked_window [23:16] & access_window [2]) | (new_data_window [23:16] & masked_window [23:16]));
+assign modified_window [3] = ((~masked_window [31:24] & access_window [3]) | (new_data_window [31:24] & masked_window [31:24]));
+assign modified_window [4] = ((~masked_window [39:32] & access_window [4]) | (new_data_window [39:32] & masked_window [39:32]));
+assign modified_window [5] = ((~masked_window [47:40] & access_window [5]) | (new_data_window [47:40] & masked_window [47:40]));
+assign modified_window [6] = ((~masked_window [55:48] & access_window [6]) | (new_data_window [55:48] & masked_window [55:48]));
+assign modified_window [7] = ((~masked_window [63:56] & access_window [7]) | (new_data_window [63:56] & masked_window [63:56]));
 
 //These replace the data registers on a store operation, these are not registers but contain the information
 //That needs to be stored

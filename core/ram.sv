@@ -9,7 +9,6 @@ module ram
 	input we, clk,
 	output [(DATA_WIDTH-1):0] q
 );
-
 	// Declare the RAM variable
 	reg [DATA_WIDTH-1:0] ram[2**ADDR_WIDTH-1:0];
 
@@ -32,9 +31,9 @@ module ram
 
 	initial begin
 		$display("Init memory");
-		//for (int i = 0;i < 2**ADDR_WIDTH-1; i++ ) begin
-		//	ram[i] = 32'h0;
-		//end
+		for (int i = 0;i < 2**ADDR_WIDTH-1; i++ ) begin
+			ram[i] = 32'h0;
+		end
 		$readmemh("C:/Users/camin/Documents/VanilaCore/core/c_code/ROM.hex", ram);
 		//$readmemh("ROM.hex", ram); 
 	end
