@@ -154,9 +154,9 @@ static int op_lw(void)      { trace("LW     r%u, r%u + %i", rd,  rs1,       imm1
 static int op_lbu(void)     { trace("LBU    r%u, r%u + %i", rd,  rs1,       imm12);    return op_unified(); }
 static int op_lhu(void)     { trace("LHU    r%u, r%u + %i", rd,  rs1,       imm12);    return op_unified(); }
 
-static int op_ecall(void)   { trace("ECALL",       0,            0,0); exception("Unknown Opcode exception"); return 0; }
-static int op_ebreak(void)  { trace("EBREAK",      0,            0,0); exception("Unknown Opcode exception"); return 0; }
-static int op_unknown(void) { trace("???? (%08x)", current_instr,0,0); exception("Unknown Opcode exception"); return 0; }
+static int op_ecall(void)   { trace("ECALL",       0,            0,0);    pc    = pc + 4; return 1; }
+static int op_ebreak(void)  { trace("EBREAK",      0,            0,0);    pc    = pc + 4; return 1; }
+static int op_unknown(void) { trace("???? (%08x)", current_instr,0,0);    pc    = pc + 4; return 1; }
 
 struct opcode_entry { 
   char *spec;

@@ -1,5 +1,5 @@
 
-State Machine - |soc|core:CORE_0|memory_access:memory_access_0|data_bus_state
+State Machine - |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|data_bus_state
 Name data_bus_state.UWRITE2 data_bus_state.UWRITE1 data_bus_state.READ_W2 data_bus_state.READ_W1 data_bus_state.READ2 data_bus_state.READ1 data_bus_state.NO_CMD 
 data_bus_state.NO_CMD 0 0 0 0 0 0 0 
 data_bus_state.READ1 0 0 0 0 0 1 1 
@@ -9,30 +9,30 @@ data_bus_state.READ_W2 0 0 1 0 0 0 1
 data_bus_state.UWRITE1 0 1 0 0 0 0 1 
 data_bus_state.UWRITE2 1 0 0 0 0 0 1 
 
-State Machine - |soc|core:CORE_0|control_unit:control_unit_0|load_state
+State Machine - |ZeltaSoC|core:CORE_0|control_unit:control_unit_0|load_state
 Name load_state.RECIEVE_DATA 
 load_state.SEND_CMD 0 
 load_state.RECIEVE_DATA 1 
 
-State Machine - |soc|core:CORE_0|fetch_stm:fetch_stm_0|state
+State Machine - |ZeltaSoC|core:CORE_0|fetch_stm:fetch_stm_0|state
 Name state.READ state.EXEC state.INC 
 state.READ 0 0 0 
 state.INC 1 0 1 
 state.EXEC 1 1 0 
 
-State Machine - |soc|console:console_0|current_state
+State Machine - |ZeltaSoC|console:console_0|current_state
 Name current_state.STOP current_state.BIT_S current_state.START current_state.IDDLE 
 current_state.IDDLE 0 0 0 0 
 current_state.START 0 0 1 1 
 current_state.BIT_S 0 1 0 1 
 current_state.STOP 1 0 0 1 
 
-State Machine - |soc|console:console_0|wb_states
+State Machine - |ZeltaSoC|console:console_0|wb_states
 Name wb_states.TAKE_WB 
 wb_states.IDDLE_WB 0 
 wb_states.TAKE_WB 1 
 
-State Machine - |soc|uart_slave:uart_slave_0|current_state
+State Machine - |ZeltaSoC|uart_slave:uart_slave_0|current_state
 Name current_state.STOP current_state.BIT_S current_state.START current_state.IDDLE 
 current_state.IDDLE 0 0 0 0 
 current_state.START 0 0 1 1 

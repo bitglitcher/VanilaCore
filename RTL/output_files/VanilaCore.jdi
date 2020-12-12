@@ -1,8 +1,8 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="c47ecdc5c8b71b3bb895"/>
+    <hash md5_digest_80b="8f786747fa79bb11c173"/>
   </project>
   <file_info>
-    <file device="EP4CE6E22C8" path="VanilaCore.sof" usercode="0xFFFFFFFF"/>
+    <file device="EP4CE115F23I7" path="VanilaCore.sof" usercode="0xFFFFFFFF"/>
   </file_info>
 </sld_project_info>

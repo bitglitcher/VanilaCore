@@ -2,123 +2,51 @@
 Timing Analyzer Summary
 ------------------------------------------------------------
 
-Type  : Slow 1200mV 85C Model Setup 'new_clock'
-Slack : 4.819
+Type  : Slow 1200mV 100C Model Setup 'clk'
+Slack : -0.658
+TNS   : -0.988
+
+Type  : Slow 1200mV 100C Model Hold 'clk'
+Slack : 0.405
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Setup 'clk'
-Slack : 14.373
+Type  : Slow 1200mV 100C Model Minimum Pulse Width 'clk'
+Slack : 9.646
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Setup 'seven_segment:seven_segment_0|cnt[15]'
-Slack : 998.538
+Type  : Slow 1200mV 100C Model Minimum Pulse Width 'debounce:debounce_rst|new_slow_clock[21]'
+Slack : 4999.781
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Hold 'new_clock'
-Slack : 0.451
+Type  : Slow 1200mV -40C Model Setup 'clk'
+Slack : 0.424
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Hold 'seven_segment:seven_segment_0|cnt[15]'
-Slack : 0.453
+Type  : Slow 1200mV -40C Model Hold 'clk'
+Slack : 0.334
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Hold 'clk'
-Slack : 0.465
+Type  : Slow 1200mV -40C Model Minimum Pulse Width 'clk'
+Slack : 9.656
 TNS   : 0.000
 
-Type  : Slow 1200mV 85C Model Minimum Pulse Width 'seven_segment:seven_segment_0|cnt[15]'
-Slack : 0.289
-TNS   : 0.000
-
-Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk'
-Slack : 9.783
-TNS   : 0.000
-
-Type  : Slow 1200mV 85C Model Minimum Pulse Width 'new_clock'
-Slack : 19.673
-TNS   : 0.000
-
-Type  : Slow 1200mV 85C Model Minimum Pulse Width 'debounce:debounce_rst|new_slow_clock[21]'
-Slack : 4999.794
-TNS   : 0.000
-
-Type  : Slow 1200mV 0C Model Setup 'new_clock'
-Slack : 5.570
-TNS   : 0.000
-
-Type  : Slow 1200mV 0C Model Setup 'clk'
-Slack : 14.824
-TNS   : 0.000
-
-Type  : Slow 1200mV 0C Model Setup 'seven_segment:seven_segment_0|cnt[15]'
-Slack : 998.686
-TNS   : 0.000
-
-Type  : Slow 1200mV 0C Model Hold 'new_clock'
-Slack : 0.401
-TNS   : 0.000
-
-Type  : Slow 1200mV 0C Model Hold 'seven_segment:seven_segment_0|cnt[15]'
-Slack : 0.401
-TNS   : 0.000
-
-Type  : Slow 1200mV 0C Model Hold 'clk'
-Slack : 0.416
-TNS   : 0.000
-
-Type  : Slow 1200mV 0C Model Minimum Pulse Width 'seven_segment:seven_segment_0|cnt[15]'
-Slack : 0.274
-TNS   : 0.000
-
-Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk'
-Slack : 9.772
-TNS   : 0.000
-
-Type  : Slow 1200mV 0C Model Minimum Pulse Width 'new_clock'
-Slack : 19.684
-TNS   : 0.000
-
-Type  : Slow 1200mV 0C Model Minimum Pulse Width 'debounce:debounce_rst|new_slow_clock[21]'
+Type  : Slow 1200mV -40C Model Minimum Pulse Width 'debounce:debounce_rst|new_slow_clock[21]'
 Slack : 4999.789
 TNS   : 0.000
 
-Type  : Fast 1200mV 0C Model Setup 'new_clock'
-Slack : 13.124
+Type  : Fast 1200mV -40C Model Setup 'clk'
+Slack : 4.469
 TNS   : 0.000
 
-Type  : Fast 1200mV 0C Model Setup 'clk'
-Slack : 17.515
+Type  : Fast 1200mV -40C Model Hold 'clk'
+Slack : 0.172
 TNS   : 0.000
 
-Type  : Fast 1200mV 0C Model Setup 'seven_segment:seven_segment_0|cnt[15]'
-Slack : 999.348
+Type  : Fast 1200mV -40C Model Minimum Pulse Width 'clk'
+Slack : 9.381
 TNS   : 0.000
 
-Type  : Fast 1200mV 0C Model Hold 'new_clock'
-Slack : 0.185
-TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Hold 'seven_segment:seven_segment_0|cnt[15]'
-Slack : 0.186
-TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Hold 'clk'
-Slack : 0.194
-TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Minimum Pulse Width 'seven_segment:seven_segment_0|cnt[15]'
-Slack : 0.333
-TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk'
-Slack : 9.435
-TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Minimum Pulse Width 'new_clock'
-Slack : 19.701
-TNS   : 0.000
-
-Type  : Fast 1200mV 0C Model Minimum Pulse Width 'debounce:debounce_rst|new_slow_clock[21]'
+Type  : Fast 1200mV -40C Model Minimum Pulse Width 'debounce:debounce_rst|new_slow_clock[21]'
 Slack : 4999.786
 TNS   : 0.000
 

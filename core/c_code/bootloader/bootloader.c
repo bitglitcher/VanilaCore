@@ -43,9 +43,9 @@ void receive_buffer()
     char buffer [200]; //8 Character hexadecimal value = 32bit value 
     while(1)
     {
-        if(*uart_reciever_count > 1)
+        if(1)
         {
-            char data = (*uart_reciever_data) & 0xff;
+            char data = 'a';
             if(data == '*') //Stop character
             {
                 buffer [index] = '\0';   
@@ -88,7 +88,7 @@ int main()
     char input_buffer [20];
     int index = 0;
     int command_okay = 0;
-    int buf_len = 0;
+    
     while(1)
     {
       //Read input buffer lenght
@@ -102,7 +102,7 @@ int main()
         print_char(data_c);
         input_buffer[index] = data_c;
         index++;
-        if(index >= 20)
+        if(index > 20)
         {
           printl("\nError: Line too long\n");
           //Clean buffer
@@ -116,7 +116,9 @@ int main()
         if(data_c == '\r')
         {
             //To eliminate the new line
-            input_buffer[index-1] = '\0';
+            if(index != 0) input_buffer[index-1] = '\0';
+            else input_buffer[index] = '\0';
+
           for(int i = 0; i < N_COMMANDS;i++)
           {
             if(strcmp(input_buffer, commands[i]) == 0)

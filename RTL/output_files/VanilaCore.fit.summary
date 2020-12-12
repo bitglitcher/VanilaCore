@@ -1,16 +1,16 @@
-Fitter Status : Successful - Sat Dec 05 23:35:33 2020
+Fitter Status : Successful - Fri Dec 11 04:42:54 2020
 Quartus Prime Version : 19.1.0 Build 670 09/22/2019 SJ Lite Edition
 Revision Name : VanilaCore
-Top-level Entity Name : soc
+Top-level Entity Name : ZeltaSoC
 Family : Cyclone IV E
-Device : EP4CE6E22C8
+Device : EP4CE115F23I7
 Timing Models : Final
-Total logic elements : 4,740 / 6,272 ( 76 % )
-    Total combinational functions : 4,238 / 6,272 ( 68 % )
-    Dedicated logic registers : 1,526 / 6,272 ( 24 % )
-Total registers : 1526
-Total pins : 15 / 92 ( 16 % )
+Total logic elements : 4,493 / 114,480 ( 4 % )
+    Total combinational functions : 4,236 / 114,480 ( 4 % )
+    Dedicated logic registers : 1,478 / 114,480 ( 1 % )
+Total registers : 1478
+Total pins : 4 / 281 ( 1 % )
 Total virtual pins : 0
-Total memory bits : 131,968 / 276,480 ( 48 % )
-Embedded Multiplier 9-bit elements : 0 / 30 ( 0 % )
-Total PLLs : 0 / 2 ( 0 % )
+Total memory bits : 131,968 / 3,981,312 ( 3 % )
+Embedded Multiplier 9-bit elements : 0 / 532 ( 0 % )
+Total PLLs : 0 / 4 ( 0 % )

@@ -4,26 +4,33 @@
 	.attribute unaligned_access, 0
 	.attribute stack_align, 16
 	.text
+	.section	.rodata.str1.4,"aMS",@progbits,1
+	.align	2
+.LC1:
+	.string	"%f\n"
+	.section	.text.startup,"ax",@progbits
 	.align	2
 	.globl	main
 	.type	main, @function
 main:
-	addi	sp,sp,-32
-	sw	s0,28(sp)
-	addi	s0,sp,32
-	li	a5,-1078001664
-	sw	a5,-20(s0)
-	lw	a5,-20(s0)
- #APP
-# 12 "bootloader.c" 1
-	srai a5, a5, 16 
-# 0 "" 2
- #NO_APP
-	sw	a5,-24(s0)
-	li	a5,23
-	mv	a0,a5
-	lw	s0,28(sp)
-	addi	sp,sp,32
+	lui	a5,%hi(.LC0)
+	lw	a2,%lo(.LC0)(a5)
+	lw	a3,%lo(.LC0+4)(a5)
+	addi	sp,sp,-64
+	lui	a1,%hi(.LC1)
+	addi	a0,sp,8
+	addi	a1,a1,%lo(.LC1)
+	sw	ra,60(sp)
+	call	sprintf
+	lw	ra,60(sp)
+	li	a0,65536
+	addi	a0,a0,-1
+	addi	sp,sp,64
 	jr	ra
 	.size	main, .-main
+	.section	.srodata.cst8,"aM",@progbits,8
+	.align	3
+.LC0:
+	.word	536870912
+	.word	1081361711
 	.ident	"GCC: (GNU) 10.2.0"

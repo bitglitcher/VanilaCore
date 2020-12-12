@@ -22,9 +22,11 @@ module memory_access
     WB4 data_bus
 );
 
-//Registers to latch the address and data buses
+//Registers to latch the address, data buses and funct3 bus
 reg [31:0] store_data_reg;
 reg [31:0] address_reg;
+
+logic [2:0] funct3_ff;
 
 //Load and store cycles are atomic so its fine to allow the execution of another
 //instruction instead of halting the whole CPU, but when the CPU wants to load or store
@@ -57,8 +59,8 @@ begin
     endcase
 end
 
-wire unaligned = ((address_reg [1:0] >= 3) & (access_size != BYTE))? 1 : 0;
-
+wire unaligned = ((address [1:0] >= 3) & (access_size != BYTE))? 1 : 0;
+logic unaligned_ff;
 ////////////////////////////////////////////////////////
 // Most of the following logic is used to align data  //
 ////////////////////////////////////////////////////////
@@ -100,7 +102,7 @@ wire [31:0] ALIGNED_WORD_BUS = aligned_data;
 logic [31:0] mask;
 always_comb
 begin
-    case(funct3)
+    case(funct3_ff)
         SB: mask = 32'h000000ff;
         SH: mask = 32'h0000ffff;
         SW: mask = 32'hffffffff;
@@ -145,7 +147,7 @@ assign new_data_2 [31:24] = modified_window [7];
 //Multiplexer to choose between the load bus
 always_comb
 begin
-    case(funct3)
+    case(funct3_ff)
         LB: load_data = ALIGNED_BYTE;
         LH: load_data = ALIGNED_HALF_WORD;
         LW: load_data = ALIGNED_WORD_BUS;
@@ -220,6 +222,8 @@ begin
                     //Latch data and address
                     store_data_reg = store_data;
                     address_reg = address;
+                    funct3_ff = funct3;
+                    unaligned_ff = unaligned;
                     unique case(memory_operation)
                         LOAD_DATA:
                         begin
@@ -250,11 +254,17 @@ begin
                 begin
                     ack = 1'b0;
                     data_bus_state <= NO_CMD;
+                    store_data_reg = store_data_reg;
+                    address_reg = address_reg;
+                    funct3_ff = funct3_ff;
                 end
 
             end
             READ1:
             begin
+                    store_data_reg = store_data_reg;
+                    address_reg = address_reg;
+                    funct3_ff = funct3_ff;
                 ack = 1'b0;
                 data_bus.DAT_O <= 32'h0;
                 data_bus.ADR <= address_reg [31:0];
@@ -265,7 +275,7 @@ begin
                     data_bus.STB <= 1'b0;
                     data_bus.CYC <= 1'b0;
                     data_bus.WE <= 1'b0;
-                    if(unaligned)
+                    if(unaligned_ff)
                     begin
                         data_bus_state <= READ2;
                         data_valid = 1'b0;
@@ -290,6 +300,9 @@ begin
             end
             READ2:
             begin
+                    store_data_reg = store_data_reg;
+                    address_reg = address_reg;
+                    funct3_ff = funct3_ff;
                 ack = 1'b0;
                 data_bus.DAT_O <= 32'h0;
                 data_bus.ADR <= address_reg [31:0] + 32'b100;
@@ -317,6 +330,9 @@ begin
             end
             READ_W1:
             begin
+                    store_data_reg = store_data_reg;
+                    address_reg = address_reg;
+                    funct3_ff = funct3_ff;
                 data_valid = 1'b0;
                 ack = 1'b0;
                 data_bus.DAT_O <= 32'h0;
@@ -328,7 +344,7 @@ begin
                     data_bus.STB <= 1'b0;
                     data_bus.CYC <= 1'b0;
                     data_bus.WE <= 1'b0;
-                    if(unaligned)
+                    if(unaligned_ff)
                     begin
                         data_bus_state <= READ_W2;
                     end
@@ -349,14 +365,17 @@ begin
             end
             READ_W2:
             begin
+                    store_data_reg = store_data_reg;
+                    address_reg = address_reg;
+                    funct3_ff = funct3_ff;
                 data_valid = 1'b0;
                 ack = 1'b0;
                 data_bus.DAT_O <= 32'h0;
                 data_bus.ADR <= address_reg [31:0] + 32'b100;
                 if(data_bus.ACK)
                 begin
-                    data_1 <= data_bus.DAT_I;
-                    data_2 <= data_2;
+                    data_1 <= data_1;
+                    data_2 <= data_bus.DAT_I;
                     //data_bus.DAT_O <= da;
                     data_bus.STB <= 1'b0;
                     data_bus.CYC <= 1'b0;
@@ -375,6 +394,9 @@ begin
             end
             UWRITE1:
             begin
+                    store_data_reg = store_data_reg;
+                    address_reg = address_reg;
+                    funct3_ff = funct3_ff;
                 data_valid = 1'b0;
                 ack = 1'b0;
                 data_bus.ADR <= address_reg [31:0];
@@ -386,7 +408,7 @@ begin
                     data_bus.STB <= 1'b0;
                     data_bus.CYC <= 1'b0;
                     data_bus.WE <= 1'b0;
-                    if(unaligned)
+                    if(unaligned_ff)
                     begin
                         data_bus_state <= UWRITE2;
                     end
@@ -407,6 +429,9 @@ begin
             end
             UWRITE2:
             begin
+                    store_data_reg = store_data_reg;
+                    address_reg = address_reg;
+                    funct3_ff = funct3_ff;
                 data_valid = 1'b0;
                 ack = 1'b0;
                 data_bus.ADR <= address_reg [31:0] + 32'b100;
@@ -432,6 +457,9 @@ begin
             end
     		default:
     		  begin
+                store_data_reg = store_data_reg;
+                address_reg = address_reg;
+                funct3_ff = funct3_ff;
                 data_valid = 1'b0;
                 ack = 1'b0;
                 data_bus.DAT_O <= 32'h0;

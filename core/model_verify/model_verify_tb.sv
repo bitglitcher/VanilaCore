@@ -23,8 +23,8 @@ WB4 inst_bus(clk, rst);
 WB4 data_bus(clk, rst);
 
 
-ram_wb MEMORY_INST(.wb(inst_bus));
-ram_wb MEMORY_DATA(.wb(data_bus));
+ram_wb #(32, 16) MEMORY_INST(.wb(inst_bus));
+ram_wb #(32, 16) MEMORY_DATA(.wb(data_bus));
 
 logic [31:0] debug_registers [31:0];
 logic pre_execution;

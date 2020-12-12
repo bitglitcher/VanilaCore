@@ -76,7 +76,7 @@ wishbone_arbitrer wishbone_arbitrer_0
 
 
 //Memory and devices
-ram_wb MEMORY_RAM(.wb(memory_mater_wb));
+ram_wb #(32, 12) MEMORY_RAM(.wb(memory_mater_wb));
 uart_slave uart_slave_0
 (
     .wb(uart_rx_wb),

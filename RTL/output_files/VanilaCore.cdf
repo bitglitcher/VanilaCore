@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP4CE6E22) Path("C:/Users/camin/Documents/VanilaCore/RTL/output_files/") File("VanilaCore.sof") MfrSpec(OpMask(1));
+		Device PartName(EP4CE115F23) Path("C:/Users/camin/Documents/VanilaCore/RTL/output_files/") File("VanilaCore.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 
