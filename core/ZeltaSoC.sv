@@ -1,5 +1,5 @@
 
-//`define sim
+`include "debug_def.sv"
 
 module ZeltaSoC
 (
@@ -18,8 +18,6 @@ logic clk;
 logic rst;
 logic uart_tx;
 logic uart_rx;
-logic [6:0] display_data;
-logic [3:0] select;
 assign new_rst = rst;
 `endif
 
@@ -62,7 +60,7 @@ wishbone_arbitrer wishbone_arbitrer_0
 
 
 //Memory and devices
-ram_wb #(32, 12) MEMORY_RAM(.wb(memory_mater_wb));
+ram_wb #(32, 16) MEMORY_RAM(.wb(memory_mater_wb));
 uart_slave uart_slave_0
 (
     .wb(uart_rx_wb),

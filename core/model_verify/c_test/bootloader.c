@@ -3,10 +3,9 @@
 
 int main()
 {
-  float fuck_you = 324.324f;
+  int something = 10;
   char buffer [40];
-  sprintf(buffer, "%f\n", fuck_you);
-
+  sprintf(buffer, "%d\n", something);
 
   return 0xffff;
 }

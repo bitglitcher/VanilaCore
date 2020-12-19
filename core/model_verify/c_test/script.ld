@@ -6,22 +6,21 @@
 OUTPUT_FORMAT("elf32-littleriscv", "elf32-littleriscv",
               "elf32-littleriscv")
 OUTPUT_ARCH(riscv)
-/* >>> Our addition. <<< */
+
 MEMORY
 {
-   /* qemu-system-risc64 virt machine */
-   RAM (rwx)  : ORIGIN = 0x000000, LENGTH = 0x1ffff
+   RAM (rwx)  : ORIGIN = 0x000000, LENGTH = 0x3ffff
 }
-/* >>> End of our addition. <<< */
+
 ENTRY(_start)
 SEARCH_DIR("/mnt/c/Users/camin/Documents/opt/riscv/riscv64-unknown-elf/lib");
 SECTIONS
 {
   /* Read-only sections, merged into text segment: */
   PROVIDE (__executable_start = SEGMENT_START("text-segment", 0x10000)); . = SEGMENT_START("text-segment", 0x10000) + SIZEOF_HEADERS;
-  /* >>> Our addition. <<< */
+
   PROVIDE(__stack_top = ORIGIN(RAM) + LENGTH(RAM));
-  /* >>> End of our addition. <<< */
+
   .interp         : { *(.interp) }
   .note.gnu.build-id  : { *(.note.gnu.build-id) }
   .hash           : { *(.hash) }

@@ -10,8 +10,8 @@ char banner[] =
 \\ \\_/ / (_| | | | | | | (_| | \\__/\\ (_) | | |  __/ \n\
  \\___/ \\__,_|_| |_|_|_|\\__,_|\\____/\\___/|_|  \\___| ";
                                                   
-int* uart_reciever_count = (int*)0x10000004;
-int* uart_reciever_data =  (int*)0x10000000;
+volatile int* uart_reciever_count = (int*)0x10000004;
+volatile int* uart_reciever_data =  (int*)0x10000000;
 
 void print(char* string)
 {
@@ -23,6 +23,7 @@ void print(char* string)
     ptr = ptr + 1;
   }
 }
+
 
 void print_char(char data)
 {
@@ -84,6 +85,14 @@ int main()
     printl(banner);
     printl("Bootloader level 0");
     
+    char sbuffer [100];
+    int test_int = 32;
+    char letter = 'G';
+    char string [] = "Hello World RISCV!";
+    sprintf(sbuffer, "Testing Sprintf function because it was not working... >:(\n\nInt: %d\nChar %c\nString %s\n", test_int, letter, string);
+
+    print(sbuffer);
+
     //Input buffer
     char input_buffer [20];
     int index = 0;
@@ -164,8 +173,6 @@ int main()
             print("Buffer: ");
             printl(input_buffer);
         }
-        
-        *((int*)0x01000000) = *uart_reciever_count; 
       }
       //For stability
       for(int i = 0;i < 0x1000;i++);

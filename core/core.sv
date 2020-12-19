@@ -81,6 +81,15 @@ logic data_valid;
 //ALU immediate instructions signal
 logic imm_t;
 
+//CSR Unit control signals
+logic csr_unit_enable;
+
+//MISC Signals to the CSR unit
+logic illegal_ins;
+logic arithmetic_event;
+logic unconditional_branch;
+logic conditional_branch;
+
 control_unit control_unit_0
 (
     .clk(inst_bus.clk),
@@ -98,7 +107,12 @@ control_unit control_unit_0
     .cyc(cyc),
     .ack(ack),
     .data_valid(data_valid),
-    .imm_t(imm_t)
+    .imm_t(imm_t),
+    .csr_unit_enable(csr_unit_enable),
+    .illegal_ins(illegal_ins),
+    .arithmetic_event(arithmetic_event),
+    .unconditional_branch(unconditional_branch),
+    .conditional_branch(conditional_branch)
 );
 
 //Data buses that come from the register file
@@ -114,6 +128,12 @@ logic [31:0] alu_src2;
 //Load data from memory access unit
 logic [31:0] load_data;
 
+//Input and Output Data BUSes to the CSR unit
+logic [31:0] csr_dout;
+
+//CSR Register file write enable
+logic csr_regfile_write;
+
 //Multiplexer for the Registerfile input
 always_comb
 begin
@@ -123,6 +143,7 @@ begin
         AUIPC_SRC: rd_d <= decode_bus.u_imm + PC;
         PC_SRC: rd_d <= PC + 4;
         LOAD_SRC: rd_d <= load_data;
+        CSR_SRC: rd_d <= csr_dout;
     endcase
 end
 
@@ -136,7 +157,7 @@ regfile regfile_0
     .ra_d(rs1_d), 
     .rb_d(rs2_d),
     .rd_d(rd_d),
-    .wr(regfile_wr)
+    .wr(regfile_wr | csr_regfile_write)
     `ifdef DEBUG_PORT
     ,.reg_debug(debug_registers)
     `endif
@@ -173,21 +194,35 @@ branch_unit branch_unit_0
     .branch(branch)
 );
 
+//Exeptions and interrupts signal
+logic exp_int;
+assign exp_int = illegal_ins;
+
+//Exeption address
+logic [31:0] exeption_addr;
+
 //Jump signal is true if branch or JAL is true
-assign jump = branch | uncoditional_jump;
+assign jump = branch | uncoditional_jump | exp_int;
 
 //Calculate the target address when taking jump or branch
 //This is just a multiplexer
 always_comb
 begin
-    unique case(jmp_target_src)
-        //JAL
-        J_IMM: jump_target = PC + 32'(signed'(decode_bus.j_imm));
-        //BRANCH instructions
-        B_IMM: jump_target = PC + 32'(signed'(decode_bus.b_imm));
-        //JALR. Base rs1 + imm sign extended
-        I_IMM: jump_target = rs1_d + 32'(signed'(decode_bus.i_imm));
-    endcase
+    if(exp_int)
+    begin
+        jump_target = exeption_addr;
+    end
+    else
+    begin
+        unique case(jmp_target_src)
+            //JAL
+            J_IMM: jump_target = PC + 32'(signed'(decode_bus.j_imm));
+            //BRANCH instructions
+            B_IMM: jump_target = PC + 32'(signed'(decode_bus.b_imm));
+            //JALR. Base rs1 + imm sign extended
+            I_IMM: jump_target = rs1_d + 32'(signed'(decode_bus.i_imm));
+        endcase
+    end
 end
 
 //Address bus for the load and store operations
@@ -225,6 +260,50 @@ memory_access memory_access_0
 
     //Wishbone interface
     .data_bus(data_bus)
+);
+
+
+
+
+//CSR Unit
+csr_unit csr_unit_0
+(
+    //Syscon
+    .clk(inst_bus.clk),
+    .rst(inst_bus.rst),
+
+    //Commands
+    .i_imm(decode_bus.i_imm),
+    .funct3(decode_bus.funct3),
+    .rd(decode_bus.rd),
+    .rs1(decode_bus.rs1),
+    .csr_unit_enable(csr_unit_enable),
+
+    //Data buses
+    .din(rs1_d),
+    .dout(csr_dout),
+
+    //Register file control signals
+    .wr(csr_regfile_write),
+
+    //Exeption or trap signal to jump
+    .trap(),
+    .address(exeption_addr),
+
+    //Used by internally by registers
+    //Instruction execute
+    .execute(execute),
+    .PC(PC),
+    .IR(IR),
+    .illegal_ins(illegal_ins),
+    .memory_operation(memory_operation),
+    .cyc_memory_operation(cyc),
+    .arithmetic_event(arithmetic_event),
+    .address_ld(address_ld),
+    .unconditional_branch(unconditional_branch),
+    .conditional_branch(conditional_branch),
+    .branch(jump)
+
 );
 
 endmodule 

@@ -3,23 +3,19 @@ Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow 1200mV 100C Model Setup 'clk'
-Slack : -0.658
-TNS   : -0.988
+Slack : 4.540
+TNS   : 0.000
 
 Type  : Slow 1200mV 100C Model Hold 'clk'
-Slack : 0.405
+Slack : 0.407
 TNS   : 0.000
 
 Type  : Slow 1200mV 100C Model Minimum Pulse Width 'clk'
-Slack : 9.646
-TNS   : 0.000
-
-Type  : Slow 1200mV 100C Model Minimum Pulse Width 'debounce:debounce_rst|new_slow_clock[21]'
-Slack : 4999.781
+Slack : 19.649
 TNS   : 0.000
 
 Type  : Slow 1200mV -40C Model Setup 'clk'
-Slack : 0.424
+Slack : 6.042
 TNS   : 0.000
 
 Type  : Slow 1200mV -40C Model Hold 'clk'
@@ -27,27 +23,19 @@ Slack : 0.334
 TNS   : 0.000
 
 Type  : Slow 1200mV -40C Model Minimum Pulse Width 'clk'
-Slack : 9.656
-TNS   : 0.000
-
-Type  : Slow 1200mV -40C Model Minimum Pulse Width 'debounce:debounce_rst|new_slow_clock[21]'
-Slack : 4999.789
+Slack : 19.654
 TNS   : 0.000
 
 Type  : Fast 1200mV -40C Model Setup 'clk'
-Slack : 4.469
+Slack : 12.072
 TNS   : 0.000
 
 Type  : Fast 1200mV -40C Model Hold 'clk'
-Slack : 0.172
+Slack : 0.173
 TNS   : 0.000
 
 Type  : Fast 1200mV -40C Model Minimum Pulse Width 'clk'
-Slack : 9.381
-TNS   : 0.000
-
-Type  : Fast 1200mV -40C Model Minimum Pulse Width 'debounce:debounce_rst|new_slow_clock[21]'
-Slack : 4999.786
+Slack : 19.382
 TNS   : 0.000
 
 ------------------------------------------------------------

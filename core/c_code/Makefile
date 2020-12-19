@@ -59,3 +59,9 @@ store_byte:
 	riscv64-unknown-elf-objcopy -F elf32-littleriscv test_linked.o -O binary ROM.bin
 	python3 generate_rom.py > ROM.hex
 	cp ROM.hex /mnt/c/Users/camin/Documents/VanilaCore/modelsim/ROM.hex
+
+csr_read:
+	riscv64-unknown-elf-gcc -T script.ld -lm -lgcc -static -march=rv32i -mabi=ilp32 -nostartfiles -ffreestanding -mstrict-align csr.s -O0 -o test_linked.o
+	riscv64-unknown-elf-objcopy -F elf32-littleriscv test_linked.o -O binary ROM.bin
+	python3 generate_rom.py > ROM.hex
+	cp ROM.hex /mnt/c/Users/camin/Documents/VanilaCore/modelsim/ROM.hex

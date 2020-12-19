@@ -1,0 +1,13 @@
+
+Events supported by the CORE
+
+    -LOAD instructions
+    -Store instructions
+    -Arithmetic instructions
+    
+    -Unaligned Accesses
+    -Number of traps
+    -Interrupt
+    -Unconditional Branch
+    -Coditional Branch
+    -Taken Branchs

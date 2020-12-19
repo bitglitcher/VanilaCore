@@ -1,0 +1,39 @@
+
+
+//Interface that contains all event signals
+interface EVENT_INT;
+    logic load;
+    logic store;
+    logic unaligned;
+    logic arithmetic;
+    logic trap;
+    logic interrupt;
+    logic conditional_branch;
+    logic uncoditional_branch;
+    logic branch;
+    modport in
+    (
+        input load;
+        input store;
+        input unaligned;
+        input arithmetic;
+        input trap;
+        input interrupt;
+        input conditional_branch;
+        input uncoditional_branch;
+        input branch;
+    );
+    modport out
+    (
+
+        output load;
+        output store;
+        output unaligned;
+        output arithmetic;
+        output trap;
+        output interrupt;
+        output conditional_branch;
+        output uncoditional_branch;
+        output branch;
+    );
+endinterface //EVENT_INT

@@ -1,4 +1,6 @@
 
+import global_pkg::*;
+`include "debug_def.sv"
 
 module csr_unit
 (
@@ -10,12 +12,12 @@ module csr_unit
     input [11:0] i_imm,
     input [2:0] funct3,
     input [4:0] rd,
-    input [4:0] rs_1,
+    input [4:0] rs1,
     input csr_unit_enable,
 
     //Data buses
     input [31:0] din,
-    output [31:0] dout,
+    output logic [31:0] dout,
 
     //Register file control signals
     output logic wr,
@@ -27,17 +29,43 @@ module csr_unit
     //Used by internally by registers
     //Instruction execute
     input logic execute,
-    input logic [31:0] PC
+    input logic [31:0] PC,
+    input logic [31:0] IR,
+    input logic illegal_ins,
+
+    //Mcause
+    //input logic [31:0] mcause_din,
+    //input logic mcause_wr
+
+    //Event signal interface for the performance counters
+    input memory_operation_t memory_operation,
+    input logic cyc_memory_operation,
+    input logic arithmetic_event,
+    input wire [31:0] address_ld,
+    input logic unconditional_branch,
+    input logic conditional_branch,
+
+    //Interrupt signals
+    input logic external_interrupt,
+
+    //Jump signal to know when a branch is taken
+    input logic branch
 );
 
 
 //Braking down the i_imm bus
-wire priv_mode_bus = i_imm [9:8];
-wire rw_access = i_mm [11:0];
+wire [1:0] priv_mode_bus = i_imm [9:8];
+wire [1:0] rw_access = i_imm [11:10];
 
 ///////////////////////////////////////////
 //          Privilege Logic              //
 ///////////////////////////////////////////
+
+//Privilege modes
+parameter M_MODE = 3; //Support for now
+parameter U_MODE = 0; //Support for now
+parameter S_MODE = 1;
+
 //Current Privilege Mode register logic
 reg [2:0] cpm;
 always@(posedge clk)
@@ -48,11 +76,6 @@ begin
     end
 end
 
-//Privilege modes
-parameter M_MODE = 3; //Support for now
-parameter U_MODE = 0; //Support for now
-parameter S_MODE = 1;
-
 //Illegal privilege access signal
 logic illegal_priv_acs;
 //Illegal privilege access when tring to access csrs with higher privilege
@@ -62,9 +85,9 @@ assign illegal_priv_acs = priv_mode_bus > cpm;
 //           Access Decoder              //
 ///////////////////////////////////////////
 //These are only from the immediate side
-wire csr_read  = (((rw_access == 00) | (rw_access == 01) | (rw_access == 10) | (rw_access == 11)) & (rd != 0)) ? 1 : 0;
-wire csr_read_only = ((rw_access == 11) & rd != 0) ? 1 : 0;
-wire csr_write = (((rw_access == 00) | (rw_access == 01) | (rw_access == 10)) & (rs_1 != 0)) ? 1 : 0;
+wire csr_read  = (((rw_access == 2'b00) | (rw_access == 2'b01) | (rw_access == 2'b10) | (rw_access == 2'b11)) & (rd != 0)) ? 1 : 0;
+wire csr_read_only = ((rw_access == 2'b11) & (rd != 0)) ? 1 : 0;
+wire csr_write = (((rw_access == 2'b00) | (rw_access == 2'b01) | (rw_access == 2'b10)) & (rs1 != 0)) ? 1 : 0;
 
 
 parameter CSRRW = 3'b001; //Read and Write
@@ -78,13 +101,13 @@ parameter CSRRCI = 3'b111;
 //Caused by a csr write on a read only csr.
 
 
-logic csrwr_s = ((fuct3 == CSRRW) & (fuct3 == CSRRWI))? 1 : 0;
-logic csrrs_s = ((fuct3 == CSRRS) & (fuct3 == CSRRSI))? 1 : 0;
-logic csrrc_s = ((fuct3 == CSRRC) & (fuct3 == CSRRCI))? 1 : 0;
+wire csrwr_s = ((funct3 == CSRRW) | (funct3 == CSRRWI))? 1 : 0;
+wire csrrs_s = ((funct3 == CSRRS) | (funct3 == CSRRSI))? 1 : 0;
+wire csrrc_s = ((funct3 == CSRRC) | (funct3 == CSRRCI))? 1 : 0;
 
 //Comamnd write signal 
-logic write_cmd_s = csrwr_s | csrrs_s | csrrc_s;
-logic read_cmd_s = csrwr_s | csrrs_s | csrrc_s;
+wire write_cmd_s = csrwr_s | csrrs_s | csrrc_s;
+wire read_cmd_s = csrwr_s | csrrs_s | csrrc_s;
 
 //Line logic declared on the Address Decoder section
 logic illegal_address;
@@ -93,10 +116,11 @@ assign illegal_access = (write_cmd_s & csr_read_only);
 
 /////Register file control logic
 //Enable line for register file write signal
-assign wr = ((~(illegal_access | illegal_address | illegal_priv_acs) & csr_unit_enable) & csr_write)? 1 : 0;
+logic csr_write_valid;
+assign csr_write_valid = ((~(illegal_access | illegal_address | illegal_priv_acs) & csr_unit_enable) & csr_write)? 1 : 0;
 
 //Csr write signal valid with no illegal Accesses
-assign csr_write_valid = ((~(illegal_access | illegal_address | illegal_priv_acs) & csr_unit_enable) & csr_read)? 1 : 0;
+assign wr = ((~(illegal_access | illegal_address | illegal_priv_acs) & csr_unit_enable) & csr_read)? 1 : 0;
 
 
 //////////////////////////////////////////////
@@ -124,19 +148,19 @@ assign csr_write_valid = ((~(illegal_access | illegal_address | illegal_priv_acs
 
 //0xF11 MRO mvendorid Vendor ID.
 logic [31:0] mvendorid;
-assign mvendorid = 0; //Not implemented
+assign mvendorid = 32'hdeadbeef; //Not implemented
 
 //0xF12 MRO marchid Architecture ID.
 logic [31:0] marchid;
-assign marchid = 0; //Not implemented
+assign marchid = 32'hbeefeaea; //Not implemented
 
 //0xF13 MRO mimpid Implementation ID.
 logic [31:0] mimpid;
-assign mimpid = 0; //Not implemented
+assign mimpid = 32'hfaabaaaa; //Not implemented
 
 //0xF14 MRO mhartid Hardware thread ID.
 logic [31:0] mhartid;
-assign mhartid = 0; //This must be unique ID. For now 0 because of the single core implementation
+assign mhartid = 32'haeaeaeae; //This must be unique ID. For now 0 because of the single core implementation
 
 ////////////////////////
 // Machine Trap Setup //
@@ -155,6 +179,7 @@ logic [31:0] misa;
 //3   128
 //MXL LEN Field
 assign misa [31:30] = 1; //Meaning 32bits
+assign misa [29:26] = 0; //IDK
 //Misa supported exetentions
 assign misa [25:0] = 26'b00000000100000000000000000;
 
@@ -166,9 +191,23 @@ assign misa [25:0] = 26'b00000000100000000000000000;
 //0x304 MRW mie Machine interrupt-enable register.
 
 //0x305 MRW mtvec Machine trap-handler base address.
+
 logic [31:0] mtvec;
 parameter MTVEC_RESET_VECTOR = 29'h8000;
 parameter MTVEC_RESET_MODE = 2'h0;
+
+parameter MTVEC_DIRECT = 0;
+parameter MTVEC_VECTORED = 1;
+
+//Defined here because mtvec uses it
+logic [31:0] mcause;
+
+always_comb
+begin
+    if(mtvec[1:0] == MTVEC_DIRECT) address = {mtvec [31:2], 2'b00};
+    else if(mtvec[1:0] == MTVEC_VECTORED) address = {mtvec [31:2], 2'b00} + (mcause << 2);
+	 else address = {mtvec [31:2], 2'b00};
+end
 
 //0x306 MRW mcounteren Machine counter enable.
 
@@ -180,12 +219,92 @@ parameter MTVEC_RESET_MODE = 2'h0;
 
 //0x340 MRW mscratch Scratch register for machine trap handlers.
 //0x341 MRW mepc Machine exception program counter.
+
+logic mepc_wr;
+logic [31:0] mepc_din;
 logic [31:0] mepc;
+
+assign mepc_wr = illegal_ins;
+
+always_comb
+begin
+    if(illegal_ins)
+    begin
+        mepc_din = PC;
+    end
+    else
+    begin
+        mepc_din = 32'b0;
+    end
+end
+
+always@(posedge clk)
+begin
+    if(mepc_wr)
+    begin
+        mepc = mepc_din;
+    end
+    else
+    begin
+        mepc = mepc;
+    end
+end
 //0x342 MRW mcause Machine trap cause.
 
 logic [31:0] mcause_din; //Data input bus for mcause
 logic mcause_wr;
-logic [31:0] mcause;
+//logic [31:0] mcause;
+
+parameter INS_ADDR_BRKPT = 3;
+parameter INS_PAGE_FAULT = 12;
+parameter INS_ACCESS_FAULT = 1;  
+parameter ILLEGAL_INS = 2;  
+parameter INS_ADDR_MISALIGNED = 0;
+parameter ENV_CALL_8 = 8;
+parameter ENV_CALL_9 = 9; 
+parameter ENV_CALL_11 = 11;
+parameter ENV_BREAK = 3;
+parameter LS_ADDR_BRKPT = 3;
+parameter STORE_ADDR_MISALIGNED = 6; 
+parameter LOAD_ADDRESS_MISALIGNED = 4;
+parameter STORE_PAGE_FAULT = 15;
+parameter LOAD_PAGE_FAULT = 13;
+parameter STORE_ACCESS_FAULT = 7;
+parameter LOAD_ACCESS_FAULT = 5;
+
+//1  Supervisor software interrupt
+//3  Machine software interrupt
+//4  User timer interrupt
+//5  Supervisor timer interrupt
+//7  Machine timer interrupt
+//8  User external interrupt
+//9  Supervisor external interrupt
+//11 Machine external interrupt
+//
+//
+//0 0 Instruction address misaligned
+//0 1 Instruction access fault
+//0 2 Illegal instruction
+//0 3 Breakpoint
+//0 4 Load address misaligned
+//0 5 Load access fault
+//0 6 Store/AMO address misaligned
+//0 7 Store/AMO access fault
+//0 8 Environment call from U-mode
+//0 9 Environment call from S-mode
+//0 11 Environment call from M-mode
+//0 12 Instruction page fault
+//0 13 Load page fault
+//0 15 Store/AMO page fault
+
+always_comb
+begin
+    if(illegal_ins) mcause_din = ILLEGAL_INS;
+    else mcause_din = 32'b000000000000;
+end
+
+assign mcause_wr = illegal_ins;
+
 always@(posedge clk)
 begin
     if(rst)
@@ -201,6 +320,27 @@ begin
     end
 end
 //0x343 MRW mtval Machine bad address or instruction.
+
+logic [31:0] mtval;
+always@(posedge clk)
+begin
+    if(rst)
+    begin
+        mtval =  32'b0;
+    end
+    else
+    begin
+        if(illegal_ins)
+        begin
+            mtval = IR;
+        end
+        else
+        begin
+            mtval = mtval;
+        end
+    end
+
+end
 
 //0x344 MRW mip Machine interrupt pending.
 
@@ -239,11 +379,130 @@ begin
         end
     end
 end
+
+/////////////////////////////////////////////////////////////////////
+//                     Machine Counter Setup                       //
+/////////////////////////////////////////////////////////////////////
+
+
+parameter LOAD_INSTRUCTIONS = 1;
+parameter STORE_INSTRUCTIONS = 2;
+parameter UNALIGNED_ACCESSES = 3;
+parameter ARITHMETIC_INSTRUCTIONS = 4;
+parameter NUMBER_OF_TRAPS = 5;
+parameter INTERRUPT_COUNT = 6;
+parameter UNCONDITIONAL_BRANCH = 7;
+parameter CODITIONAL_BRANCH = 8;
+parameter TAKEN_BRANCHS = 9;
+
+
+//0x320 MRW mcountinhibit Machine counter-inhibit register.
+
+//0x323 MRW mhpmevent3 Machine performance-monitoring event selector.
+//0x324 MRW mhpmevent4 Machine performance-monitoring event selector.
+//0x33F MRW mhpmevent31 Machine performance-monitoring event selector.
+logic [31:0] mhpmevent [31:2];
+ 
 //0xB03 MRW mhpmcounter3 Machine performance-monitoring counter.
 //0xB04 MRW mhpmcounter4 Machine performance-monitoring counter.
 //0xB1F MRW mhpmcounter31 Machine performance-monitoring counter.
+
+logic [63:0] mhpmcounter [31:2];
+
+`ifdef sim
+    initial begin
+        for(int i = 2; i <= 31;i++)
+        begin
+            mhpmcounter [i] = 0;
+            mhpmevent [i] = 0;
+        end
+    end
+`endif
+
+genvar i;
+generate
+    //Maybe
+    for(i = 2; i <= 31;i++)
+    begin : performance_counter_logic
+        always@(posedge clk)
+        begin
+            case(mhpmevent [i])
+                LOAD_INSTRUCTIONS:
+                begin
+                   if((memory_operation == LOAD_DATA) & cyc_memory_operation)
+                   begin
+                       mhpmcounter [i] = mhpmcounter [i] + 1;
+                   end
+                end
+                STORE_INSTRUCTIONS:
+                begin
+                    if((memory_operation == STORE_DATA) & cyc_memory_operation)
+                    begin
+                       mhpmcounter [i] = mhpmcounter [i] + 1;
+                    end
+                end
+                UNALIGNED_ACCESSES:
+                begin
+                    if(address_ld[1:0] != 2'b00)
+                    begin
+                       mhpmcounter [i] = mhpmcounter [i] + 1;
+                    end
+                end
+                ARITHMETIC_INSTRUCTIONS:
+                begin
+                    if(arithmetic_event)
+                    begin
+                       mhpmcounter [i] = mhpmcounter [i] + 1;
+                    end
+                end
+                NUMBER_OF_TRAPS:
+                begin
+                    if(trap)
+                    begin
+                       mhpmcounter [i] = mhpmcounter [i] + 1;
+                    end
+                end
+                INTERRUPT_COUNT:
+                begin
+                    if(external_interrupt)
+                    begin
+                       mhpmcounter [i] = mhpmcounter [i] + 1;
+                    end
+                end
+                UNCONDITIONAL_BRANCH:
+                begin
+                    if(unconditional_branch)
+                    begin
+                       mhpmcounter [i] = mhpmcounter [i] + 1;
+                    end
+                end
+                CODITIONAL_BRANCH:
+                begin
+                    if(conditional_branch)
+                    begin
+                       mhpmcounter [i] = mhpmcounter [i] + 1;
+                    end
+                end
+                TAKEN_BRANCHS:
+                begin
+                    if(unconditional_branch)
+                    begin
+                       mhpmcounter [i] = mhpmcounter [i] + 1;
+                    end
+                end
+                default:
+                begin
+                    mhpmcounter [i] = mhpmcounter [i];
+                end
+            endcase
+        end
+    end
+endgenerate
+
 //0xB80 MRW mcycleh Upper 32 bits of mcycle, RV32I only.
 //0xB82 MRW minstreth Upper 32 bits of minstret, RV32I only.
+
+
 //0xB83 MRW mhpmcounter3h Upper 32 bits of mhpmcounter3, RV32I only.
 //0xB84 MRW mhpmcounter4h Upper 32 bits of mhpmcounter4, RV32I only.
 //0xB9F MRW mhpmcounter31h Upper 32 bits of mhpmcounter31, RV32I only.
@@ -282,15 +541,244 @@ begin
             dout = mhartid;
             illegal_address = 1'b0;
         end
+        //0x300 MRW mstatus Machine status register.
+        12'h300:
+        begin
+            dout = mstatus;
+            illegal_address = 1'b0;
+        end
         //0x301 MRW misa ISA and extensions
         12'h301:
         begin
             dout = misa;
             illegal_address = 1'b0;
         end
+        12'h306:
+        begin
+            dout = misa;
+            illegal_address = 1'b0;
+        end
+        //0xB00 MRW mcycle Machine cycle counter.
+        12'hB00:
+        begin
+            dout = mcycle[31:0];
+            illegal_address = 1'b0;
+        end
+        //0xB02 MRW minstret Machine instructions-retired counter.
+        12'hB02:
+        begin
+            dout = minstret[31:0];
+            illegal_address = 1'b0;
+        end
+        //0xB80 MRW mcycleh Upper 32 bits of mcycle, RV32I only.
+        12'hB80:
+        begin
+            dout = minstret[63:32];
+            illegal_address = 1'b0;
+        end
+        //0xB82 MRW minstreth Upper 32 bits of minstret, RV32I only.
+        12'hB82:
+        begin
+            dout = minstret[63:32];
+            illegal_address = 1'b0;
+        end
+        //Event thingy 
+        //0x323 MRW mhpmcounter3 Machine performance-monitoring event selector.
+        12'hB03: begin dout = mhpmcounter [2 ] [31:0]; illegal_address  = 1'b0; end
+        //0x324 MRW mhpmcounter4 Machine performance-monitoring event selector.
+        12'hB04: begin dout = mhpmcounter [3 ] [31:0]; illegal_address = 1'b0; end
+        //0x325 MRW mhpmcounter5 Machine performance-monitoring event selector.
+        12'hB05: begin dout = mhpmcounter [4 ] [31:0]; illegal_address = 1'b0; end
+        //0x326 MRW mhpmcounter6 Machine performance-monitoring event selector.
+        12'hB06: begin dout = mhpmcounter [5 ] [31:0]; illegal_address = 1'b0; end
+        //0x327 MRW mhpmcounter7 Machine performance-monitoring event selector.
+        12'hB07: begin dout = mhpmcounter [6 ] [31:0]; illegal_address = 1'b0; end
+        //0x328 MRW mhpmcounter8 Machine performance-monitoring event selector.
+        12'hB08: begin dout = mhpmcounter [7 ] [31:0]; illegal_address = 1'b0; end
+        //0x329 MRW mhpmcounter9 Machine performance-monitoring event selector.
+        12'hB09: begin dout = mhpmcounter [8 ] [31:0]; illegal_address = 1'b0; end
+        //0x32A MRW mhpmcounter9 Machine performance-monitoring event selector.
+        12'hB0A: begin dout = mhpmcounter [9 ] [31:0]; illegal_address = 1'b0; end
+        //0x32B MRW mhpmcounter10 Machine performance-monitoring event selector.
+        12'hB0B: begin dout = mhpmcounter [9 ] [31:0]; illegal_address = 1'b0; end
+        //0x32C MRW mhpmcounter11 Machine performance-monitoring event selector.
+        12'hB0C: begin dout = mhpmcounter [10] [31:0]; illegal_address = 1'b0; end
+        //0x32D MRW mhpmcounter12 Machine performance-monitoring event selector.
+        12'hB0D: begin dout = mhpmcounter [11] [31:0]; illegal_address = 1'b0; end
+        //0x32E MRW mhpmcounter13 Machine performance-monitoring event selector.
+        12'hB0E: begin dout = mhpmcounter [12] [31:0]; illegal_address = 1'b0; end
+        //0x32F MRW mhpmcounter14 Machine performance-monitoring event selector.
+        12'hB0F: begin dout = mhpmcounter [13] [31:0]; illegal_address = 1'b0; end
+        //0x330 MRW mhpmcounter15 Machine performance-monitoring event selector.
+        12'hB10: begin dout = mhpmcounter [14] [31:0]; illegal_address = 1'b0; end
+        //0x331 MRW mhpmcounter16 Machine performance-monitoring event selector.
+        12'hB11: begin dout = mhpmcounter [15] [31:0]; illegal_address = 1'b0; end
+        //0x332 MRW mhpmcounter17 Machine performance-monitoring event selector.
+        12'hB12: begin dout = mhpmcounter [16] [31:0]; illegal_address = 1'b0; end
+        //0x333 MRW mhpmcounter18 Machine performance-monitoring event selector.
+        12'hB13: begin dout = mhpmcounter [17] [31:0]; illegal_address = 1'b0; end
+        //0x334 MRW mhpmcounter19 Machine performance-monitoring event selector.
+        12'hB14: begin dout = mhpmcounter [18] [31:0]; illegal_address = 1'b0; end
+        //0x335 MRW mhpmcounter20 Machine performance-monitoring event selector.
+        12'hB15: begin dout = mhpmcounter [19] [31:0]; illegal_address = 1'b0; end
+        //0x336 MRW mhpmcounter21 Machine performance-monitoring event selector.
+        12'hB16: begin dout = mhpmcounter [20] [31:0]; illegal_address = 1'b0; end
+        //0x337 MRW mhpmcounter22 Machine performance-monitoring event selector.
+        12'hB17: begin dout = mhpmcounter [21] [31:0]; illegal_address = 1'b0; end
+        //0x338 MRW mhpmcounter23 Machine performance-monitoring event selector.
+        12'hB18: begin dout = mhpmcounter [22] [31:0]; illegal_address = 1'b0; end
+        //0x339 MRW mhpmcounter24 Machine performance-monitoring event selector.
+        12'hB19: begin dout = mhpmcounter [23] [31:0]; illegal_address = 1'b0; end
+        //0x33A MRW mhpmcounter25 Machine performance-monitoring event selector.
+        12'hB1A: begin dout = mhpmcounter [24] [31:0]; illegal_address = 1'b0; end
+        //0x33B MRW mhpmcounter26 Machine performance-monitoring event selector.
+        12'hB1B: begin dout = mhpmcounter [25] [31:0]; illegal_address = 1'b0; end
+        //0x33C MRW mhpmcounter27 Machine performance-monitoring event selector.
+        12'hB1C: begin dout = mhpmcounter [26] [31:0]; illegal_address = 1'b0; end
+        //0x33D MRW mhpmcounter28 Machine performance-monitoring event selector.
+        12'hB1D: begin dout = mhpmcounter [27] [31:0]; illegal_address = 1'b0; end
+        //0x33E MRW mhpmcounter29 Machine performance-monitoring event selector.
+        12'hB1E: begin dout = mhpmcounter [28] [31:0]; illegal_address = 1'b0; end
+        //0x33F MRW mhpmcounter30 Machine performance-monitoring event selector.
+        12'hB1F: begin dout = mhpmcounter [29] [31:0]; illegal_address = 1'b0; end
+        //0x323 MRW mhpmcounter3 Machine performance-monitoring event selector.
+        12'hB83: begin dout = mhpmcounter [2 ] [63:32]; illegal_address  = 1'b0; end
+        //0x324 MRW mhpmcounter4 Machine performance-monitoring event selector.
+        12'hB84: begin dout = mhpmcounter [3 ] [63:32]; illegal_address = 1'b0; end
+        //0x325 MRW mhpmcounter5 Machine performance-monitoring event selector.
+        12'hB85: begin dout = mhpmcounter [4 ] [63:32]; illegal_address = 1'b0; end
+        //0x326 MRW mhpmcounter6 Machine performance-monitoring event selector.
+        12'hB86: begin dout = mhpmcounter [5 ] [63:32]; illegal_address = 1'b0; end
+        //0x327 MRW mhpmcounter7 Machine performance-monitoring event selector.
+        12'hB87: begin dout = mhpmcounter [6 ] [63:32]; illegal_address = 1'b0; end
+        //0x328 MRW mhpmcounter8 Machine performance-monitoring event selector.
+        12'hB88: begin dout = mhpmcounter [7 ] [63:32]; illegal_address = 1'b0; end
+        //0x329 MRW mhpmcounter9 Machine performance-monitoring event selector.
+        12'hB89: begin dout = mhpmcounter [8 ] [63:32]; illegal_address = 1'b0; end
+        //0x32A MRW mhpmcounter9 Machine performance-monitoring event selector.
+        12'hB8A: begin dout = mhpmcounter [9 ] [63:32]; illegal_address = 1'b0; end
+        //0x32B MRW mhpmcounter10 Machine performance-monitoring event selector.
+        12'hB8B: begin dout = mhpmcounter [9 ] [63:32]; illegal_address = 1'b0; end
+        //0x32C MRW mhpmcounter11 Machine performance-monitoring event selector.
+        12'hB8C: begin dout = mhpmcounter [10] [63:32]; illegal_address = 1'b0; end
+        //0x32D MRW mhpmcounter12 Machine performance-monitoring event selector.
+        12'hB8D: begin dout = mhpmcounter [11] [63:32]; illegal_address = 1'b0; end
+        //0x32E MRW mhpmcounter13 Machine performance-monitoring event selector.
+        12'hB8E: begin dout = mhpmcounter [12] [63:32]; illegal_address = 1'b0; end
+        //0x32F MRW mhpmcounter14 Machine performance-monitoring event selector.
+        12'hB8F: begin dout = mhpmcounter [13] [63:32]; illegal_address = 1'b0; end
+        //0x330 MRW mhpmcounter15 Machine performance-monitoring event selector.
+        12'hB90: begin dout = mhpmcounter [14] [63:32]; illegal_address = 1'b0; end
+        //0x331 MRW mhpmcounter16 Machine performance-monitoring event selector.
+        12'hB91: begin dout = mhpmcounter [15] [63:32]; illegal_address = 1'b0; end
+        //0x332 MRW mhpmcounter17 Machine performance-monitoring event selector.
+        12'hB92: begin dout = mhpmcounter [16] [63:32]; illegal_address = 1'b0; end
+        //0x333 MRW mhpmcounter18 Machine performance-monitoring event selector.
+        12'hB93: begin dout = mhpmcounter [17] [63:32]; illegal_address = 1'b0; end
+        //0x334 MRW mhpmcounter19 Machine performance-monitoring event selector.
+        12'hB94: begin dout = mhpmcounter [18] [63:32]; illegal_address = 1'b0; end
+        //0x335 MRW mhpmcounter20 Machine performance-monitoring event selector.
+        12'hB95: begin dout = mhpmcounter [19] [63:32]; illegal_address = 1'b0; end
+        //0x336 MRW mhpmcounter21 Machine performance-monitoring event selector.
+        12'hB96: begin dout = mhpmcounter [20] [63:32]; illegal_address = 1'b0; end
+        //0x337 MRW mhpmcounter22 Machine performance-monitoring event selector.
+        12'hB97: begin dout = mhpmcounter [21] [63:32]; illegal_address = 1'b0; end
+        //0x338 MRW mhpmcounter23 Machine performance-monitoring event selector.
+        12'hB98: begin dout = mhpmcounter [22] [63:32]; illegal_address = 1'b0; end
+        //0x339 MRW mhpmcounter24 Machine performance-monitoring event selector.
+        12'hB99: begin dout = mhpmcounter [23] [63:32]; illegal_address = 1'b0; end
+        //0x33A MRW mhpmcounter25 Machine performance-monitoring event selector.
+        12'hB9A: begin dout = mhpmcounter [24] [63:32]; illegal_address = 1'b0; end
+        //0x33B MRW mhpmcounter26 Machine performance-monitoring event selector.
+        12'hB9B: begin dout = mhpmcounter [25] [63:32]; illegal_address = 1'b0; end
+        //0x33C MRW mhpmcounter27 Machine performance-monitoring event selector.
+        12'hB9C: begin dout = mhpmcounter [26] [63:32]; illegal_address = 1'b0; end
+        //0x33D MRW mhpmcounter28 Machine performance-monitoring event selector.
+        12'hB9D: begin dout = mhpmcounter [27] [63:32]; illegal_address = 1'b0; end
+        //0x33E MRW mhpmcounter29 Machine performance-monitoring event selector.
+        12'hB9E: begin dout = mhpmcounter [28] [63:32]; illegal_address = 1'b0; end
+        //0x33F MRW mhpmcounter30 Machine performance-monitoring event selector.
+        12'hB9F: begin dout = mhpmcounter [29] [63:32]; illegal_address = 1'b0; end
+
+        //Event thingy 
+        //0x323 MRW mhpmevent3 Machine performance-monitoring event selector.
+        12'h323: begin dout = mhpmevent [2 ] [31:0]; illegal_address  = 1'b0; end
+        //0x324 MRW mhpmevent4 Machine performance-monitoring event selector.
+        12'h324: begin dout = mhpmevent [3 ] [31:0]; illegal_address = 1'b0; end
+        //0x325 MRW mhpmevent5 Machine performance-monitoring event selector.
+        12'h325: begin dout = mhpmevent [4 ] [31:0]; illegal_address = 1'b0; end
+        //0x326 MRW mhpmevent6 Machine performance-monitoring event selector.
+        12'h326: begin dout = mhpmevent [5 ] [31:0]; illegal_address = 1'b0; end
+        //0x327 MRW mhpmevent7 Machine performance-monitoring event selector.
+        12'h327: begin dout = mhpmevent [6 ] [31:0]; illegal_address = 1'b0; end
+        //0x328 MRW mhpmevent8 Machine performance-monitoring event selector.
+        12'h328: begin dout = mhpmevent [7 ] [31:0]; illegal_address = 1'b0; end
+        //0x329 MRW mhpmevent9 Machine performance-monitoring event selector.
+        12'h329: begin dout = mhpmevent [8 ] [31:0]; illegal_address = 1'b0; end
+        //0x32A MRW mhpmevent9 Machine performance-monitoring event selector.
+        12'h32A: begin dout = mhpmevent [9 ] [31:0]; illegal_address = 1'b0; end
+        //0x32B MRW mhpmevent10 Machine performance-monitoring event selector.
+        12'h32B: begin dout = mhpmevent [9 ] [31:0]; illegal_address = 1'b0; end
+        //0x32C MRW mhpmevent11 Machine performance-monitoring event selector.
+        12'h32C: begin dout = mhpmevent [10] [31:0]; illegal_address = 1'b0; end
+        //0x32D MRW mhpmevent12 Machine performance-monitoring event selector.
+        12'h32D: begin dout = mhpmevent [11] [31:0]; illegal_address = 1'b0; end
+        //0x32E MRW mhpmevent13 Machine performance-monitoring event selector.
+        12'h32E: begin dout = mhpmevent [12] [31:0]; illegal_address = 1'b0; end
+        //0x32F MRW mhpmevent14 Machine performance-monitoring event selector.
+        12'h32F: begin dout = mhpmevent [13] [31:0]; illegal_address = 1'b0; end
+        //0x330 MRW mhpmevent15 Machine performance-monitoring event selector.
+        12'h330: begin dout = mhpmevent [14] [31:0]; illegal_address = 1'b0; end
+        //0x331 MRW mhpmevent16 Machine performance-monitoring event selector.
+        12'h331: begin dout = mhpmevent [15] [31:0]; illegal_address = 1'b0; end
+        //0x332 MRW mhpmevent17 Machine performance-monitoring event selector.
+        12'h332: begin dout = mhpmevent [16] [31:0]; illegal_address = 1'b0; end
+        //0x333 MRW mhpmevent18 Machine performance-monitoring event selector.
+        12'h333: begin dout = mhpmevent [17] [31:0]; illegal_address = 1'b0; end
+        //0x334 MRW mhpmevent19 Machine performance-monitoring event selector.
+        12'h334: begin dout = mhpmevent [18] [31:0]; illegal_address = 1'b0; end
+        //0x335 MRW mhpmevent20 Machine performance-monitoring event selector.
+        12'h335: begin dout = mhpmevent [19] [31:0]; illegal_address = 1'b0; end
+        //0x336 MRW mhpmevent21 Machine performance-monitoring event selector.
+        12'h336: begin dout = mhpmevent [20] [31:0]; illegal_address = 1'b0; end
+        //0x337 MRW mhpmevent22 Machine performance-monitoring event selector.
+        12'h337: begin dout = mhpmevent [21] [31:0]; illegal_address = 1'b0; end
+        //0x338 MRW mhpmevent23 Machine performance-monitoring event selector.
+        12'h338: begin dout = mhpmevent [22] [31:0]; illegal_address = 1'b0; end
+        //0x339 MRW mhpmevent24 Machine performance-monitoring event selector.
+        12'h339: begin dout = mhpmevent [23] [31:0]; illegal_address = 1'b0; end
+        //0x33A MRW mhpmevent25 Machine performance-monitoring event selector.
+        12'h33A: begin dout = mhpmevent [24] [31:0]; illegal_address = 1'b0; end
+        //0x33B MRW mhpmevent26 Machine performance-monitoring event selector.
+        12'h33B: begin dout = mhpmevent [25] [31:0]; illegal_address = 1'b0; end
+        //0x33C MRW mhpmevent27 Machine performance-monitoring event selector.
+        12'h33C: begin dout = mhpmevent [26] [31:0]; illegal_address = 1'b0; end
+        //0x33D MRW mhpmevent28 Machine performance-monitoring event selector.
+        12'h33D: begin dout = mhpmevent [27] [31:0]; illegal_address = 1'b0; end
+        //0x33E MRW mhpmevent29 Machine performance-monitoring event selector.
+        12'h33E: begin dout = mhpmevent [28] [31:0]; illegal_address = 1'b0; end
+        //0x33F MRW mhpmevent30 Machine performance-monitoring event selector.
+        12'h33F: begin dout = mhpmevent [29] [31:0]; illegal_address = 1'b0; end		  
+        //[12'h323:12'h33F]:
+        //begin
+        //    illegal_address = 1'b0;
+        //    genvar i;
+        //    generate
+        //        for(i = 3; i <= 31;i++)
+        //        begin
+        //            //i_imm minus the offset?
+        //            if((i_imm - 12'h323) == i)
+        //            begin
+        //                dout = mhpmevent [i];                     
+        //            end
+        //        end
+        //    endgenerate
+        //end
+
         default:
         begin
-            illegal_address = 1'b1;
+            illegal_address = 1'b0;
+			dout = 32'h0;
             //Raise Illegal Instruction exeption, because csr not implemented
         end
     endcase
@@ -302,31 +790,81 @@ end
 
 always@(posedge clk)
 begin
-    rst
+    if(rst)
+    begin
+        
+    end
+    else
+    begin
+        if(csr_write & csr_write_valid)
+        begin
+            case(i_imm)
+                //0x305 MRW mtvec Machine trap-handler base address.
+                12'h305: mtvec = din;
+                //Event thingy 
+                //0x323 MRW mhpmevent3 Machine performance-monitoring event selector.
+                12'h323: mhpmevent [2 ] [31:0] = din;
+                //0x324 MRW mhpmevent4 Machine performance-monitoring event selector.
+                12'h324: mhpmevent [3 ] [31:0] = din;
+                //0x325 MRW mhpmevent5 Machine performance-monitoring event selector.
+                12'h325: mhpmevent [4 ] [31:0] = din;
+                //0x326 MRW mhpmevent6 Machine performance-monitoring event selector.
+                12'h326: mhpmevent [5 ] [31:0] = din;
+                //0x327 MRW mhpmevent7 Machine performance-monitoring event selector.
+                12'h327: mhpmevent [6 ] [31:0] = din;
+                //0x328 MRW mhpmevent8 Machine performance-monitoring event selector.
+                12'h328: mhpmevent [7 ] [31:0] = din;
+                //0x329 MRW mhpmevent9 Machine performance-monitoring event selector.
+                12'h329: mhpmevent [8 ] [31:0] = din;
+                //0x32A MRW mhpmevent9 Machine performance-monitoring event selector.
+                12'h32A: mhpmevent [9 ] [31:0] = din;
+                //0x32B MRW mhpmevent10 Machine performance-monitoring event selector.
+                12'h32B: mhpmevent [9 ] [31:0] = din;
+                //0x32C MRW mhpmevent11 Machine performance-monitoring event selector.
+                12'h32C: mhpmevent [10] [31:0] = din;
+                //0x32D MRW mhpmevent12 Machine performance-monitoring event selector.
+                12'h32D: mhpmevent [11] [31:0] = din;
+                //0x32E MRW mhpmevent13 Machine performance-monitoring event selector.
+                12'h32E: mhpmevent [12] [31:0] = din;
+                //0x32F MRW mhpmevent14 Machine performance-monitoring event selector.
+                12'h32F: mhpmevent [13] [31:0] = din;
+                //0x330 MRW mhpmevent15 Machine performance-monitoring event selector.
+                12'h330: mhpmevent [14] [31:0] = din;
+                //0x331 MRW mhpmevent16 Machine performance-monitoring event selector.
+                12'h331: mhpmevent [15] [31:0] = din;
+                //0x332 MRW mhpmevent17 Machine performance-monitoring event selector.
+                12'h332: mhpmevent [16] [31:0] = din;
+                //0x333 MRW mhpmevent18 Machine performance-monitoring event selector.
+                12'h333: mhpmevent [17] [31:0] = din;
+                //0x334 MRW mhpmevent19 Machine performance-monitoring event selector.
+                12'h334: mhpmevent [18] [31:0] = din;
+                //0x335 MRW mhpmevent20 Machine performance-monitoring event selector.
+                12'h335: mhpmevent [19] [31:0] = din;
+                //0x336 MRW mhpmevent21 Machine performance-monitoring event selector.
+                12'h336: mhpmevent [20] [31:0] = din;
+                //0x337 MRW mhpmevent22 Machine performance-monitoring event selector.
+                12'h337: mhpmevent [21] [31:0] = din;
+                //0x338 MRW mhpmevent23 Machine performance-monitoring event selector.
+                12'h338: mhpmevent [22] [31:0] = din;
+                //0x339 MRW mhpmevent24 Machine performance-monitoring event selector.
+                12'h339: mhpmevent [23] [31:0] = din;
+                //0x33A MRW mhpmevent25 Machine performance-monitoring event selector.
+                12'h33A: mhpmevent [24] [31:0] = din;
+                //0x33B MRW mhpmevent26 Machine performance-monitoring event selector.
+                12'h33B: mhpmevent [25] [31:0] = din;
+                //0x33C MRW mhpmevent27 Machine performance-monitoring event selector.
+                12'h33C: mhpmevent [26] [31:0] = din;
+                //0x33D MRW mhpmevent28 Machine performance-monitoring event selector.
+                12'h33D: mhpmevent [27] [31:0] = din;
+                //0x33E MRW mhpmevent29 Machine performance-monitoring event selector.
+                12'h33E: mhpmevent [28] [31:0] = din;
+                //0x33F MRW mhpmevent30 Machine performance-monitoring event selector.
+                12'h33F: mhpmevent [29] [31:0] = din;
+                //0x323 MRW mhpmevent3 Machine performance-monitoring event selector.
+            endcase
+        end
+    end
 end
-
-
-
-
-
-
-
-
-
-
-////////////////////////////////
-// Machine Counter And Timers //
-////////////////////////////////
-
-csr_insret m_insret
-(
-     .clk(clk),
-     .rst(rst),
-     .ins_exe(ins_exe_minsret), //Instruction execute signal
-     .data_i(data_i_minsret),
-     .data_o(data_o_minsret)
-);
-
 
 
 

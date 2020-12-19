@@ -1,4 +1,4 @@
-## Generated SDC file "VanilaCore.out.sdc"
+## Generated SDC file "VanilaCore.sdc"
 
 ## Copyright (C) 2019  Intel Corporation. All rights reserved.
 ## Your use of Intel Corporation's design tools, logic functions 
@@ -20,10 +20,10 @@
 ## PROGRAM "Quartus Prime"
 ## VERSION "Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition"
 
-## DATE    "Thu Nov 26 09:29:18 2020"
+## DATE    "Wed Dec 16 00:47:32 2020"
 
 ##
-## DEVICE  "EP4CE6E22C8"
+## DEVICE  "EP4CE115F23I7"
 ##
 
 
@@ -39,10 +39,7 @@ set_time_format -unit ns -decimal_places 3
 # Create Clock
 #**************************************************************
 
-create_clock -name {new_clock} -period 40.000 -waveform { 0.000 20.000 } [get_registers { new_clock }]
-create_clock -name {debounce:debounce_rst|new_slow_clock[21]} -period 10000.000 -waveform { 0.000 5000.000 } [get_registers { debounce:debounce_rst|new_slow_clock[21] }]
-create_clock -name {clk} -period 20.000 -waveform { 0.000 10.000 } [get_ports { clk }]
-create_clock -name {seven_segment:seven_segment_0|cnt[15]} -period 1000.000 -waveform { 0.000 0.500 } [get_registers { seven_segment:seven_segment_0|cnt[15] }]
+create_clock -name {clk} -period 40.000 -waveform { 0.000 20.000 } [get_ports { clk }]
 
 
 #**************************************************************
@@ -63,40 +60,8 @@ create_clock -name {seven_segment:seven_segment_0|cnt[15]} -period 1000.000 -wav
 
 set_clock_uncertainty -rise_from [get_clocks {clk}] -rise_to [get_clocks {clk}]  0.020  
 set_clock_uncertainty -rise_from [get_clocks {clk}] -fall_to [get_clocks {clk}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {clk}] -rise_to [get_clocks {debounce:debounce_rst|new_slow_clock[21]}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {clk}] -fall_to [get_clocks {debounce:debounce_rst|new_slow_clock[21]}]  0.020  
 set_clock_uncertainty -fall_from [get_clocks {clk}] -rise_to [get_clocks {clk}]  0.020  
 set_clock_uncertainty -fall_from [get_clocks {clk}] -fall_to [get_clocks {clk}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {clk}] -rise_to [get_clocks {debounce:debounce_rst|new_slow_clock[21]}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {clk}] -fall_to [get_clocks {debounce:debounce_rst|new_slow_clock[21]}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {seven_segment:seven_segment_0|cnt[15]}] -rise_to [get_clocks {seven_segment:seven_segment_0|cnt[15]}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {seven_segment:seven_segment_0|cnt[15]}] -fall_to [get_clocks {seven_segment:seven_segment_0|cnt[15]}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {seven_segment:seven_segment_0|cnt[15]}] -rise_to [get_clocks {new_clock}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {seven_segment:seven_segment_0|cnt[15]}] -fall_to [get_clocks {new_clock}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {seven_segment:seven_segment_0|cnt[15]}] -rise_to [get_clocks {seven_segment:seven_segment_0|cnt[15]}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {seven_segment:seven_segment_0|cnt[15]}] -fall_to [get_clocks {seven_segment:seven_segment_0|cnt[15]}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {seven_segment:seven_segment_0|cnt[15]}] -rise_to [get_clocks {new_clock}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {seven_segment:seven_segment_0|cnt[15]}] -fall_to [get_clocks {new_clock}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {debounce:debounce_rst|new_slow_clock[21]}] -rise_to [get_clocks {clk}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {debounce:debounce_rst|new_slow_clock[21]}] -fall_to [get_clocks {clk}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {debounce:debounce_rst|new_slow_clock[21]}] -rise_to [get_clocks {new_clock}]  0.010  
-set_clock_uncertainty -rise_from [get_clocks {debounce:debounce_rst|new_slow_clock[21]}] -fall_to [get_clocks {new_clock}]  0.010  
-set_clock_uncertainty -fall_from [get_clocks {debounce:debounce_rst|new_slow_clock[21]}] -rise_to [get_clocks {clk}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {debounce:debounce_rst|new_slow_clock[21]}] -fall_to [get_clocks {clk}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {debounce:debounce_rst|new_slow_clock[21]}] -rise_to [get_clocks {new_clock}]  0.010  
-set_clock_uncertainty -fall_from [get_clocks {debounce:debounce_rst|new_slow_clock[21]}] -fall_to [get_clocks {new_clock}]  0.010  
-set_clock_uncertainty -rise_from [get_clocks {new_clock}] -rise_to [get_clocks {clk}]  0.030  
-set_clock_uncertainty -rise_from [get_clocks {new_clock}] -fall_to [get_clocks {clk}]  0.030  
-set_clock_uncertainty -rise_from [get_clocks {new_clock}] -rise_to [get_clocks {seven_segment:seven_segment_0|cnt[15]}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {new_clock}] -fall_to [get_clocks {seven_segment:seven_segment_0|cnt[15]}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {new_clock}] -rise_to [get_clocks {new_clock}]  0.020  
-set_clock_uncertainty -rise_from [get_clocks {new_clock}] -fall_to [get_clocks {new_clock}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {new_clock}] -rise_to [get_clocks {clk}]  0.030  
-set_clock_uncertainty -fall_from [get_clocks {new_clock}] -fall_to [get_clocks {clk}]  0.030  
-set_clock_uncertainty -fall_from [get_clocks {new_clock}] -rise_to [get_clocks {seven_segment:seven_segment_0|cnt[15]}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {new_clock}] -fall_to [get_clocks {seven_segment:seven_segment_0|cnt[15]}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {new_clock}] -rise_to [get_clocks {new_clock}]  0.020  
-set_clock_uncertainty -fall_from [get_clocks {new_clock}] -fall_to [get_clocks {new_clock}]  0.020  
 
 
 #**************************************************************

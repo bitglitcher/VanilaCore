@@ -1,5 +1,5 @@
 Analysis & Synthesis report for VanilaCore
-Fri Dec 11 04:40:32 2020
+Fri Dec 18 16:35:55 2020
 Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
 
 
@@ -26,7 +26,7 @@ Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
  18. Multiplexer Restructuring Statistics (Restructuring Performed)
  19. Source assignments for console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_0|altsyncram_osc1:auto_generated
  20. Source assignments for console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_1|altsyncram_osc1:auto_generated
- 21. Source assignments for ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0|altsyncram_v291:auto_generated
+ 21. Source assignments for ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0|altsyncram_j491:auto_generated
  22. Source assignments for uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_0|altsyncram_osc1:auto_generated
  23. Source assignments for uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_1|altsyncram_osc1:auto_generated
  24. Parameter Settings for User Entity Instance: cross_bar:cross_bar_0
@@ -41,22 +41,21 @@ Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
  33. Parameter Settings for User Entity Instance: core:CORE_0|alu:alu_0
  34. Parameter Settings for User Entity Instance: core:CORE_0|branch_unit:branch_unit_0
  35. Parameter Settings for User Entity Instance: core:CORE_0|memory_access:memory_access_0
- 36. Parameter Settings for Inferred Entity Instance: console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_0
- 37. Parameter Settings for Inferred Entity Instance: console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_1
- 38. Parameter Settings for Inferred Entity Instance: ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0
- 39. Parameter Settings for Inferred Entity Instance: uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_0
- 40. Parameter Settings for Inferred Entity Instance: uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_1
- 41. altsyncram Parameter Settings by Entity Instance
- 42. Port Connectivity Checks: "core:CORE_0"
- 43. Port Connectivity Checks: "console:console_0|fifo:fifo_0"
- 44. Port Connectivity Checks: "console:console_0"
- 45. Port Connectivity Checks: "uart_slave:uart_slave_0|fifo:fifo_0"
- 46. Port Connectivity Checks: "ram_wb:MEMORY_RAM|ram:RAM_0"
- 47. Port Connectivity Checks: "cross_bar:cross_bar_0"
- 48. Post-Synthesis Netlist Statistics for Top Partition
- 49. Elapsed Time Per Partition
- 50. Analysis & Synthesis Messages
- 51. Analysis & Synthesis Suppressed Messages
+ 36. Parameter Settings for User Entity Instance: core:CORE_0|csr_unit:csr_unit_0
+ 37. Parameter Settings for Inferred Entity Instance: console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_0
+ 38. Parameter Settings for Inferred Entity Instance: console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_1
+ 39. Parameter Settings for Inferred Entity Instance: ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0
+ 40. Parameter Settings for Inferred Entity Instance: uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_0
+ 41. Parameter Settings for Inferred Entity Instance: uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_1
+ 42. altsyncram Parameter Settings by Entity Instance
+ 43. Port Connectivity Checks: "core:CORE_0|csr_unit:csr_unit_0"
+ 44. Port Connectivity Checks: "console:console_0|fifo:fifo_0"
+ 45. Port Connectivity Checks: "console:console_0"
+ 46. Port Connectivity Checks: "uart_slave:uart_slave_0|fifo:fifo_0"
+ 47. Post-Synthesis Netlist Statistics for Top Partition
+ 48. Elapsed Time Per Partition
+ 49. Analysis & Synthesis Messages
+ 50. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -83,18 +82,18 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Dec 11 04:40:32 2020       ;
+; Analysis & Synthesis Status        ; Successful - Fri Dec 18 16:35:55 2020       ;
 ; Quartus Prime Version              ; 19.1.0 Build 670 09/22/2019 SJ Lite Edition ;
 ; Revision Name                      ; VanilaCore                                  ;
 ; Top-level Entity Name              ; ZeltaSoC                                    ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 5,325                                       ;
-;     Total combinational functions  ; 4,236                                       ;
-;     Dedicated logic registers      ; 1,492                                       ;
-; Total registers                    ; 1492                                        ;
+; Total logic elements               ; 11,274                                      ;
+;     Total combinational functions  ; 9,321                                       ;
+;     Dedicated logic registers      ; 4,329                                       ;
+; Total registers                    ; 4329                                        ;
 ; Total pins                         ; 4                                           ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 131,968                                     ;
+; Total memory bits                  ; 2,098,048                                   ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
 ; Total PLLs                         ; 0                                           ;
 +------------------------------------+---------------------------------------------+
@@ -212,6 +211,7 @@ https://fpgasoftware.intel.com/eula.
 +-----------------------------------------+-----------------+-------------------------------------------------------+---------------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path        ; Used in Netlist ; File Type                                             ; File Name with Absolute Path                                                    ; Library ;
 +-----------------------------------------+-----------------+-------------------------------------------------------+---------------------------------------------------------------------------------+---------+
+; ../core/csr_unit.sv                     ; yes             ; User SystemVerilog HDL File                           ; C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv                            ;         ;
 ; ../core/ZeltaSoC.sv                     ; yes             ; User SystemVerilog HDL File                           ; C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv                            ;         ;
 ; ../core/debug_def.sv                    ; yes             ; User SystemVerilog HDL File                           ; C:/Users/camin/Documents/VanilaCore/core/debug_def.sv                           ;         ;
 ; ../core/uart_slave.sv                   ; yes             ; User SystemVerilog HDL File                           ; C:/Users/camin/Documents/VanilaCore/core/uart_slave.sv                          ;         ;
@@ -244,8 +244,11 @@ https://fpgasoftware.intel.com/eula.
 ; altram.inc                              ; yes             ; Megafunction                                          ; c:/intelfpga_lite/19.1/quartus/libraries/megafunctions/altram.inc               ;         ;
 ; altdpram.inc                            ; yes             ; Megafunction                                          ; c:/intelfpga_lite/19.1/quartus/libraries/megafunctions/altdpram.inc             ;         ;
 ; db/altsyncram_osc1.tdf                  ; yes             ; Auto-Generated Megafunction                           ; C:/Users/camin/Documents/VanilaCore/RTL/db/altsyncram_osc1.tdf                  ;         ;
-; db/altsyncram_v291.tdf                  ; yes             ; Auto-Generated Megafunction                           ; C:/Users/camin/Documents/VanilaCore/RTL/db/altsyncram_v291.tdf                  ;         ;
-; db/vanilacore.ram0_ram_6773ddc7.hdl.mif ; yes             ; Auto-Generated Auto-Found Memory Initialization File  ; C:/Users/camin/Documents/VanilaCore/RTL/db/vanilacore.ram0_ram_6773ddc7.hdl.mif ;         ;
+; db/altsyncram_j491.tdf                  ; yes             ; Auto-Generated Megafunction                           ; C:/Users/camin/Documents/VanilaCore/RTL/db/altsyncram_j491.tdf                  ;         ;
+; db/vanilacore.ram0_ram_6773dc4a.hdl.mif ; yes             ; Auto-Generated Auto-Found Memory Initialization File  ; C:/Users/camin/Documents/VanilaCore/RTL/db/vanilacore.ram0_ram_6773dc4a.hdl.mif ;         ;
+; db/decode_rsa.tdf                       ; yes             ; Auto-Generated Megafunction                           ; C:/Users/camin/Documents/VanilaCore/RTL/db/decode_rsa.tdf                       ;         ;
+; db/decode_k8a.tdf                       ; yes             ; Auto-Generated Megafunction                           ; C:/Users/camin/Documents/VanilaCore/RTL/db/decode_k8a.tdf                       ;         ;
+; db/mux_oob.tdf                          ; yes             ; Auto-Generated Megafunction                           ; C:/Users/camin/Documents/VanilaCore/RTL/db/mux_oob.tdf                          ;         ;
 +-----------------------------------------+-----------------+-------------------------------------------------------+---------------------------------------------------------------------------------+---------+
 
 
@@ -254,81 +257,85 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 5,325     ;
+; Estimated Total logic elements              ; 11,274    ;
 ;                                             ;           ;
-; Total combinational functions               ; 4236      ;
+; Total combinational functions               ; 9321      ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 2953      ;
-;     -- 3 input functions                    ; 927       ;
-;     -- <=2 input functions                  ; 356       ;
+;     -- 4 input functions                    ; 5774      ;
+;     -- 3 input functions                    ; 1242      ;
+;     -- <=2 input functions                  ; 2305      ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 3805      ;
-;     -- arithmetic mode                      ; 431       ;
+;     -- normal mode                          ; 6993      ;
+;     -- arithmetic mode                      ; 2328      ;
 ;                                             ;           ;
-; Total registers                             ; 1492      ;
-;     -- Dedicated logic registers            ; 1492      ;
+; Total registers                             ; 4329      ;
+;     -- Dedicated logic registers            ; 4329      ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
 ; I/O pins                                    ; 4         ;
-; Total memory bits                           ; 131968    ;
+; Total memory bits                           ; 2098048   ;
 ;                                             ;           ;
 ; Embedded Multiplier 9-bit elements          ; 0         ;
 ;                                             ;           ;
 ; Maximum fan-out node                        ; clk~input ;
-; Maximum fan-out                             ; 1551      ;
-; Total fan-out                               ; 20682     ;
-; Average fan-out                             ; 3.56      ;
+; Maximum fan-out                             ; 4613      ;
+; Total fan-out                               ; 49152     ;
+; Average fan-out                             ; 3.52      ;
 +---------------------------------------------+-----------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                               ;
-+----------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------+-------------------+--------------+
-; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                  ; Entity Name       ; Library Name ;
-+----------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------+-------------------+--------------+
-; |ZeltaSoC                                    ; 4236 (0)            ; 1492 (0)                  ; 131968      ; 0            ; 0       ; 0         ; 4    ; 0            ; |ZeltaSoC                                                                                            ; ZeltaSoC          ; work         ;
-;    |console:console_0|                       ; 135 (98)            ; 72 (50)                   ; 448         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|console:console_0                                                                          ; console           ; work         ;
-;       |fifo:fifo_0|                          ; 37 (37)             ; 22 (22)                   ; 448         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|console:console_0|fifo:fifo_0                                                              ; fifo              ; work         ;
-;          |altsyncram:buffer_rtl_0|           ; 0 (0)               ; 0 (0)                     ; 224         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_0                                      ; altsyncram        ; work         ;
-;             |altsyncram_osc1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 224         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_0|altsyncram_osc1:auto_generated       ; altsyncram_osc1   ; work         ;
-;          |altsyncram:buffer_rtl_1|           ; 0 (0)               ; 0 (0)                     ; 224         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_1                                      ; altsyncram        ; work         ;
-;             |altsyncram_osc1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 224         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_1|altsyncram_osc1:auto_generated       ; altsyncram_osc1   ; work         ;
-;    |core:CORE_0|                             ; 3874 (239)          ; 1325 (0)                  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|core:CORE_0                                                                                ; core              ; work         ;
-;       |alu:alu_0|                            ; 474 (474)           ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|core:CORE_0|alu:alu_0                                                                      ; alu               ; work         ;
-;       |branch_unit:branch_unit_0|            ; 85 (85)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|core:CORE_0|branch_unit:branch_unit_0                                                      ; branch_unit       ; work         ;
-;       |control_unit:control_unit_0|          ; 35 (35)             ; 14 (14)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|core:CORE_0|control_unit:control_unit_0                                                    ; control_unit      ; work         ;
-;       |fetch_stm:fetch_stm_0|                ; 57 (57)             ; 80 (80)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|core:CORE_0|fetch_stm:fetch_stm_0                                                          ; fetch_stm         ; work         ;
-;       |memory_access:memory_access_0|        ; 332 (332)           ; 207 (207)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0                                                  ; memory_access     ; work         ;
-;       |regfile:regfile_0|                    ; 2652 (2652)         ; 1024 (1024)               ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|core:CORE_0|regfile:regfile_0                                                              ; regfile           ; work         ;
-;    |cross_bar:cross_bar_0|                   ; 20 (20)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|cross_bar:cross_bar_0                                                                      ; cross_bar         ; work         ;
-;    |debounce:debounce_rst|                   ; 23 (23)             ; 23 (23)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|debounce:debounce_rst                                                                      ; debounce          ; work         ;
-;    |ram_wb:MEMORY_RAM|                       ; 2 (2)               ; 1 (1)                     ; 131072      ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|ram_wb:MEMORY_RAM                                                                          ; ram_wb            ; work         ;
-;       |ram:RAM_0|                            ; 0 (0)               ; 0 (0)                     ; 131072      ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|ram_wb:MEMORY_RAM|ram:RAM_0                                                                ; ram               ; work         ;
-;          |altsyncram:ram_rtl_0|              ; 0 (0)               ; 0 (0)                     ; 131072      ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0                                           ; altsyncram        ; work         ;
-;             |altsyncram_v291:auto_generated| ; 0 (0)               ; 0 (0)                     ; 131072      ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0|altsyncram_v291:auto_generated            ; altsyncram_v291   ; work         ;
-;    |uart_slave:uart_slave_0|                 ; 136 (99)            ; 71 (49)                   ; 448         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|uart_slave:uart_slave_0                                                                    ; uart_slave        ; work         ;
-;       |fifo:fifo_0|                          ; 37 (37)             ; 22 (22)                   ; 448         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|uart_slave:uart_slave_0|fifo:fifo_0                                                        ; fifo              ; work         ;
-;          |altsyncram:buffer_rtl_0|           ; 0 (0)               ; 0 (0)                     ; 224         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_0                                ; altsyncram        ; work         ;
-;             |altsyncram_osc1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 224         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_0|altsyncram_osc1:auto_generated ; altsyncram_osc1   ; work         ;
-;          |altsyncram:buffer_rtl_1|           ; 0 (0)               ; 0 (0)                     ; 224         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_1                                ; altsyncram        ; work         ;
-;             |altsyncram_osc1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 224         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_1|altsyncram_osc1:auto_generated ; altsyncram_osc1   ; work         ;
-;    |wishbone_arbitrer:wishbone_arbitrer_0|   ; 46 (46)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|wishbone_arbitrer:wishbone_arbitrer_0                                                      ; wishbone_arbitrer ; work         ;
-+----------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------+-------------------+--------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                           ;
++----------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------+-------------------+--------------+
+; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                              ; Entity Name       ; Library Name ;
++----------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------+-------------------+--------------+
+; |ZeltaSoC                                    ; 9321 (0)            ; 4329 (0)                  ; 2098048     ; 0            ; 0       ; 0         ; 4    ; 0            ; |ZeltaSoC                                                                                                        ; ZeltaSoC          ; work         ;
+;    |console:console_0|                       ; 135 (98)            ; 72 (50)                   ; 448         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|console:console_0                                                                                      ; console           ; work         ;
+;       |fifo:fifo_0|                          ; 37 (37)             ; 22 (22)                   ; 448         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|console:console_0|fifo:fifo_0                                                                          ; fifo              ; work         ;
+;          |altsyncram:buffer_rtl_0|           ; 0 (0)               ; 0 (0)                     ; 224         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_0                                                  ; altsyncram        ; work         ;
+;             |altsyncram_osc1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 224         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_0|altsyncram_osc1:auto_generated                   ; altsyncram_osc1   ; work         ;
+;          |altsyncram:buffer_rtl_1|           ; 0 (0)               ; 0 (0)                     ; 224         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_1                                                  ; altsyncram        ; work         ;
+;             |altsyncram_osc1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 224         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_1|altsyncram_osc1:auto_generated                   ; altsyncram_osc1   ; work         ;
+;    |core:CORE_0|                             ; 8706 (242)          ; 4149 (0)                  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|core:CORE_0                                                                                            ; core              ; work         ;
+;       |alu:alu_0|                            ; 479 (479)           ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|core:CORE_0|alu:alu_0                                                                                  ; alu               ; work         ;
+;       |branch_unit:branch_unit_0|            ; 87 (87)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|core:CORE_0|branch_unit:branch_unit_0                                                                  ; branch_unit       ; work         ;
+;       |control_unit:control_unit_0|          ; 42 (42)             ; 17 (17)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|core:CORE_0|control_unit:control_unit_0                                                                ; control_unit      ; work         ;
+;       |csr_unit:csr_unit_0|                  ; 3001 (3001)         ; 2817 (2817)               ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0                                                                        ; csr_unit          ; work         ;
+;       |fetch_stm:fetch_stm_0|                ; 117 (117)           ; 84 (84)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|core:CORE_0|fetch_stm:fetch_stm_0                                                                      ; fetch_stm         ; work         ;
+;       |memory_access:memory_access_0|        ; 332 (332)           ; 207 (207)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0                                                              ; memory_access     ; work         ;
+;       |regfile:regfile_0|                    ; 4406 (4406)         ; 1024 (1024)               ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|core:CORE_0|regfile:regfile_0                                                                          ; regfile           ; work         ;
+;    |cross_bar:cross_bar_0|                   ; 22 (22)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|cross_bar:cross_bar_0                                                                                  ; cross_bar         ; work         ;
+;    |debounce:debounce_rst|                   ; 64 (64)             ; 33 (33)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|debounce:debounce_rst                                                                                  ; debounce          ; work         ;
+;    |ram_wb:MEMORY_RAM|                       ; 209 (1)             ; 4 (1)                     ; 2097152     ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|ram_wb:MEMORY_RAM                                                                                      ; ram_wb            ; work         ;
+;       |ram:RAM_0|                            ; 208 (0)             ; 3 (0)                     ; 2097152     ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|ram_wb:MEMORY_RAM|ram:RAM_0                                                                            ; ram               ; work         ;
+;          |altsyncram:ram_rtl_0|              ; 208 (0)             ; 3 (0)                     ; 2097152     ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0                                                       ; altsyncram        ; work         ;
+;             |altsyncram_j491:auto_generated| ; 208 (0)             ; 3 (3)                     ; 2097152     ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0|altsyncram_j491:auto_generated                        ; altsyncram_j491   ; work         ;
+;                |decode_k8a:rden_decode|      ; 7 (7)               ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0|altsyncram_j491:auto_generated|decode_k8a:rden_decode ; decode_k8a        ; work         ;
+;                |decode_rsa:decode3|          ; 11 (11)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0|altsyncram_j491:auto_generated|decode_rsa:decode3     ; decode_rsa        ; work         ;
+;                |mux_oob:mux2|                ; 190 (190)           ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0|altsyncram_j491:auto_generated|mux_oob:mux2           ; mux_oob           ; work         ;
+;    |uart_slave:uart_slave_0|                 ; 135 (98)            ; 71 (49)                   ; 448         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|uart_slave:uart_slave_0                                                                                ; uart_slave        ; work         ;
+;       |fifo:fifo_0|                          ; 37 (37)             ; 22 (22)                   ; 448         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|uart_slave:uart_slave_0|fifo:fifo_0                                                                    ; fifo              ; work         ;
+;          |altsyncram:buffer_rtl_0|           ; 0 (0)               ; 0 (0)                     ; 224         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_0                                            ; altsyncram        ; work         ;
+;             |altsyncram_osc1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 224         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_0|altsyncram_osc1:auto_generated             ; altsyncram_osc1   ; work         ;
+;          |altsyncram:buffer_rtl_1|           ; 0 (0)               ; 0 (0)                     ; 224         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_1                                            ; altsyncram        ; work         ;
+;             |altsyncram_osc1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 224         ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_1|altsyncram_osc1:auto_generated             ; altsyncram_osc1   ; work         ;
+;    |wishbone_arbitrer:wishbone_arbitrer_0|   ; 50 (50)             ; 0 (0)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ZeltaSoC|wishbone_arbitrer:wishbone_arbitrer_0                                                                  ; wishbone_arbitrer ; work         ;
++----------------------------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------+-------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis RAM Summary                                                                                                                                                                                                               ;
-+-------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+-----------------------------------------+
-; Name                                                                                                  ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size   ; MIF                                     ;
-+-------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+-----------------------------------------+
-; console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_0|altsyncram_osc1:auto_generated|ALTSYNCRAM       ; AUTO ; Simple Dual Port ; 32           ; 7            ; 32           ; 7            ; 224    ; None                                    ;
-; console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_1|altsyncram_osc1:auto_generated|ALTSYNCRAM       ; AUTO ; Simple Dual Port ; 32           ; 7            ; 32           ; 7            ; 224    ; None                                    ;
-; ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0|altsyncram_v291:auto_generated|ALTSYNCRAM            ; AUTO ; Single Port      ; 4096         ; 32           ; --           ; --           ; 131072 ; db/VanilaCore.ram0_ram_6773ddc7.hdl.mif ;
-; uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_0|altsyncram_osc1:auto_generated|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 32           ; 7            ; 32           ; 7            ; 224    ; None                                    ;
-; uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_1|altsyncram_osc1:auto_generated|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 32           ; 7            ; 32           ; 7            ; 224    ; None                                    ;
-+-------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+--------+-----------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                                                ;
++-------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+---------+-----------------------------------------+
+; Name                                                                                                  ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size    ; MIF                                     ;
++-------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+---------+-----------------------------------------+
+; console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_0|altsyncram_osc1:auto_generated|ALTSYNCRAM       ; AUTO ; Simple Dual Port ; 32           ; 7            ; 32           ; 7            ; 224     ; None                                    ;
+; console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_1|altsyncram_osc1:auto_generated|ALTSYNCRAM       ; AUTO ; Simple Dual Port ; 32           ; 7            ; 32           ; 7            ; 224     ; None                                    ;
+; ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0|altsyncram_j491:auto_generated|ALTSYNCRAM            ; AUTO ; Single Port      ; 65536        ; 32           ; --           ; --           ; 2097152 ; db/VanilaCore.ram0_ram_6773dc4a.hdl.mif ;
+; uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_0|altsyncram_osc1:auto_generated|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 32           ; 7            ; 32           ; 7            ; 224     ; None                                    ;
+; uart_slave:uart_slave_0|fifo:fifo_0|altsyncram:buffer_rtl_1|altsyncram_osc1:auto_generated|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 32           ; 7            ; 32           ; 7            ; 224     ; None                                    ;
++-------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+---------+-----------------------------------------+
 
 
 Encoding Type:  One-Hot
@@ -407,44 +414,53 @@ Encoding Type:  One-Hot
 +---------------------+--------------------+---------------------+---------------------+---------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                                                 ;
-+---------------------------------------------------------------+--------------------------------------------------------------------+
-; Register name                                                 ; Reason for Removal                                                 ;
-+---------------------------------------------------------------+--------------------------------------------------------------------+
-; core:CORE_0|control_unit:control_unit_0|memory_operation[2,3] ; Stuck at GND due to stuck port data_in                             ;
-; core:CORE_0|control_unit:control_unit_0|jmp_target_src[2,3]   ; Stuck at GND due to stuck port data_in                             ;
-; core:CORE_0|control_unit:control_unit_0|sr2_src[1..3]         ; Stuck at GND due to stuck port data_in                             ;
-; core:CORE_0|fetch_stm:fetch_stm_0|inst_bus.DAT_O[0..31]       ; Stuck at GND due to stuck port data_in                             ;
-; core:CORE_0|fetch_stm:fetch_stm_0|inst_bus.WE                 ; Stuck at GND due to stuck port data_in                             ;
-; console:console_0|data[7]                                     ; Stuck at GND due to stuck port data_in                             ;
-; core:CORE_0|control_unit:control_unit_0|jmp_target_src[0]     ; Merged with core:CORE_0|control_unit:control_unit_0|enable_branch  ;
-; console:console_0|wr                                          ; Merged with console:console_0|ACK_S                                ;
-; core:CORE_0|memory_access:memory_access_0|data_bus.STB        ; Merged with core:CORE_0|memory_access:memory_access_0|data_bus.CYC ;
-; core:CORE_0|fetch_stm:fetch_stm_0|inst_bus.STB                ; Merged with core:CORE_0|fetch_stm:fetch_stm_0|inst_bus.CYC         ;
-; core:CORE_0|control_unit:control_unit_0|regfile_src[3]        ; Stuck at GND due to stuck port data_in                             ;
-; core:CORE_0|memory_access:memory_access_0|data_bus_state~2    ; Lost fanout                                                        ;
-; core:CORE_0|memory_access:memory_access_0|data_bus_state~3    ; Lost fanout                                                        ;
-; core:CORE_0|memory_access:memory_access_0|data_bus_state~4    ; Lost fanout                                                        ;
-; core:CORE_0|memory_access:memory_access_0|data_bus_state~5    ; Lost fanout                                                        ;
-; core:CORE_0|control_unit:control_unit_0|load_state~5          ; Lost fanout                                                        ;
-; core:CORE_0|control_unit:control_unit_0|load_state~6          ; Lost fanout                                                        ;
-; core:CORE_0|control_unit:control_unit_0|load_state~7          ; Lost fanout                                                        ;
-; core:CORE_0|fetch_stm:fetch_stm_0|state~4                     ; Lost fanout                                                        ;
-; core:CORE_0|fetch_stm:fetch_stm_0|state~5                     ; Lost fanout                                                        ;
-; console:console_0|current_state~6                             ; Lost fanout                                                        ;
-; console:console_0|current_state~7                             ; Lost fanout                                                        ;
-; console:console_0|current_state~8                             ; Lost fanout                                                        ;
-; console:console_0|current_state~9                             ; Lost fanout                                                        ;
-; console:console_0|wb_states~3                                 ; Lost fanout                                                        ;
-; console:console_0|wb_states~4                                 ; Lost fanout                                                        ;
-; console:console_0|wb_states~5                                 ; Lost fanout                                                        ;
-; uart_slave:uart_slave_0|current_state~6                       ; Lost fanout                                                        ;
-; uart_slave:uart_slave_0|current_state~7                       ; Lost fanout                                                        ;
-; uart_slave:uart_slave_0|current_state~8                       ; Lost fanout                                                        ;
-; uart_slave:uart_slave_0|current_state~9                       ; Lost fanout                                                        ;
-; Total Number of Removed Registers = 66                        ;                                                                    ;
-+---------------------------------------------------------------+--------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                               ;
++--------------------------------------------------------------------------+-----------------------------------------------------------------------+
+; Register name                                                            ; Reason for Removal                                                    ;
++--------------------------------------------------------------------------+-----------------------------------------------------------------------+
+; core:CORE_0|csr_unit:csr_unit_0|cpm[0,1]                                 ; Stuck at VCC due to stuck port data_in                                ;
+; core:CORE_0|csr_unit:csr_unit_0|cpm[2]                                   ; Stuck at GND due to stuck port data_in                                ;
+; core:CORE_0|control_unit:control_unit_0|memory_operation[2,3]            ; Stuck at GND due to stuck port data_in                                ;
+; core:CORE_0|control_unit:control_unit_0|jmp_target_src[2,3]              ; Stuck at GND due to stuck port data_in                                ;
+; core:CORE_0|control_unit:control_unit_0|sr2_src[1..3]                    ; Stuck at GND due to stuck port data_in                                ;
+; core:CORE_0|fetch_stm:fetch_stm_0|inst_bus.DAT_O[0..31]                  ; Stuck at GND due to stuck port data_in                                ;
+; core:CORE_0|fetch_stm:fetch_stm_0|inst_bus.WE                            ; Stuck at GND due to stuck port data_in                                ;
+; console:console_0|data[7]                                                ; Stuck at GND due to stuck port data_in                                ;
+; core:CORE_0|csr_unit:csr_unit_0|mcause[2,4,13,15,17,19,21,23,25,27]      ; Merged with core:CORE_0|csr_unit:csr_unit_0|mcause[0]                 ;
+; core:CORE_0|csr_unit:csr_unit_0|mcause[5..12,14,16,18,20,22,24,26,28,29] ; Merged with core:CORE_0|csr_unit:csr_unit_0|mcause[3]                 ;
+; core:CORE_0|memory_access:memory_access_0|data_bus.CYC                   ; Merged with core:CORE_0|memory_access:memory_access_0|data_bus.STB    ;
+; core:CORE_0|control_unit:control_unit_0|enable_branch                    ; Merged with core:CORE_0|control_unit:control_unit_0|jmp_target_src[0] ;
+; core:CORE_0|control_unit:control_unit_0|conditional_branch               ; Merged with core:CORE_0|control_unit:control_unit_0|jmp_target_src[0] ;
+; core:CORE_0|control_unit:control_unit_0|unconditional_branch             ; Merged with core:CORE_0|control_unit:control_unit_0|jump              ;
+; console:console_0|wr                                                     ; Merged with console:console_0|ACK_S                                   ;
+; core:CORE_0|csr_unit:csr_unit_0|mcause[3]                                ; Merged with core:CORE_0|csr_unit:csr_unit_0|mcause[0]                 ;
+; core:CORE_0|fetch_stm:fetch_stm_0|inst_bus.STB                           ; Merged with core:CORE_0|fetch_stm:fetch_stm_0|inst_bus.CYC            ;
+; core:CORE_0|csr_unit:csr_unit_0|mcause[0]                                ; Stuck at GND due to stuck port data_in                                ;
+; core:CORE_0|control_unit:control_unit_0|regfile_src[3]                   ; Stuck at GND due to stuck port data_in                                ;
+; core:CORE_0|memory_access:memory_access_0|data_bus_state~2               ; Lost fanout                                                           ;
+; core:CORE_0|memory_access:memory_access_0|data_bus_state~3               ; Lost fanout                                                           ;
+; core:CORE_0|memory_access:memory_access_0|data_bus_state~4               ; Lost fanout                                                           ;
+; core:CORE_0|memory_access:memory_access_0|data_bus_state~5               ; Lost fanout                                                           ;
+; core:CORE_0|control_unit:control_unit_0|load_state~5                     ; Lost fanout                                                           ;
+; core:CORE_0|control_unit:control_unit_0|load_state~6                     ; Lost fanout                                                           ;
+; core:CORE_0|control_unit:control_unit_0|load_state~7                     ; Lost fanout                                                           ;
+; core:CORE_0|fetch_stm:fetch_stm_0|state~4                                ; Lost fanout                                                           ;
+; core:CORE_0|fetch_stm:fetch_stm_0|state~5                                ; Lost fanout                                                           ;
+; console:console_0|current_state~6                                        ; Lost fanout                                                           ;
+; console:console_0|current_state~7                                        ; Lost fanout                                                           ;
+; console:console_0|current_state~8                                        ; Lost fanout                                                           ;
+; console:console_0|current_state~9                                        ; Lost fanout                                                           ;
+; console:console_0|wb_states~3                                            ; Lost fanout                                                           ;
+; console:console_0|wb_states~4                                            ; Lost fanout                                                           ;
+; console:console_0|wb_states~5                                            ; Lost fanout                                                           ;
+; uart_slave:uart_slave_0|current_state~6                                  ; Lost fanout                                                           ;
+; uart_slave:uart_slave_0|current_state~7                                  ; Lost fanout                                                           ;
+; uart_slave:uart_slave_0|current_state~8                                  ; Lost fanout                                                           ;
+; uart_slave:uart_slave_0|current_state~9                                  ; Lost fanout                                                           ;
+; core:CORE_0|csr_unit:csr_unit_0|mcycle[32..63]                           ; Lost fanout                                                           ;
+; Total Number of Removed Registers = 132                                  ;                                                                       ;
++--------------------------------------------------------------------------+-----------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -452,12 +468,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 1492  ;
-; Number of registers using Synchronous Clear  ; 156   ;
-; Number of registers using Synchronous Load   ; 26    ;
+; Total registers                              ; 4329  ;
+; Number of registers using Synchronous Clear  ; 239   ;
+; Number of registers using Synchronous Load   ; 2     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 1365  ;
+; Number of registers using Clock Enable       ; 4156  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -467,7 +483,7 @@ Encoding Type:  One-Hot
 +---------------------------------------------+---------------------------------------+------+
 ; Register Name                               ; Megafunction                          ; Type ;
 +---------------------------------------------+---------------------------------------+------+
-; ram_wb:MEMORY_RAM|ram:RAM_0|addr_reg[0..11] ; ram_wb:MEMORY_RAM|ram:RAM_0|ram_rtl_0 ; RAM  ;
+; ram_wb:MEMORY_RAM|ram:RAM_0|addr_reg[0..15] ; ram_wb:MEMORY_RAM|ram:RAM_0|ram_rtl_0 ; RAM  ;
 +---------------------------------------------+---------------------------------------+------+
 
 
@@ -476,74 +492,103 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------+
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|fetch_stm:fetch_stm_0|PC[2]                         ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |ZeltaSoC|core:CORE_0|fetch_stm:fetch_stm_0|PC[1]                         ;
-; 3:1                ; 64 bits   ; 128 LEs       ; 64 LEs               ; 64 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|address_reg[25]       ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[31][1]                       ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[30][30]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[29][5]                       ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[28][10]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[27][14]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[26][20]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[25][17]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[24][11]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[23][26]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[22][30]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[21][12]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[20][12]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[19][19]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[18][16]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[17][31]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[16][18]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[15][17]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[14][31]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[13][21]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[12][8]                       ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[11][24]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[10][11]                      ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[9][26]                       ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[8][4]                        ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[7][31]                       ;
+; 3:1                ; 64 bits   ; 128 LEs       ; 64 LEs               ; 64 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|minstret[6]                     ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|fetch_stm:fetch_stm_0|PC[8]                         ;
+; 3:1                ; 64 bits   ; 128 LEs       ; 64 LEs               ; 64 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|address_reg[17]       ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[31][20]                      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[30][7]                       ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[29][4]                       ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[28][28]                      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[27][11]                      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[26][25]                      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[25][2]                       ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[24][14]                      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[23][18]                      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[22][4]                       ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[21][22]                      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[20][26]                      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[19][16]                      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[18][7]                       ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[17][21]                      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[16][21]                      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[15][21]                      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[14][21]                      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[13][16]                      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[12][18]                      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[11][19]                      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[10][6]                       ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[9][29]                       ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[8][21]                       ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[7][21]                       ;
 ; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[6][21]                       ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[5][27]                       ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[4][2]                        ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[3][25]                       ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[2][30]                       ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[1][13]                       ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[0][3]                        ;
-; 4:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|data_1[16]            ;
-; 4:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|data_2[19]            ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[5][9]                        ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[4][17]                       ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[3][2]                        ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[2][6]                        ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[1][1]                        ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS[0][31]                       ;
+; 4:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|data_1[3]             ;
+; 4:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|data_2[6]             ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |ZeltaSoC|core:CORE_0|fetch_stm:fetch_stm_0|PC[0]                         ;
 ; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |ZeltaSoC|console:console_0|fifo:fifo_0|buff_cnt[0]                       ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |ZeltaSoC|uart_slave:uart_slave_0|fifo:fifo_0|buff_cnt[1]                 ;
-; 5:1                ; 3 bits    ; 9 LEs         ; 3 LEs                ; 6 LEs                  ; Yes        ; |ZeltaSoC|console:console_0|shamnt[2]                                     ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |ZeltaSoC|uart_slave:uart_slave_0|fifo:fifo_0|buff_cnt[3]                 ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 3 LEs                ; 6 LEs                  ; Yes        ; |ZeltaSoC|console:console_0|shamnt[0]                                     ;
 ; 5:1                ; 3 bits    ; 9 LEs         ; 3 LEs                ; 6 LEs                  ; Yes        ; |ZeltaSoC|uart_slave:uart_slave_0|shamnt[2]                               ;
-; 6:1                ; 18 bits   ; 72 LEs        ; 36 LEs               ; 36 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|fetch_stm:fetch_stm_0|PC[23]                        ;
-; 129:1              ; 3 bits    ; 258 LEs       ; 57 LEs               ; 201 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|control_unit:control_unit_0|regfile_src[0]          ;
+; 129:1              ; 4 bits    ; 344 LEs       ; 96 LEs               ; 248 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|control_unit:control_unit_0|regfile_src[2]          ;
+; 8:1                ; 14 bits   ; 70 LEs        ; 42 LEs               ; 28 LEs                 ; Yes        ; |ZeltaSoC|core:CORE_0|fetch_stm:fetch_stm_0|PC[19]                        ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[29][40]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[28][34]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[27][59]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[26][8]              ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[25][7]              ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[24][14]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[23][51]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[22][31]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[21][62]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[20][25]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[19][34]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[18][47]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[17][37]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[16][59]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[15][55]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[14][45]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[13][26]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[12][52]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[11][23]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[10][56]             ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[9][5]               ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[8][8]               ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[7][3]               ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[6][18]              ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[5][13]              ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[4][57]              ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[3][51]              ;
+; 15:1               ; 64 bits   ; 640 LEs       ; 0 LEs                ; 640 LEs                ; Yes        ; |ZeltaSoC|core:CORE_0|csr_unit:csr_unit_0|mhpmcounter[2][63]              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|control_unit:control_unit_0|load_state              ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|modified_window[5][2] ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|modified_window[0][0] ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|modified_window[1][6] ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|modified_window[2][6] ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|modified_window[3][6] ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|modified_window[4][5] ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|modified_window[6][3] ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|modified_window[5][0] ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|modified_window[0][7] ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|modified_window[1][0] ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|modified_window[2][4] ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|modified_window[3][4] ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|modified_window[4][0] ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|memory_access:memory_access_0|modified_window[6][1] ;
 ; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|console:console_0|fifo:fifo_0|write_ptr                         ;
 ; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|console:console_0|fifo:fifo_0|read_ptr                          ;
 ; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|uart_slave:uart_slave_0|fifo:fifo_0|write_ptr                   ;
 ; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|uart_slave:uart_slave_0|fifo:fifo_0|read_ptr                    ;
-; 3:1                ; 21 bits   ; 42 LEs        ; 42 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|Selector92                                          ;
-; 4:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|fetch_stm:fetch_stm_0|Selector20                    ;
-; 5:1                ; 33 bits   ; 99 LEs        ; 99 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|cross_bar:cross_bar_0|cpu.DAT_I[17]                             ;
-; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|Mux49                             ;
-; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|Mux74                             ;
+; 3:1                ; 21 bits   ; 42 LEs        ; 42 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|Selector79                                          ;
+; 4:1                ; 33 bits   ; 66 LEs        ; 66 LEs               ; 0 LEs                  ; No         ; |ZeltaSoC|cross_bar:cross_bar_0|cpu.DAT_I[23]                             ;
+; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|Mux63                             ;
+; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|Mux89                             ;
+; 6:1                ; 15 bits   ; 60 LEs        ; 45 LEs               ; 15 LEs                 ; No         ; |ZeltaSoC|core:CORE_0|fetch_stm:fetch_stm_0|Selector20                    ;
 ; 7:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |ZeltaSoC|uart_slave:uart_slave_0|current_state                           ;
 ; 9:1                ; 2 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; No         ; |ZeltaSoC|uart_slave:uart_slave_0|current_state                           ;
-; 79:1               ; 7 bits    ; 364 LEs       ; 252 LEs              ; 112 LEs                ; No         ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS                              ;
-; 79:1               ; 3 bits    ; 156 LEs       ; 102 LEs              ; 54 LEs                 ; No         ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS                              ;
-; 80:1               ; 2 bits    ; 106 LEs       ; 70 LEs               ; 36 LEs                 ; No         ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS                              ;
-; 81:1               ; 7 bits    ; 378 LEs       ; 252 LEs              ; 126 LEs                ; No         ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS                              ;
-; 83:1               ; 4 bits    ; 220 LEs       ; 152 LEs              ; 68 LEs                 ; No         ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS                              ;
-; 84:1               ; 2 bits    ; 112 LEs       ; 78 LEs               ; 34 LEs                 ; No         ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS                              ;
+; 173:1              ; 7 bits    ; 805 LEs       ; 686 LEs              ; 119 LEs                ; No         ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS                              ;
+; 173:1              ; 3 bits    ; 345 LEs       ; 291 LEs              ; 54 LEs                 ; No         ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS                              ;
+; 174:1              ; 2 bits    ; 232 LEs       ; 196 LEs              ; 36 LEs                 ; No         ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS                              ;
+; 175:1              ; 7 bits    ; 812 LEs       ; 693 LEs              ; 119 LEs                ; No         ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS                              ;
+; 177:1              ; 4 bits    ; 472 LEs       ; 404 LEs              ; 68 LEs                 ; No         ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS                              ;
+; 178:1              ; 2 bits    ; 236 LEs       ; 204 LEs              ; 32 LEs                 ; No         ; |ZeltaSoC|core:CORE_0|regfile:regfile_0|REGS                              ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------+
 
 
@@ -566,7 +611,7 @@ Encoding Type:  One-Hot
 
 
 +--------------------------------------------------------------------------------------------------------+
-; Source assignments for ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0|altsyncram_v291:auto_generated ;
+; Source assignments for ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0|altsyncram_j491:auto_generated ;
 +---------------------------------+--------------------+------+------------------------------------------+
 ; Assignment                      ; Value              ; From ; To                                       ;
 +---------------------------------+--------------------+------+------------------------------------------+
@@ -615,7 +660,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                  ;
 +----------------+-------+---------------------------------------+
 ; DATA_WIDTH     ; 32    ; Signed Integer                        ;
-; ADDR_WIDTH     ; 12    ; Signed Integer                        ;
+; ADDR_WIDTH     ; 16    ; Signed Integer                        ;
 +----------------+-------+---------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -626,7 +671,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value ; Type                                            ;
 +----------------+-------+-------------------------------------------------+
 ; DATA_WIDTH     ; 32    ; Signed Integer                                  ;
-; ADDR_WIDTH     ; 12    ; Signed Integer                                  ;
+; ADDR_WIDTH     ; 16    ; Signed Integer                                  ;
 +----------------+-------+-------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -776,6 +821,53 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: core:CORE_0|csr_unit:csr_unit_0 ;
++-------------------------+-------------------------------+--------------------+
+; Parameter Name          ; Value                         ; Type               ;
++-------------------------+-------------------------------+--------------------+
+; M_MODE                  ; 3                             ; Signed Integer     ;
+; U_MODE                  ; 0                             ; Signed Integer     ;
+; S_MODE                  ; 1                             ; Signed Integer     ;
+; CSRRW                   ; 001                           ; Unsigned Binary    ;
+; CSRRS                   ; 010                           ; Unsigned Binary    ;
+; CSRRC                   ; 011                           ; Unsigned Binary    ;
+; CSRRWI                  ; 101                           ; Unsigned Binary    ;
+; CSRRSI                  ; 110                           ; Unsigned Binary    ;
+; CSRRCI                  ; 111                           ; Unsigned Binary    ;
+; MTVEC_RESET_VECTOR      ; 00000000000001000000000000000 ; Unsigned Binary    ;
+; MTVEC_RESET_MODE        ; 00                            ; Unsigned Binary    ;
+; MTVEC_DIRECT            ; 0                             ; Signed Integer     ;
+; MTVEC_VECTORED          ; 1                             ; Signed Integer     ;
+; INS_ADDR_BRKPT          ; 3                             ; Signed Integer     ;
+; INS_PAGE_FAULT          ; 12                            ; Signed Integer     ;
+; INS_ACCESS_FAULT        ; 1                             ; Signed Integer     ;
+; ILLEGAL_INS             ; 2                             ; Signed Integer     ;
+; INS_ADDR_MISALIGNED     ; 0                             ; Signed Integer     ;
+; ENV_CALL_8              ; 8                             ; Signed Integer     ;
+; ENV_CALL_9              ; 9                             ; Signed Integer     ;
+; ENV_CALL_11             ; 11                            ; Signed Integer     ;
+; ENV_BREAK               ; 3                             ; Signed Integer     ;
+; LS_ADDR_BRKPT           ; 3                             ; Signed Integer     ;
+; STORE_ADDR_MISALIGNED   ; 6                             ; Signed Integer     ;
+; LOAD_ADDRESS_MISALIGNED ; 4                             ; Signed Integer     ;
+; STORE_PAGE_FAULT        ; 15                            ; Signed Integer     ;
+; LOAD_PAGE_FAULT         ; 13                            ; Signed Integer     ;
+; STORE_ACCESS_FAULT      ; 7                             ; Signed Integer     ;
+; LOAD_ACCESS_FAULT       ; 5                             ; Signed Integer     ;
+; LOAD_INSTRUCTIONS       ; 1                             ; Signed Integer     ;
+; STORE_INSTRUCTIONS      ; 2                             ; Signed Integer     ;
+; UNALIGNED_ACCESSES      ; 3                             ; Signed Integer     ;
+; ARITHMETIC_INSTRUCTIONS ; 4                             ; Signed Integer     ;
+; NUMBER_OF_TRAPS         ; 5                             ; Signed Integer     ;
+; INTERRUPT_COUNT         ; 6                             ; Signed Integer     ;
+; UNCONDITIONAL_BRANCH    ; 7                             ; Signed Integer     ;
+; CODITIONAL_BRANCH       ; 8                             ; Signed Integer     ;
+; TAKEN_BRANCHS           ; 9                             ; Signed Integer     ;
++-------------------------+-------------------------------+--------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +--------------------------------------------------------------------------------------------------------+
 ; Parameter Settings for Inferred Entity Instance: console:console_0|fifo:fifo_0|altsyncram:buffer_rtl_0 ;
 +------------------------------------+----------------------+--------------------------------------------+
@@ -911,8 +1003,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; WIDTH_BYTEENA                      ; 1                                       ; Untyped            ;
 ; OPERATION_MODE                     ; SINGLE_PORT                             ; Untyped            ;
 ; WIDTH_A                            ; 32                                      ; Untyped            ;
-; WIDTHAD_A                          ; 12                                      ; Untyped            ;
-; NUMWORDS_A                         ; 4096                                    ; Untyped            ;
+; WIDTHAD_A                          ; 16                                      ; Untyped            ;
+; NUMWORDS_A                         ; 65536                                   ; Untyped            ;
 ; OUTDATA_REG_A                      ; UNREGISTERED                            ; Untyped            ;
 ; ADDRESS_ACLR_A                     ; NONE                                    ; Untyped            ;
 ; OUTDATA_ACLR_A                     ; NONE                                    ; Untyped            ;
@@ -941,7 +1033,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                               ; Untyped            ;
 ; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ                    ; Untyped            ;
 ; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ                    ; Untyped            ;
-; INIT_FILE                          ; db/VanilaCore.ram0_ram_6773ddc7.hdl.mif ; Untyped            ;
+; INIT_FILE                          ; db/VanilaCore.ram0_ram_6773dc4a.hdl.mif ; Untyped            ;
 ; INIT_FILE_LAYOUT                   ; PORT_A                                  ; Untyped            ;
 ; MAXIMUM_DEPTH                      ; 0                                       ; Untyped            ;
 ; CLOCK_ENABLE_INPUT_A               ; NORMAL                                  ; Untyped            ;
@@ -954,7 +1046,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                                   ; Untyped            ;
 ; WIDTH_ECCSTATUS                    ; 3                                       ; Untyped            ;
 ; DEVICE_FAMILY                      ; Cyclone IV E                            ; Untyped            ;
-; CBXI_PARAMETER                     ; altsyncram_v291                         ; Untyped            ;
+; CBXI_PARAMETER                     ; altsyncram_j491                         ; Untyped            ;
 +------------------------------------+-----------------------------------------+--------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -1112,7 +1204,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Entity Instance                           ; ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0            ;
 ;     -- OPERATION_MODE                     ; SINGLE_PORT                                                 ;
 ;     -- WIDTH_A                            ; 32                                                          ;
-;     -- NUMWORDS_A                         ; 4096                                                        ;
+;     -- NUMWORDS_A                         ; 65536                                                       ;
 ;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                ;
 ;     -- WIDTH_B                            ; 1                                                           ;
 ;     -- NUMWORDS_B                         ; 1                                                           ;
@@ -1145,16 +1237,14 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------------------+-------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "core:CORE_0"                                                                                                        ;
-+-----------------+--------+----------+----------------------------------------------------------------------------------------------------------+
-; Port            ; Type   ; Severity ; Details                                                                                                  ;
-+-----------------+--------+----------+----------------------------------------------------------------------------------------------------------+
-; debug_registers ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-; pre_execution   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-; post_execution  ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-; pc_debug        ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-+-----------------+--------+----------+----------------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "core:CORE_0|csr_unit:csr_unit_0"                                                                                                                           ;
++--------------------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; Port               ; Type   ; Severity ; Details                                                                                                                                      ;
++--------------------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
+; trap               ; Output ; Info     ; Explicitly unconnected                                                                                                                       ;
+; external_interrupt ; Input  ; Warning  ; Declared by entity but not connected by instance. If a default value exists, it will be used.  Otherwise, the port will be connected to GND. ;
++--------------------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------+
@@ -1184,52 +1274,32 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------+--------+----------+-------------------------------------------------------------------------------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "ram_wb:MEMORY_RAM|ram:RAM_0"                                                                 ;
-+---------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port          ; Type   ; Severity ; Details                                                                             ;
-+---------------+--------+----------+-------------------------------------------------------------------------------------+
-; debug_data    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; debug_address ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+---------------+--------+----------+-------------------------------------------------------------------------------------+
-
-
-+---------------------------------------------------+
-; Port Connectivity Checks: "cross_bar:cross_bar_0" ;
-+----------------+---------+----------+-------------+
-; Port           ; Type    ; Severity ; Details     ;
-+----------------+---------+----------+-------------+
-; seven_segments ; Unknown ; Warning  ;             ;
-+----------------+---------+----------+-------------+
-
-
 +-----------------------------------------------------+
 ; Post-Synthesis Netlist Statistics for Top Partition ;
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 4                           ;
-; cycloneiii_ff         ; 1492                        ;
-;     ENA               ; 1267                        ;
-;     ENA SCLR          ; 73                          ;
-;     ENA SCLR SLD      ; 12                          ;
-;     ENA SLD           ; 13                          ;
-;     SCLR              ; 71                          ;
+; cycloneiii_ff         ; 4329                        ;
+;     ENA               ; 4020                        ;
+;     ENA SCLR          ; 135                         ;
+;     ENA SLD           ; 1                           ;
+;     SCLR              ; 104                         ;
 ;     SLD               ; 1                           ;
-;     plain             ; 55                          ;
-; cycloneiii_lcell_comb ; 4248                        ;
-;     arith             ; 431                         ;
-;         2 data inputs ; 152                         ;
+;     plain             ; 68                          ;
+; cycloneiii_lcell_comb ; 9333                        ;
+;     arith             ; 2328                        ;
+;         2 data inputs ; 2049                        ;
 ;         3 data inputs ; 279                         ;
-;     normal            ; 3817                        ;
-;         1 data inputs ; 23                          ;
-;         2 data inputs ; 193                         ;
-;         3 data inputs ; 648                         ;
-;         4 data inputs ; 2953                        ;
-; cycloneiii_ram_block  ; 60                          ;
+;     normal            ; 7005                        ;
+;         1 data inputs ; 52                          ;
+;         2 data inputs ; 216                         ;
+;         3 data inputs ; 963                         ;
+;         4 data inputs ; 5774                        ;
+; cycloneiii_ram_block  ; 284                         ;
 ;                       ;                             ;
-; Max LUT depth         ; 17.30                       ;
-; Average LUT depth     ; 10.82                       ;
+; Max LUT depth         ; 18.30                       ;
+; Average LUT depth     ; 8.56                        ;
 +-----------------------+-----------------------------+
 
 
@@ -1238,7 +1308,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:10     ;
+; Top            ; 00:00:32     ;
 +----------------+--------------+
 
 
@@ -1248,10 +1318,12 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
-    Info: Processing started: Fri Dec 11 04:40:14 2020
+    Info: Processing started: Fri Dec 18 16:35:13 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off VanilaCore -c VanilaCore
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file /users/camin/documents/vanilacore/core/csr_unit.sv
+    Info (12023): Found entity 1: csr_unit File: C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file /users/camin/documents/vanilacore/core/zeltasoc.sv
     Info (12023): Found entity 1: ZeltaSoC File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 4
 Info (12021): Found 0 design units, including 0 entities, in source file /users/camin/documents/vanilacore/core/debug_def.sv
@@ -1283,15 +1355,12 @@ Info (12021): Found 1 design units, including 1 entities, in source file /users/
     Info (12023): Found entity 1: seven_segment File: C:/Users/camin/Documents/VanilaCore/core/seven_segment.sv Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file /users/camin/documents/vanilacore/core/console.sv
     Info (12023): Found entity 1: console File: C:/Users/camin/Documents/VanilaCore/core/console.sv Line: 8
-Info (12021): Found 1 design units, including 1 entities, in source file /users/camin/documents/vanilacore/core/soc.sv
-    Info (12023): Found entity 1: soc File: C:/Users/camin/Documents/VanilaCore/core/soc.sv Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file /users/camin/documents/vanilacore/core/cross_bar.sv
     Info (12023): Found entity 1: cross_bar File: C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv Line: 4
 Info (12021): Found 1 design units, including 1 entities, in source file /users/camin/documents/vanilacore/core/branch_unit.sv
     Info (12023): Found entity 1: branch_unit File: C:/Users/camin/Documents/VanilaCore/core/branch_unit.sv Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file /users/camin/documents/vanilacore/core/wishbone.sv
     Info (12023): Found entity 1: WB4 File: C:/Users/camin/Documents/VanilaCore/core/wishbone.sv Line: 1
-Warning (10261): Verilog HDL Event Control warning at ram_wb.sv(50): Event Control contains a complex event expression File: C:/Users/camin/Documents/VanilaCore/core/ram_wb.sv Line: 50
 Info (12021): Found 1 design units, including 1 entities, in source file /users/camin/documents/vanilacore/core/ram_wb.sv
     Info (12023): Found entity 1: ram_wb File: C:/Users/camin/Documents/VanilaCore/core/ram_wb.sv Line: 7
 Info (12021): Found 1 design units, including 1 entities, in source file /users/camin/documents/vanilacore/core/ram.sv
@@ -1302,23 +1371,18 @@ Info (12021): Found 1 design units, including 1 entities, in source file /users/
     Info (12023): Found entity 1: alu File: C:/Users/camin/Documents/VanilaCore/core/alu.sv Line: 3
 Info (12021): Found 1 design units, including 1 entities, in source file /users/camin/documents/vanilacore/core/regfile.sv
     Info (12023): Found entity 1: regfile File: C:/Users/camin/Documents/VanilaCore/core/regfile.sv Line: 6
-Warning (10236): Verilog HDL Implicit Net warning at ram_wb.sv(18): created implicit net for "debug_data" File: C:/Users/camin/Documents/VanilaCore/core/ram_wb.sv Line: 18
-Warning (10236): Verilog HDL Implicit Net warning at ram_wb.sv(19): created implicit net for "debug_address" File: C:/Users/camin/Documents/VanilaCore/core/ram_wb.sv Line: 19
 Info (12127): Elaborating entity "ZeltaSoC" for the top level hierarchy
-Info (12128): Elaborating entity "debounce" for hierarchy "debounce:debounce_rst" File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 31
-Warning (10230): Verilog HDL assignment warning at debounce.sv(20): truncated value with size 32 to match size of target (22) File: C:/Users/camin/Documents/VanilaCore/core/debounce.sv Line: 20
-Info (12128): Elaborating entity "WB4" for hierarchy "WB4:inst_bus" File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 34
-Info (12128): Elaborating entity "cross_bar" for hierarchy "cross_bar:cross_bar_0" File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 54
-Info (12128): Elaborating entity "wishbone_arbitrer" for hierarchy "wishbone_arbitrer:wishbone_arbitrer_0" File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 61
+Info (12128): Elaborating entity "debounce" for hierarchy "debounce:debounce_rst" File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 29
+Info (12128): Elaborating entity "WB4" for hierarchy "WB4:inst_bus" File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 32
+Info (12128): Elaborating entity "cross_bar" for hierarchy "cross_bar:cross_bar_0" File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 52
+Info (12128): Elaborating entity "wishbone_arbitrer" for hierarchy "wishbone_arbitrer:wishbone_arbitrer_0" File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 59
 Warning (10230): Verilog HDL assignment warning at wishbone_arbitrer.sv(21): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/wishbone_arbitrer.sv Line: 21
 Warning (10230): Verilog HDL assignment warning at wishbone_arbitrer.sv(22): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/wishbone_arbitrer.sv Line: 22
-Info (12128): Elaborating entity "ram_wb" for hierarchy "ram_wb:MEMORY_RAM" File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 65
+Info (12128): Elaborating entity "ram_wb" for hierarchy "ram_wb:MEMORY_RAM" File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 63
 Info (12128): Elaborating entity "ram" for hierarchy "ram_wb:MEMORY_RAM|ram:RAM_0" File: C:/Users/camin/Documents/VanilaCore/core/ram_wb.sv Line: 21
 Info (10648): Verilog HDL Display System Task info at ram.sv(40): Init memory File: C:/Users/camin/Documents/VanilaCore/core/ram.sv Line: 40
-Warning (10850): Verilog HDL warning at ram.sv(46): number of words (1354) in memory file does not match the number of elements in the address range [0:4095] File: C:/Users/camin/Documents/VanilaCore/core/ram.sv Line: 46
-Warning (10030): Net "debug_address[11..0]" at ram.sv(18) has no driver or initial value, using a default initial value '0' File: C:/Users/camin/Documents/VanilaCore/core/ram.sv Line: 18
-Warning (10034): Output port "debug_address[31..12]" at ram.sv(18) has no driver File: C:/Users/camin/Documents/VanilaCore/core/ram.sv Line: 18
-Info (12128): Elaborating entity "uart_slave" for hierarchy "uart_slave:uart_slave_0" File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 70
+Warning (10850): Verilog HDL warning at ram.sv(46): number of words (12) in memory file does not match the number of elements in the address range [0:65535] File: C:/Users/camin/Documents/VanilaCore/core/ram.sv Line: 46
+Info (12128): Elaborating entity "uart_slave" for hierarchy "uart_slave:uart_slave_0" File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 68
 Warning (10762): Verilog HDL Case Statement warning at uart_slave.sv(61): can't check case statement for completeness because the case expression has too many possible states File: C:/Users/camin/Documents/VanilaCore/core/uart_slave.sv Line: 61
 Warning (10762): Verilog HDL Case Statement warning at uart_slave.sv(75): can't check case statement for completeness because the case expression has too many possible states File: C:/Users/camin/Documents/VanilaCore/core/uart_slave.sv Line: 75
 Warning (10230): Verilog HDL assignment warning at uart_slave.sv(156): truncated value with size 32 to match size of target (3) File: C:/Users/camin/Documents/VanilaCore/core/uart_slave.sv Line: 156
@@ -1327,22 +1391,25 @@ Warning (10230): Verilog HDL assignment warning at fifo.sv(58): truncated value 
 Warning (10230): Verilog HDL assignment warning at fifo.sv(62): truncated value with size 32 to match size of target (5) File: C:/Users/camin/Documents/VanilaCore/core/fifo.sv Line: 62
 Warning (10230): Verilog HDL assignment warning at fifo.sv(82): truncated value with size 32 to match size of target (5) File: C:/Users/camin/Documents/VanilaCore/core/fifo.sv Line: 82
 Warning (10230): Verilog HDL assignment warning at fifo.sv(90): truncated value with size 32 to match size of target (5) File: C:/Users/camin/Documents/VanilaCore/core/fifo.sv Line: 90
-Info (12128): Elaborating entity "console" for hierarchy "console:console_0" File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 71
+Info (12128): Elaborating entity "console" for hierarchy "console:console_0" File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 69
 Warning (10230): Verilog HDL assignment warning at console.sv(169): truncated value with size 8 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/console.sv Line: 169
 Warning (10230): Verilog HDL assignment warning at console.sv(179): truncated value with size 32 to match size of target (3) File: C:/Users/camin/Documents/VanilaCore/core/console.sv Line: 179
-Info (12128): Elaborating entity "core" for hierarchy "core:CORE_0" File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 77
-Warning (10958): SystemVerilog warning at core.sv(120): unique or priority keyword makes case statement complete File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 120
+Info (12128): Elaborating entity "core" for hierarchy "core:CORE_0" File: C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv Line: 75
 Info (12128): Elaborating entity "fetch_stm" for hierarchy "core:CORE_0|fetch_stm:fetch_stm_0" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 45
 Info (12128): Elaborating entity "decode" for hierarchy "core:CORE_0|decode:decode_bus" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 51
 Info (12128): Elaborating entity "decoder" for hierarchy "core:CORE_0|decoder:decoder_0" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 57
 Warning (10230): Verilog HDL assignment warning at decoder.sv(26): truncated value with size 11 to match size of target (10) File: C:/Users/camin/Documents/VanilaCore/core/decoder.sv Line: 26
-Info (12128): Elaborating entity "control_unit" for hierarchy "core:CORE_0|control_unit:control_unit_0" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 102
-Warning (10175): Verilog HDL warning at control_unit.sv(248): ignoring unsupported system task File: C:/Users/camin/Documents/VanilaCore/core/control_unit.sv Line: 248
-Warning (10958): SystemVerilog warning at control_unit.sv(240): unique or priority keyword makes case statement complete File: C:/Users/camin/Documents/VanilaCore/core/control_unit.sv Line: 240
-Warning (10958): SystemVerilog warning at control_unit.sv(237): unique or priority keyword makes case statement complete File: C:/Users/camin/Documents/VanilaCore/core/control_unit.sv Line: 237
-Info (12128): Elaborating entity "regfile" for hierarchy "core:CORE_0|regfile:regfile_0" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 143
-Info (12128): Elaborating entity "alu" for hierarchy "core:CORE_0|alu:alu_0" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 162
-Info (12128): Elaborating entity "branch_unit" for hierarchy "core:CORE_0|branch_unit:branch_unit_0" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 174
+Info (12128): Elaborating entity "control_unit" for hierarchy "core:CORE_0|control_unit:control_unit_0" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 116
+Warning (10175): Verilog HDL warning at control_unit.sv(296): ignoring unsupported system task File: C:/Users/camin/Documents/VanilaCore/core/control_unit.sv Line: 296
+Warning (10958): SystemVerilog warning at control_unit.sv(288): unique or priority keyword makes case statement complete File: C:/Users/camin/Documents/VanilaCore/core/control_unit.sv Line: 288
+Warning (10175): Verilog HDL warning at control_unit.sv(310): ignoring unsupported system task File: C:/Users/camin/Documents/VanilaCore/core/control_unit.sv Line: 310
+Warning (10175): Verilog HDL warning at control_unit.sv(316): ignoring unsupported system task File: C:/Users/camin/Documents/VanilaCore/core/control_unit.sv Line: 316
+Warning (10175): Verilog HDL warning at control_unit.sv(328): ignoring unsupported system task File: C:/Users/camin/Documents/VanilaCore/core/control_unit.sv Line: 328
+Warning (10175): Verilog HDL warning at control_unit.sv(334): ignoring unsupported system task File: C:/Users/camin/Documents/VanilaCore/core/control_unit.sv Line: 334
+Warning (10958): SystemVerilog warning at control_unit.sv(285): unique or priority keyword makes case statement complete File: C:/Users/camin/Documents/VanilaCore/core/control_unit.sv Line: 285
+Info (12128): Elaborating entity "regfile" for hierarchy "core:CORE_0|regfile:regfile_0" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 164
+Info (12128): Elaborating entity "alu" for hierarchy "core:CORE_0|alu:alu_0" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 183
+Info (12128): Elaborating entity "branch_unit" for hierarchy "core:CORE_0|branch_unit:branch_unit_0" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 195
 Warning (10230): Verilog HDL assignment warning at branch_unit.sv(27): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/branch_unit.sv Line: 27
 Warning (10230): Verilog HDL assignment warning at branch_unit.sv(28): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/branch_unit.sv Line: 28
 Warning (10230): Verilog HDL assignment warning at branch_unit.sv(29): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/branch_unit.sv Line: 29
@@ -1350,18 +1417,31 @@ Warning (10230): Verilog HDL assignment warning at branch_unit.sv(30): truncated
 Warning (10230): Verilog HDL assignment warning at branch_unit.sv(31): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/branch_unit.sv Line: 31
 Warning (10230): Verilog HDL assignment warning at branch_unit.sv(32): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/branch_unit.sv Line: 32
 Warning (10230): Verilog HDL assignment warning at branch_unit.sv(33): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/branch_unit.sv Line: 33
-Info (12128): Elaborating entity "memory_access" for hierarchy "core:CORE_0|memory_access:memory_access_0" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 228
+Info (12128): Elaborating entity "memory_access" for hierarchy "core:CORE_0|memory_access:memory_access_0" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 263
 Warning (10230): Verilog HDL assignment warning at memory_access.sv(62): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/memory_access.sv Line: 62
 Warning (10027): Verilog HDL or VHDL warning at the memory_access.sv(85): index expression is not wide enough to address all of the elements in the array File: C:/Users/camin/Documents/VanilaCore/core/memory_access.sv Line: 85
 Warning (10958): SystemVerilog warning at memory_access.sv(227): unique or priority keyword makes case statement complete File: C:/Users/camin/Documents/VanilaCore/core/memory_access.sv Line: 227
+Info (12128): Elaborating entity "csr_unit" for hierarchy "core:CORE_0|csr_unit:csr_unit_0" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 307
+Warning (10036): Verilog HDL or VHDL warning at csr_unit.sv(109): object "read_cmd_s" assigned a value but never read File: C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv Line: 109
+Warning (10858): Verilog HDL warning at csr_unit.sv(169): object mstatus used but never assigned File: C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv Line: 169
+Warning (10230): Verilog HDL assignment warning at csr_unit.sv(74): truncated value with size 32 to match size of target (3) File: C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv Line: 74
+Warning (10230): Verilog HDL assignment warning at csr_unit.sv(87): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv Line: 87
+Warning (10230): Verilog HDL assignment warning at csr_unit.sv(88): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv Line: 88
+Warning (10230): Verilog HDL assignment warning at csr_unit.sv(89): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv Line: 89
+Warning (10230): Verilog HDL assignment warning at csr_unit.sv(103): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv Line: 103
+Warning (10230): Verilog HDL assignment warning at csr_unit.sv(104): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv Line: 104
+Warning (10230): Verilog HDL assignment warning at csr_unit.sv(105): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv Line: 105
+Warning (10230): Verilog HDL assignment warning at csr_unit.sv(119): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv Line: 119
+Warning (10230): Verilog HDL assignment warning at csr_unit.sv(122): truncated value with size 32 to match size of target (1) File: C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv Line: 122
+Warning (10762): Verilog HDL Case Statement warning at csr_unit.sv(418): can't check case statement for completeness because the case expression has too many possible states File: C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv Line: 418
+Warning (10030): Net "mstatus" at csr_unit.sv(169) has no driver or initial value, using a default initial value '0' File: C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv Line: 169
+Warning (10030): Net "trap" at csr_unit.sv(25) has no driver or initial value, using a default initial value '0' File: C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv Line: 25
 Warning (276027): Inferred dual-clock RAM node "console:console_0|fifo:fifo_0|buffer_rtl_0" from synchronous design logic.  The read-during-write behavior of a dual-clock RAM is undefined and may not match the behavior of the original design.
 Warning (276027): Inferred dual-clock RAM node "console:console_0|fifo:fifo_0|buffer_rtl_1" from synchronous design logic.  The read-during-write behavior of a dual-clock RAM is undefined and may not match the behavior of the original design.
-Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "C:/Users/camin/Documents/VanilaCore/RTL/db/VanilaCore.ram0_ram_6773ddc7.hdl.mif" contains "don't care" values -- overwriting them with 0s
+Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "C:/Users/camin/Documents/VanilaCore/RTL/db/VanilaCore.ram0_ram_6773dc4a.hdl.mif" contains "don't care" values -- overwriting them with 0s
 Warning (276021): Created node "ram_wb:MEMORY_RAM|ram:RAM_0|ram" as a single-port RAM by generating altsyncram megafunction to implement register logic. Power-up values at the outputs of the RAM are different from the original design. File: C:/Users/camin/Documents/VanilaCore/core/ram.sv Line: 20
 Warning (276027): Inferred dual-clock RAM node "uart_slave:uart_slave_0|fifo:fifo_0|buffer_rtl_0" from synchronous design logic.  The read-during-write behavior of a dual-clock RAM is undefined and may not match the behavior of the original design.
 Warning (276027): Inferred dual-clock RAM node "uart_slave:uart_slave_0|fifo:fifo_0|buffer_rtl_1" from synchronous design logic.  The read-during-write behavior of a dual-clock RAM is undefined and may not match the behavior of the original design.
-Info (276014): Found 1 instances of uninferred RAM logic
-    Info (276007): RAM logic "ram_wb:MEMORY_RAM|ram:RAM_0|ram" is uninferred due to asynchronous read logic File: C:/Users/camin/Documents/VanilaCore/core/ram.sv Line: 20
 Info (19000): Inferred 5 megafunctions from design logic
     Info (276029): Inferred altsyncram megafunction from the following design logic: "console:console_0|fifo:fifo_0|buffer_rtl_0" 
         Info (286033): Parameter OPERATION_MODE set to DUAL_PORT
@@ -1396,14 +1476,14 @@ Info (19000): Inferred 5 megafunctions from design logic
     Info (276029): Inferred altsyncram megafunction from the following design logic: "ram_wb:MEMORY_RAM|ram:RAM_0|ram_rtl_0" 
         Info (286033): Parameter OPERATION_MODE set to SINGLE_PORT
         Info (286033): Parameter WIDTH_A set to 32
-        Info (286033): Parameter WIDTHAD_A set to 12
-        Info (286033): Parameter NUMWORDS_A set to 4096
+        Info (286033): Parameter WIDTHAD_A set to 16
+        Info (286033): Parameter NUMWORDS_A set to 65536
         Info (286033): Parameter OUTDATA_REG_A set to UNREGISTERED
         Info (286033): Parameter ADDRESS_ACLR_A set to NONE
         Info (286033): Parameter OUTDATA_ACLR_A set to NONE
         Info (286033): Parameter INDATA_ACLR_A set to NONE
         Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
-        Info (286033): Parameter INIT_FILE set to db/VanilaCore.ram0_ram_6773ddc7.hdl.mif
+        Info (286033): Parameter INIT_FILE set to db/VanilaCore.ram0_ram_6773dc4a.hdl.mif
     Info (276029): Inferred altsyncram megafunction from the following design logic: "uart_slave:uart_slave_0|fifo:fifo_0|buffer_rtl_0" 
         Info (286033): Parameter OPERATION_MODE set to DUAL_PORT
         Info (286033): Parameter WIDTH_A set to 7
@@ -1456,45 +1536,51 @@ Info (12130): Elaborated megafunction instantiation "ram_wb:MEMORY_RAM|ram:RAM_0
 Info (12133): Instantiated megafunction "ram_wb:MEMORY_RAM|ram:RAM_0|altsyncram:ram_rtl_0" with the following parameter:
     Info (12134): Parameter "OPERATION_MODE" = "SINGLE_PORT"
     Info (12134): Parameter "WIDTH_A" = "32"
-    Info (12134): Parameter "WIDTHAD_A" = "12"
-    Info (12134): Parameter "NUMWORDS_A" = "4096"
+    Info (12134): Parameter "WIDTHAD_A" = "16"
+    Info (12134): Parameter "NUMWORDS_A" = "65536"
     Info (12134): Parameter "OUTDATA_REG_A" = "UNREGISTERED"
     Info (12134): Parameter "ADDRESS_ACLR_A" = "NONE"
     Info (12134): Parameter "OUTDATA_ACLR_A" = "NONE"
     Info (12134): Parameter "INDATA_ACLR_A" = "NONE"
     Info (12134): Parameter "WRCONTROL_ACLR_A" = "NONE"
-    Info (12134): Parameter "INIT_FILE" = "db/VanilaCore.ram0_ram_6773ddc7.hdl.mif"
-Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_v291.tdf
-    Info (12023): Found entity 1: altsyncram_v291 File: C:/Users/camin/Documents/VanilaCore/RTL/db/altsyncram_v291.tdf Line: 28
-Warning (12241): 3 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+    Info (12134): Parameter "INIT_FILE" = "db/VanilaCore.ram0_ram_6773dc4a.hdl.mif"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_j491.tdf
+    Info (12023): Found entity 1: altsyncram_j491 File: C:/Users/camin/Documents/VanilaCore/RTL/db/altsyncram_j491.tdf Line: 34
+Info (12021): Found 1 design units, including 1 entities, in source file db/decode_rsa.tdf
+    Info (12023): Found entity 1: decode_rsa File: C:/Users/camin/Documents/VanilaCore/RTL/db/decode_rsa.tdf Line: 23
+Info (12021): Found 1 design units, including 1 entities, in source file db/decode_k8a.tdf
+    Info (12023): Found entity 1: decode_k8a File: C:/Users/camin/Documents/VanilaCore/RTL/db/decode_k8a.tdf Line: 23
+Info (12021): Found 1 design units, including 1 entities, in source file db/mux_oob.tdf
+    Info (12023): Found entity 1: mux_oob File: C:/Users/camin/Documents/VanilaCore/RTL/db/mux_oob.tdf Line: 23
+Warning (12241): 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 20 registers lost all their fanouts during netlist optimizations.
+Info (17049): 52 registers lost all their fanouts during netlist optimizations.
 Info (17016): Found the following redundant logic cells in design
-    Info (17048): Logic cell "core:CORE_0|Add0~2" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 123
-    Info (17048): Logic cell "core:CORE_0|Add0~42" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 123
-    Info (17048): Logic cell "core:CORE_0|Add0~44" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 123
-    Info (17048): Logic cell "core:CORE_0|Add0~46" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 123
-    Info (17048): Logic cell "core:CORE_0|Add0~48" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 123
-    Info (17048): Logic cell "core:CORE_0|Add0~50" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 123
-    Info (17048): Logic cell "core:CORE_0|Add0~52" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 123
-    Info (17048): Logic cell "core:CORE_0|Add0~54" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 123
-    Info (17048): Logic cell "core:CORE_0|Add0~56" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 123
-    Info (17048): Logic cell "core:CORE_0|Add0~58" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 123
-    Info (17048): Logic cell "core:CORE_0|Add0~60" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 123
-    Info (17048): Logic cell "core:CORE_0|Add0~62" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 123
+    Info (17048): Logic cell "core:CORE_0|Add0~0" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 143
+    Info (17048): Logic cell "core:CORE_0|Add0~40" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 143
+    Info (17048): Logic cell "core:CORE_0|Add0~42" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 143
+    Info (17048): Logic cell "core:CORE_0|Add0~44" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 143
+    Info (17048): Logic cell "core:CORE_0|Add0~46" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 143
+    Info (17048): Logic cell "core:CORE_0|Add0~48" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 143
+    Info (17048): Logic cell "core:CORE_0|Add0~50" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 143
+    Info (17048): Logic cell "core:CORE_0|Add0~52" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 143
+    Info (17048): Logic cell "core:CORE_0|Add0~54" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 143
+    Info (17048): Logic cell "core:CORE_0|Add0~56" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 143
+    Info (17048): Logic cell "core:CORE_0|Add0~58" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 143
+    Info (17048): Logic cell "core:CORE_0|Add0~62" File: C:/Users/camin/Documents/VanilaCore/core/core.sv Line: 143
 Info (144001): Generated suppressed messages file C:/Users/camin/Documents/VanilaCore/RTL/output_files/VanilaCore.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 5492 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 11745 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 3 input pins
     Info (21059): Implemented 1 output pins
-    Info (21061): Implemented 5428 logic cells
-    Info (21064): Implemented 60 RAM segments
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 41 warnings
-    Info: Peak virtual memory: 4837 megabytes
-    Info: Processing ended: Fri Dec 11 04:40:32 2020
-    Info: Elapsed time: 00:00:18
-    Info: Total CPU time (on all processors): 00:00:26
+    Info (21061): Implemented 11457 logic cells
+    Info (21064): Implemented 284 RAM segments
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 52 warnings
+    Info: Peak virtual memory: 4917 megabytes
+    Info: Processing ended: Fri Dec 18 16:35:55 2020
+    Info: Elapsed time: 00:00:42
+    Info: Total CPU time (on all processors): 00:00:51
 
 
 +------------------------------------------+

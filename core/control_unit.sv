@@ -31,7 +31,18 @@ module control_unit
     input   logic data_valid,
 
     //ALU immediate instruction signal
-    output logic imm_t
+    output logic imm_t,
+
+    //CSR Unit control signals
+    output logic csr_unit_enable,
+    output logic illegal_ins,
+
+    //Instruction Events
+    output logic arithmetic_event,
+
+    //Branches
+    output logic unconditional_branch,
+    output logic conditional_branch
 );
 
 parameter OP_IMM =  7'b0010011;
@@ -71,9 +82,13 @@ begin
     begin
         if(execute)
         begin       
+            illegal_ins = 1'b0;
             case(decode_bus.opcode)
                 OP_IMM:
                 begin
+                    conditional_branch = 1'b0;
+                    unconditional_branch = 1'b0;
+                    arithmetic_event = 1'b1;
                     sr2_src = I_IMM_SRC;
                     regfile_src = ALU_INPUT;
                     regfile_wr = 1'b1;
@@ -83,10 +98,14 @@ begin
                     busy = 1'b0;
                     memory_operation = MEM_NONE;
                     imm_t = 1'b1;
+                    csr_unit_enable = 1'b0;
                     //$display("OPIMM dest %x, rs1 %x, rs2 %x, imm %x", rd, rs1, rs2, i_imm);
                 end
                 OP:
                 begin
+                    conditional_branch = 1'b0;
+                    unconditional_branch = 1'b0;
+                    arithmetic_event = 1'b1;
                     sr2_src = REG_SRC;
                     regfile_src = ALU_INPUT;
                     regfile_wr = 1'b1;
@@ -96,10 +115,14 @@ begin
                     busy = 1'b0;
                     memory_operation = MEM_NONE;
                     imm_t = 1'b0;
+                    csr_unit_enable = 1'b0;
                 end
                 LUI:
                 begin
                     //$display("LUI dest %b, imm %b", rd, U_IMM_SRC);
+                    conditional_branch = 1'b0;
+                    unconditional_branch = 1'b0;
+                    arithmetic_event = 1'b0;
                     sr2_src = I_IMM_SRC;
                     regfile_src = U_IMM_SRC;
                     regfile_wr = 1'b1;
@@ -109,9 +132,13 @@ begin
                     busy = 1'b0;
                     memory_operation = MEM_NONE;
                     imm_t = 1'b0;
+                    csr_unit_enable = 1'b0;
                 end
                 AUIPC:
                 begin
+                    conditional_branch = 1'b0;
+                    unconditional_branch = 1'b0;
+                    arithmetic_event = 1'b0;
                     //$display("AUIPC dest %b, imm %b", rd, U_IMM_SRC + PC);
                     sr2_src = I_IMM_SRC;
                     regfile_src = AUIPC_SRC;
@@ -122,11 +149,15 @@ begin
                     busy = 1'b0;
                     memory_operation = MEM_NONE;
                     imm_t = 1'b0;
+                    csr_unit_enable = 1'b0;
                 end
 
                 //Unconditional JUMPS
                 JAL:
                 begin
+                    conditional_branch = 1'b0;
+                    unconditional_branch = 1'b1;
+                    arithmetic_event = 1'b0;
                     //$display("JAL address %h", jump_target);
                     regfile_wr = 1'b1;
                     sr2_src = I_IMM_SRC;
@@ -137,9 +168,13 @@ begin
                     busy = 1'b0;
                     memory_operation = MEM_NONE;
                     imm_t = 1'b0;
+                    csr_unit_enable = 1'b0;
                 end
                 JARL:
                 begin
+                    conditional_branch = 1'b0;
+                    unconditional_branch = 1'b1;
+                    arithmetic_event = 1'b0;
                     regfile_wr = 1'b1;
                     sr2_src = I_IMM_SRC;
                     regfile_src = PC_SRC;
@@ -150,10 +185,14 @@ begin
                     busy = 1'b0;
                     memory_operation = MEM_NONE;
                     imm_t = 1'b0;
+                    csr_unit_enable = 1'b0;
                 end
                 //Conditional jumps
                 BRANCH:
                 begin
+                    conditional_branch = 1'b1;
+                    unconditional_branch = 1'b0;
+                    arithmetic_event = 1'b0;
                     //$display("BRANCH Instruction");
                     regfile_wr = 1'b0;
                     sr2_src = I_IMM_SRC;
@@ -164,10 +203,14 @@ begin
                     busy = 1'b0;
                     memory_operation = MEM_NONE;
                     imm_t = 1'b0;
+                    csr_unit_enable = 1'b0;
                 end
                 //Memory Access
                 STORE:
                 begin
+                    conditional_branch = 1'b0;
+                    unconditional_branch = 1'b0;
+                    arithmetic_event = 1'b0;
                     regfile_wr = 1'b0;
                     sr2_src = I_IMM_SRC;
                     regfile_src = ALU_INPUT;
@@ -177,6 +220,7 @@ begin
                     enable_branch = 1'b0;
                     jump = 1'b0;
                     imm_t = 1'b0;
+                    csr_unit_enable = 1'b0;
                     if(ack)
                     begin
                         cyc = 1'b0;
@@ -190,6 +234,9 @@ begin
                 end
                 LOAD:
                 begin
+                    conditional_branch = 1'b0;
+                    unconditional_branch = 1'b0;
+                    arithmetic_event = 1'b0;
                     sr2_src = I_IMM_SRC;
                     regfile_src = LOAD_SRC;
                     jump = 1'b0;
@@ -198,6 +245,7 @@ begin
                     jmp_target_src = J_IMM;
                     memory_operation = LOAD_DATA;
                     enable_branch = 1'b0;
+                    csr_unit_enable = 1'b0;
                     unique case(load_state)
                         SEND_CMD:
                         begin
@@ -248,34 +296,47 @@ begin
                                     $stop;
                                 end
                             endcase
+                            csr_unit_enable = 1'b0;
                         end
                         //CSR Instructions
                         CSRRW: //Read and write
                         begin
-                            regfile_wr = 1'b1;
+                            regfile_wr = 1'b0;
                             regfile_src = CSR_SRC;
+                            csr_unit_enable = 1'b1;
                         end
                         CSRRS:
                         begin
+                            $stop;
                             
+                            csr_unit_enable = 1'b1;
                         end
                         CSRRC:
                         begin
+                            $stop;
                             
+                            csr_unit_enable = 1'b1;
                         end
                         CSRRWI:
                         begin
-                            
+                            regfile_wr = 1'b0;
+                            regfile_src = CSR_SRC;
+                            csr_unit_enable = 1'b1;
                         end
                         CSRRSI:
                         begin
+                            $stop;
                             
+                            csr_unit_enable = 1'b1;
                         end
                         CSRRCI:
                         begin
+                            $stop;
                             
+                            csr_unit_enable = 1'b1;
                         end
                     endcase
+                    conditional_branch = 1'b0;
                     imm_t = 1'b0;
                     sr2_src = I_IMM_SRC;
                     jmp_target_src = J_IMM;
@@ -284,10 +345,17 @@ begin
                     cyc = 1'b0;
                     memory_operation = MEM_NONE;
                     busy = 1'b0;
+                    arithmetic_event = 1'b0;
+                    unconditional_branch = 1'b0;
                 end
                 default:
                 begin
+                    unconditional_branch = 1'b0;
+                    conditional_branch = 1'b0;
+                    csr_unit_enable = 1'b1;
+                    arithmetic_event = 1'b0;
                 //$display("Illegal Instruction");
+                    illegal_ins = 1'b1;
                     imm_t = 1'b0;
                     regfile_wr = 1'b0;
                     regfile_src = ALU_INPUT;
@@ -303,6 +371,11 @@ begin
         end
         else
         begin
+            unconditional_branch = 1'b0;
+            conditional_branch = 1'b0;
+            arithmetic_event = 1'b0;
+            illegal_ins = 1'b0;
+            csr_unit_enable = 1'b0;
             imm_t = 1'b0;
             regfile_wr = 1'b0;
             regfile_src = ALU_INPUT;

@@ -8,5 +8,4 @@ typedef enum logic[3:0] { J_IMM, B_IMM, I_IMM } jmp_target_src_t;
 
 typedef enum logic[3:0] { MEM_NONE, LOAD_DATA, STORE_DATA} memory_operation_t;
 
-
 endpackage
