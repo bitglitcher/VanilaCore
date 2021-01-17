@@ -30,19 +30,22 @@ module control_unit
     input   logic ack,
     input   logic data_valid,
 
+
     //ALU immediate instruction signal
     output logic imm_t,
 
     //CSR Unit control signals
     output logic csr_unit_enable,
+    output logic trap_return,
+
+    //Events from instructions
     output logic illegal_ins,
-
-    //Instruction Events
     output logic arithmetic_event,
-
-    //Branches
     output logic unconditional_branch,
-    output logic conditional_branch
+    output logic conditional_branch,
+
+    input logic ignore_next
+
 );
 
 parameter OP_IMM =  7'b0010011;
@@ -57,8 +60,14 @@ parameter OP =      7'b0110011;
 parameter SYSTEM =  7'b1110011;
 
 parameter ENVIROMENT = 3'b000;
+parameter PRIV = 3'b000;
+
 parameter ECALL = 12'b000000000000;
 parameter EBREAK = 12'b000000000001;
+
+parameter URET = 12'b000000000000;
+parameter SRET = 12'b000100000000;
+parameter MRET = 12'b001100000000;
 
 parameter CSRRW = 3'b001;
 parameter CSRRS = 3'b010;
@@ -82,10 +91,11 @@ begin
     begin
         if(execute)
         begin       
-            illegal_ins = 1'b0;
             case(decode_bus.opcode)
                 OP_IMM:
                 begin
+                    trap_return = 1'b0;
+                    illegal_ins = 1'b0;
                     conditional_branch = 1'b0;
                     unconditional_branch = 1'b0;
                     arithmetic_event = 1'b1;
@@ -103,6 +113,8 @@ begin
                 end
                 OP:
                 begin
+                    trap_return = 1'b0;
+                    illegal_ins = 1'b0;
                     conditional_branch = 1'b0;
                     unconditional_branch = 1'b0;
                     arithmetic_event = 1'b1;
@@ -120,6 +132,8 @@ begin
                 LUI:
                 begin
                     //$display("LUI dest %b, imm %b", rd, U_IMM_SRC);
+                    trap_return = 1'b0;
+                    illegal_ins = 1'b0;
                     conditional_branch = 1'b0;
                     unconditional_branch = 1'b0;
                     arithmetic_event = 1'b0;
@@ -136,6 +150,8 @@ begin
                 end
                 AUIPC:
                 begin
+                    trap_return = 1'b0;
+                    illegal_ins = 1'b0;
                     conditional_branch = 1'b0;
                     unconditional_branch = 1'b0;
                     arithmetic_event = 1'b0;
@@ -155,6 +171,8 @@ begin
                 //Unconditional JUMPS
                 JAL:
                 begin
+                    trap_return = 1'b0;
+                    illegal_ins = 1'b0;
                     conditional_branch = 1'b0;
                     unconditional_branch = 1'b1;
                     arithmetic_event = 1'b0;
@@ -172,6 +190,8 @@ begin
                 end
                 JARL:
                 begin
+                    trap_return = 1'b0;
+                    illegal_ins = 1'b0;
                     conditional_branch = 1'b0;
                     unconditional_branch = 1'b1;
                     arithmetic_event = 1'b0;
@@ -190,6 +210,8 @@ begin
                 //Conditional jumps
                 BRANCH:
                 begin
+                    trap_return = 1'b0;
+                    illegal_ins = 1'b0;
                     conditional_branch = 1'b1;
                     unconditional_branch = 1'b0;
                     arithmetic_event = 1'b0;
@@ -208,6 +230,8 @@ begin
                 //Memory Access
                 STORE:
                 begin
+                    trap_return = 1'b0;
+                    illegal_ins = 1'b0;
                     conditional_branch = 1'b0;
                     unconditional_branch = 1'b0;
                     arithmetic_event = 1'b0;
@@ -234,6 +258,8 @@ begin
                 end
                 LOAD:
                 begin
+                    trap_return = 1'b0;
+                    illegal_ins = 1'b0;
                     conditional_branch = 1'b0;
                     unconditional_branch = 1'b0;
                     arithmetic_event = 1'b0;
@@ -285,14 +311,17 @@ begin
                     unique case(decode_bus.funct3)
                         ENVIROMENT:
                         begin
+                            illegal_ins = 1'b0;
                             unique case(decode_bus.i_imm)
                                 ECALL:
                                 begin
                                     //Do nothing for now
+                                    //This should make a software interrupt
                                 end
                                 EBREAK:
                                 begin
-                                    //Stop simulation
+                                    //Stop simulation, for now.
+                                    //This should make a software interrupt
                                     $stop;
                                 end
                             endcase
@@ -301,41 +330,71 @@ begin
                         //CSR Instructions
                         CSRRW: //Read and write
                         begin
+                            illegal_ins = 1'b0;
                             regfile_wr = 1'b0;
                             regfile_src = CSR_SRC;
                             csr_unit_enable = 1'b1;
                         end
                         CSRRS:
                         begin
-                            $stop;
-                            
+                            illegal_ins = 1'b0;
                             csr_unit_enable = 1'b1;
+                            regfile_wr = 1'b0;
+                            regfile_src = CSR_SRC;
                         end
                         CSRRC:
-                        begin
-                            $stop;
-                            
+                        begin                            
+                            illegal_ins = 1'b0;
                             csr_unit_enable = 1'b1;
+                            regfile_wr = 1'b0;
+                            regfile_src = CSR_SRC;
                         end
                         CSRRWI:
                         begin
+                            illegal_ins = 1'b0;
                             regfile_wr = 1'b0;
                             regfile_src = CSR_SRC;
                             csr_unit_enable = 1'b1;
                         end
                         CSRRSI:
                         begin
-                            $stop;
-                            
+                            illegal_ins = 1'b0;
+                            regfile_wr = 1'b0;
+                            regfile_src = CSR_SRC;
                             csr_unit_enable = 1'b1;
                         end
                         CSRRCI:
                         begin
-                            $stop;
-                            
+                            illegal_ins = 1'b0;
+                            regfile_wr = 1'b0;
+                            regfile_src = CSR_SRC;
                             csr_unit_enable = 1'b1;
                         end
+                        PRIV:
+                        begin
+                            unique case(decode_bus.i_imm)
+                                URET:
+                                begin
+                                    illegal_ins = 1'b1;
+                                    trap_return = 1'b0;
+                                    $display("Privilege Mode Not Supported"); 
+                                end
+                                SRET:
+                                begin
+                                    illegal_ins = 1'b1;
+                                    trap_return = 1'b0;
+                                    $display("Privilege Mode Not Supported"); 
+                                end 
+                                MRET:
+                                begin
+                                    illegal_ins = 1'b0;
+                                    trap_return = 1'b1;
+                                end
+                            endcase
+                        end
                     endcase
+                    illegal_ins = 1'b1;
+                    trap_return = 1'b0;
                     conditional_branch = 1'b0;
                     imm_t = 1'b0;
                     sr2_src = I_IMM_SRC;
@@ -355,6 +414,7 @@ begin
                     csr_unit_enable = 1'b1;
                     arithmetic_event = 1'b0;
                 //$display("Illegal Instruction");
+                    trap_return = 1'b0;
                     illegal_ins = 1'b1;
                     imm_t = 1'b0;
                     regfile_wr = 1'b0;
@@ -375,6 +435,7 @@ begin
             conditional_branch = 1'b0;
             arithmetic_event = 1'b0;
             illegal_ins = 1'b0;
+            trap_return = 1'b0;
             csr_unit_enable = 1'b0;
             imm_t = 1'b0;
             regfile_wr = 1'b0;
@@ -389,5 +450,6 @@ begin
         end
     end
 end
+
 
 endmodule

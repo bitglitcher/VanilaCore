@@ -8,17 +8,22 @@ module cross_bar
     WB4.master memory, //New masters
     WB4.master uart, //New masters
     //WB4.master seven_segments,
-    WB4.master uart_rx
+    WB4.master uart_rx,
+    WB4.master timer_dev    
 );
 
 parameter MEMORY_START = 32'h00000000;
 parameter MEMORY_END =   32'h000fffff;
+
+//Device Region
 parameter UART_START =   32'h00100000;
 parameter UART_END =     32'h00100000;
-parameter DISPLAY_START =32'h01000000;
-parameter DISPLAY_END =  32'h01000000;
-parameter UART_RX_START =32'h10000000;
-parameter UART_RX_END =  32'h10000004;
+parameter DISPLAY_START =32'h00100010;
+parameter DISPLAY_END =  32'h00100010;
+parameter UART_RX_START =32'h00100020;
+parameter UART_RX_END =  32'h00100024;
+parameter TIMER_START =  32'h00100030;
+parameter TIMER_END =    32'h0010003c;
 
 
 always_comb
@@ -39,6 +44,10 @@ begin
     uart_rx.DAT_O = cpu.DAT_O;
     uart_rx.WE = cpu.WE; 
     uart_rx.CYC = cpu.CYC;
+    timer_dev.ADR = cpu.ADR;
+    timer_dev.DAT_O = cpu.DAT_O;
+    timer_dev.WE = cpu.WE; 
+    timer_dev.CYC = cpu.CYC;
 end
 
 
@@ -52,6 +61,7 @@ begin
             cpu.DAT_I = memory.DAT_I;
             memory.STB <= cpu.STB;
             uart.STB <= 0;
+            timer_dev.STB <= 0;
             //seven_segments.STB <= 0; //Strobe 0 on other devices
             uart_rx.STB = 0;
             cpu.ACK <= memory.ACK;
@@ -63,6 +73,7 @@ begin
             memory.STB <= 0; //Strobe 0 on other devices
             //seven_segments.STB <= 0; //Strobe 0 on other devices
             uart_rx.STB = 0;
+            timer_dev.STB <= 0;
             cpu.ACK <= uart.ACK; //ACK input signal
         end
         //else if((cpu.ADR <= DISPLAY_END) & (cpu.ADR >= DISPLAY_START))  
@@ -80,6 +91,18 @@ begin
             uart_rx.STB <= cpu.STB; //Strobe select
             cpu.ACK <= uart_rx.ACK; //ACK input signal
             
+            timer_dev.STB <= 0;
+            memory.STB <= 0; //Strobe 0 on other devices
+            uart.STB <= 0; //Strobe 0 on other devices
+            //seven_segments.STB <= 0;
+        end
+        else if((cpu.ADR <= TIMER_END) & (cpu.ADR >= TIMER_START))
+        begin
+            cpu.DAT_I = timer_dev.DAT_I; //Data input to CPU
+            cpu.ACK <= timer_dev.ACK; //ACK input signal
+            timer_dev.STB <= cpu.STB; //Strobe select
+            
+            uart_rx.STB <= 0; //Strobe select
             memory.STB <= 0; //Strobe 0 on other devices
             uart.STB <= 0; //Strobe 0 on other devices
             //seven_segments.STB <= 0;
@@ -90,6 +113,7 @@ begin
             uart.STB <= 0;
             memory.STB <= 0;
             uart_rx.STB = 0;
+            timer_dev.STB = 0;
             //seven_segments.STB <= 0;
             cpu.ACK <= 1;
         end

@@ -42,13 +42,20 @@ WB4 memory_mater_wb(clk, new_rst);
 WB4 uart_wb(clk, new_rst);
 WB4 uart_rx_wb(clk, new_rst);
 
+//Timer for timer interrupts
+WB4 timer_dev(clk, new_rst);
+
+//Interrupt
+logic interrupt;
+
 cross_bar cross_bar_0 
 (
     //Define master
     .cpu(data_bus),
     .memory(memory_wb),
     .uart(uart_wb),
-    .uart_rx(uart_rx_wb)
+    .uart_rx(uart_rx_wb),
+    .timer_dev(timer_dev)
 );
 
 wishbone_arbitrer wishbone_arbitrer_0
@@ -58,6 +65,12 @@ wishbone_arbitrer wishbone_arbitrer_0
     .data_wb(memory_wb)
 );
 
+//Timer for timer interrupts
+timer timer_0
+(
+    .wb(timer_dev),
+    .interrupt(interrupt)
+);
 
 //Memory and devices
 ram_wb #(32, 16) MEMORY_RAM(.wb(memory_mater_wb));

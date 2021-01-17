@@ -6,18 +6,18 @@ import global_pkg::*;
 module core
 (
     WB4.master inst_bus,
-    WB4.master data_bus
+    WB4.master data_bus,
 `ifdef DEBUG_PORT
-    ,
     output logic [31:0] debug_registers [31:0],
     output logic pre_execution,
     output logic post_execution,
-    output logic [31:0] pc_debug
+    output logic [31:0] pc_debug,
     //output [4:0] debug_rd,
     //output [4:0] debug_rs1,
     //output [4:0] debug_rs2,
     //output [6:0] debug_opcode
 `endif
+    input logic timer_irq
 
 );
 
@@ -81,14 +81,28 @@ logic data_valid;
 //ALU immediate instructions signal
 logic imm_t;
 
-//CSR Unit control signals
-logic csr_unit_enable;
+//These are needed to read and write to CSR registers from control unit
+//Data buses that come from the register file
+logic [31:0] rs1_d;
+logic [31:0] rs2_d;
 
-//MISC Signals to the CSR unit
+//Bus form CSR unit
+logic [31:0] csr_d;
+
+//Input and Output Data BUSes to the CSR unit
+logic [31:0] csr_dout;
+
+//Event Signals
+logic csr_unit_enable;
 logic illegal_ins;
 logic arithmetic_event;
 logic unconditional_branch;
 logic conditional_branch;
+
+//Signal produced by the CSR unit to ignore next instruction
+logic ignore_next;
+
+logic trap_return;
 
 control_unit control_unit_0
 (
@@ -109,15 +123,15 @@ control_unit control_unit_0
     .data_valid(data_valid),
     .imm_t(imm_t),
     .csr_unit_enable(csr_unit_enable),
+    .trap_return(trap_return),
     .illegal_ins(illegal_ins),
     .arithmetic_event(arithmetic_event),
     .unconditional_branch(unconditional_branch),
-    .conditional_branch(conditional_branch)
+    .conditional_branch(conditional_branch),
+    .ignore_next(ignore_next)
 );
 
 //Data buses that come from the register file
-logic [31:0] rs1_d;
-logic [31:0] rs2_d;
 logic [31:0] rd_d; //Register file input bus
 
 //Output signals of the ALU
@@ -128,8 +142,6 @@ logic [31:0] alu_src2;
 //Load data from memory access unit
 logic [31:0] load_data;
 
-//Input and Output Data BUSes to the CSR unit
-logic [31:0] csr_dout;
 
 //CSR Register file write enable
 logic csr_regfile_write;
@@ -194,21 +206,20 @@ branch_unit branch_unit_0
     .branch(branch)
 );
 
-//Exeptions and interrupts signal
-logic exp_int;
-assign exp_int = illegal_ins;
-
 //Exeption address
 logic [31:0] exeption_addr;
 
+//Jump signal from CSR to take interrup, trap or expection idk... :D Well, I do know. I just don't want to try ;D
+logic jmp_handler;
+
 //Jump signal is true if branch or JAL is true
-assign jump = branch | uncoditional_jump | exp_int;
+assign jump = branch | uncoditional_jump | jmp_handler;
 
 //Calculate the target address when taking jump or branch
 //This is just a multiplexer
 always_comb
 begin
-    if(exp_int)
+    if(jmp_handler)
     begin
         jump_target = exeption_addr;
     end
@@ -262,15 +273,12 @@ memory_access memory_access_0
     .data_bus(data_bus)
 );
 
-
-
-
-//CSR Unit
+//CSR unit, this unit contains all CSR registers like Status register etc...
 csr_unit csr_unit_0
 (
     //Syscon
-    .clk(inst_bus.clk),
-    .rst(inst_bus.rst),
+    .clk(clk),
+    .rst(rst),
 
     //Commands
     .i_imm(decode_bus.i_imm),
@@ -278,16 +286,17 @@ csr_unit csr_unit_0
     .rd(decode_bus.rd),
     .rs1(decode_bus.rs1),
     .csr_unit_enable(csr_unit_enable),
+    .trap_return(trap_return),
 
     //Data buses
-    .din(rs1_d),
+    .rs1_d(rs1_d),
     .dout(csr_dout),
 
     //Register file control signals
     .wr(csr_regfile_write),
 
     //Exeption or trap signal to jump
-    .trap(),
+    .jmp_handler(jmp_handler),
     .address(exeption_addr),
 
     //Used by internally by registers
@@ -296,13 +305,16 @@ csr_unit csr_unit_0
     .PC(PC),
     .IR(IR),
     .illegal_ins(illegal_ins),
-    .memory_operation(memory_operation),
     .cyc_memory_operation(cyc),
     .arithmetic_event(arithmetic_event),
     .address_ld(address_ld),
+    .memory_operation(memory_operation),
     .unconditional_branch(unconditional_branch),
     .conditional_branch(conditional_branch),
-    .branch(jump)
+    .external_interrupt(),
+    .timer_irq(timer_irq),
+    .branch(jump),
+    .ignore_next(ignore_next)
 
 );
 
