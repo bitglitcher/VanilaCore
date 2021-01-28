@@ -1,4 +1,5 @@
 
+`include "debug_def.sv"
 
 module timer
 (
@@ -14,6 +15,13 @@ module timer
 
 reg [63:0] mtimecmp;
 reg [63:0] mtime;
+
+`ifdef sim
+initial begin 
+    mtimecmp = 64'h0000000000000000;
+    mtime = 64'h0000000000000000;
+end
+`endif
 
 logic ack_s;
 
@@ -39,8 +47,6 @@ begin
             unique case(wb.ADR[3:0])
                 4'h0: mtimecmp [31:0] = wb.DAT_O;
                 4'h4: mtimecmp [63:32] = wb.DAT_O;
-                4'h8: mtime [31:0] = wb.DAT_O;
-                4'hc: mtime [63:0] = wb.DAT_O;
             endcase
         end
     end
@@ -50,10 +56,15 @@ begin
     end
 end
 
+always @(posedge wb.clk)
+begin
+    mtime = mtime + 64'h1;
+end
+
 assign wb.ACK = (ack_s & wb.STB & wb.CYC);
 
 //Hold interrupt line while mtimecmp >= mtime
-assign interrupt = (mtimecmp >= mtime)? 1 : 0;
+assign interrupt = (mtime >= mtimecmp)? 1 : 0;
 
 
 endmodule

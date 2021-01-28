@@ -6,18 +6,18 @@ import global_pkg::*;
 module core
 (
     WB4.master inst_bus,
-    WB4.master data_bus,
+    WB4.master data_bus
+    ,input logic timer_irq
 `ifdef DEBUG_PORT
-    output logic [31:0] debug_registers [31:0],
+    ,output logic [31:0] debug_registers [31:0],
     output logic pre_execution,
     output logic post_execution,
-    output logic [31:0] pc_debug,
+    output logic [31:0] pc_debug
     //output [4:0] debug_rd,
     //output [4:0] debug_rs1,
     //output [4:0] debug_rs2,
     //output [6:0] debug_opcode
 `endif
-    input logic timer_irq
 
 );
 
@@ -86,23 +86,21 @@ logic imm_t;
 logic [31:0] rs1_d;
 logic [31:0] rs2_d;
 
-//Bus form CSR unit
-logic [31:0] csr_d;
-
 //Input and Output Data BUSes to the CSR unit
 logic [31:0] csr_dout;
 
 //Event Signals
-logic csr_unit_enable;
-logic illegal_ins;
-logic arithmetic_event;
-logic unconditional_branch;
-logic conditional_branch;
+EVENT_INT event_bus();
 
-//Signal produced by the CSR unit to ignore next instruction
-logic ignore_next;
-
-logic trap_return;
+//CSR unit signals
+logic csr_unit_wr_enable;
+logic [31:0] val_bus;
+logic [31:0] trap_address;
+logic [31:0] mepc_bus_o;
+val_src_t val_src;
+TRAP_INT trap_int();
+logic sel_rs1_d_rs1;
+write_mode_t write_mode;
 
 control_unit control_unit_0
 (
@@ -121,15 +119,63 @@ control_unit control_unit_0
     .cyc(cyc),
     .ack(ack),
     .data_valid(data_valid),
+    .trap_int(trap_int),
     .imm_t(imm_t),
-    .csr_unit_enable(csr_unit_enable),
-    .trap_return(trap_return),
-    .illegal_ins(illegal_ins),
-    .arithmetic_event(arithmetic_event),
-    .unconditional_branch(unconditional_branch),
-    .conditional_branch(conditional_branch),
-    .ignore_next(ignore_next)
+    .val_src(val_src),
+    .csr_unit_wr_enable(csr_unit_wr_enable),
+    .write_mode(write_mode),
+    .sel_rs1_d_rs1(sel_rs1_d_rs1),
+    .event_bus(event_bus)
 );
+
+logic [31:0] csr_din_mux;
+always_comb begin
+    if(sel_rs1_d_rs1) csr_din_mux = {28'h0, decode_bus.rs1};
+    else csr_din_mux = rs1_d;
+end
+
+//Multiplexer to choose the mtval data in value
+logic [31:0] address;
+always_comb begin : mtval_mux
+    case(val_src)
+        VAL_IR: val_bus = IR; 
+        VAL_PC: val_bus = PC; 
+        VAL_ADDR: val_bus = address;  
+        default: val_bus = address; 
+    endcase
+end
+
+csr_unit csr_unit_0
+(
+    //Syscon
+    .clk(inst_bus.clk),
+    .rst(inst_bus.rst),
+
+    .i_imm(decode_bus.i_imm),
+
+    .wr(csr_unit_wr_enable),
+    .write_mode(write_mode),
+
+    .din(csr_din_mux), 
+    .dout(csr_dout), 
+
+    .trap_int(trap_int),
+
+    .event_bus(event_bus),
+
+    //Interrupt input signals
+    .timer_irq(timer_irq),
+
+    //Signals that are needed on the trap unit
+    .mepc_bus(PC),
+    .mtval_bus(val_bus),
+
+    .mepc_bus_o(mepc_bus_o),
+
+    //Buses for jumping into trap handlers
+    .trap_address(trap_address)
+);
+
 
 //Data buses that come from the register file
 logic [31:0] rd_d; //Register file input bus
@@ -142,9 +188,6 @@ logic [31:0] alu_src2;
 //Load data from memory access unit
 logic [31:0] load_data;
 
-
-//CSR Register file write enable
-logic csr_regfile_write;
 
 //Multiplexer for the Registerfile input
 always_comb
@@ -169,7 +212,7 @@ regfile regfile_0
     .ra_d(rs1_d), 
     .rb_d(rs2_d),
     .rd_d(rd_d),
-    .wr(regfile_wr | csr_regfile_write)
+    .wr(regfile_wr)
     `ifdef DEBUG_PORT
     ,.reg_debug(debug_registers)
     `endif
@@ -206,22 +249,18 @@ branch_unit branch_unit_0
     .branch(branch)
 );
 
-//Exeption address
-logic [31:0] exeption_addr;
-
 //Jump signal from CSR to take interrup, trap or expection idk... :D Well, I do know. I just don't want to try ;D
-logic jmp_handler;
 
 //Jump signal is true if branch or JAL is true
-assign jump = branch | uncoditional_jump | jmp_handler;
+assign jump = branch | uncoditional_jump | trap_int.exeption;
 
 //Calculate the target address when taking jump or branch
 //This is just a multiplexer
 always_comb
 begin
-    if(jmp_handler)
+    if(trap_int.exeption)
     begin
-        jump_target = exeption_addr;
+        jump_target = trap_address;
     end
     else
     begin
@@ -232,13 +271,15 @@ begin
             B_IMM: jump_target = PC + 32'(signed'(decode_bus.b_imm));
             //JALR. Base rs1 + imm sign extended
             I_IMM: jump_target = rs1_d + 32'(signed'(decode_bus.i_imm));
+            //Restore instruction PC
+            EPC: jump_target = mepc_bus_o;
         endcase
     end
 end
 
 //Address bus for the load and store operations
 logic [31:0] address_ld;
-
+assign address = address_ld;
 //Multiplexer to choose between the load or store address
 always_comb
 begin
@@ -271,51 +312,6 @@ memory_access memory_access_0
 
     //Wishbone interface
     .data_bus(data_bus)
-);
-
-//CSR unit, this unit contains all CSR registers like Status register etc...
-csr_unit csr_unit_0
-(
-    //Syscon
-    .clk(clk),
-    .rst(rst),
-
-    //Commands
-    .i_imm(decode_bus.i_imm),
-    .funct3(decode_bus.funct3),
-    .rd(decode_bus.rd),
-    .rs1(decode_bus.rs1),
-    .csr_unit_enable(csr_unit_enable),
-    .trap_return(trap_return),
-
-    //Data buses
-    .rs1_d(rs1_d),
-    .dout(csr_dout),
-
-    //Register file control signals
-    .wr(csr_regfile_write),
-
-    //Exeption or trap signal to jump
-    .jmp_handler(jmp_handler),
-    .address(exeption_addr),
-
-    //Used by internally by registers
-    //Instruction execute
-    .execute(execute),
-    .PC(PC),
-    .IR(IR),
-    .illegal_ins(illegal_ins),
-    .cyc_memory_operation(cyc),
-    .arithmetic_event(arithmetic_event),
-    .address_ld(address_ld),
-    .memory_operation(memory_operation),
-    .unconditional_branch(unconditional_branch),
-    .conditional_branch(conditional_branch),
-    .external_interrupt(),
-    .timer_irq(timer_irq),
-    .branch(jump),
-    .ignore_next(ignore_next)
-
 );
 
 endmodule 

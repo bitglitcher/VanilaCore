@@ -4,7 +4,7 @@
 
 `include "debug_def.sv"
 
-module ram_wb #(parameter DATA_WIDTH = 32, parameter ADDR_WIDTH = 20)(WB4.slave wb);
+module ram_wb #(parameter DATA_WIDTH = 32, parameter ADDR_WIDTH = 8)(WB4.slave wb);
 
 ram #(DATA_WIDTH, ADDR_WIDTH) RAM_0
 (

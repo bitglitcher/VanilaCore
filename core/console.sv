@@ -14,7 +14,7 @@ module console
 
 parameter FREQUENCY = 25000000;
 parameter BAUD_RATE = 115200;
-parameter DELAY_CLOCKS = FREQUENCY/BAUD_RATE;
+parameter DELAY_CLOCKS = 1;//FREQUENCY/BAUD_RATE;
 
 //Logic for the wishbone interface
 

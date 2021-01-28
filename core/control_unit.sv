@@ -84,9 +84,9 @@ parameter INS_PAGE_FAULT = 12;
 parameter INS_ACCESS_FAULT = 1;  
 parameter ILLEGAL_INS = 2;  
 parameter INS_ADDR_MISALIGNED = 0;
-parameter ENV_CALL_8 = 8;
-parameter ENV_CALL_9 = 9; 
-parameter ENV_CALL_11 = 11;
+parameter CAUSE_U_ENV_CALL_8 = 8;
+parameter CAUSE_S_ENV_CALL_9 = 9; 
+parameter CAUSE_M_ENV_CALL_11 = 11;
 parameter ENV_BREAK = 3;
 parameter LS_ADDR_BRKPT = 3;
 parameter STORE_ADDR_MISALIGNED = 6; 
@@ -481,6 +481,7 @@ begin
                                         trap_int.cause = ILLEGAL_INS;
                                         trap_int.exeption = 1'b1;
                                         trap_int.interrupt = 1'b0;
+                                        val_src = VAL_IR;
                                     end
                                     SRET:
                                     begin
@@ -492,6 +493,7 @@ begin
                                         trap_int.cause = ILLEGAL_INS;
                                         trap_int.exeption = 1'b1;
                                         trap_int.interrupt = 1'b0;
+                                        val_src = VAL_IR;
                                     end 
                                     MRET:
                                     begin
@@ -501,14 +503,19 @@ begin
                                     end
                                     ECALL:
                                     begin
-                                        //Do nothing for now
-                                        //This should make a software interrupt
+                                        //This should make a software exeption
+                                        trap_int.cause = CAUSE_M_ENV_CALL_11;
+                                        trap_int.exeption = 1'b1;
+                                        trap_int.interrupt = 1'b0;
+                                        val_src = VAL_IR;
                                     end
                                     EBREAK:
                                     begin
-                                        //Stop simulation, for now.
-                                        //This should make a software interrupt
-                                        $stop;
+                                        //This should make a software exeption
+                                        trap_int.cause = ENV_BREAK;
+                                        trap_int.exeption = 1'b1;
+                                        trap_int.interrupt = 1'b0;
+                                        val_src = VAL_IR;
                                     end
                                     default:
                                     begin
@@ -520,6 +527,7 @@ begin
                                         trap_int.cause = ILLEGAL_INS;
                                         trap_int.exeption = 1'b1;
                                         trap_int.interrupt = 1'b0;
+                                        val_src = VAL_IR;
                                     end
                                 endcase
                                 sel_rs1_d_rs1 = 1'b0;

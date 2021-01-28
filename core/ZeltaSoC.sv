@@ -84,7 +84,8 @@ console console_0(.wb(uart_wb), .tx(uart_tx));
 core CORE_0
     (
         .inst_bus(inst_bus),
-        .data_bus(data_bus)
+        .data_bus(data_bus),
+        .timer_irq(interrupt)
     );
 
 `ifdef sim   

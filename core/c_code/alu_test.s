@@ -1,4 +1,4 @@
-#Authot: Benjamin Herrera Navarro
+#Author: Benjamin Herrera Navarro
 
 .global _start
 .section .init

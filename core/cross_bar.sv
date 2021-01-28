@@ -23,7 +23,7 @@ parameter DISPLAY_END =  32'h00100010;
 parameter UART_RX_START =32'h00100020;
 parameter UART_RX_END =  32'h00100024;
 parameter TIMER_START =  32'h00100030;
-parameter TIMER_END =    32'h0010003c;
+parameter TIMER_END =    32'h0010003f;
 
 
 always_comb
