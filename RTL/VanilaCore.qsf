@@ -69,6 +69,9 @@ set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name POWER_READ_INPUT_FILE vanilacore.vcd -to core
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name SYSTEMVERILOG_FILE ../core/spi_interface.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../core/spi.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../core/trap_int.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../core/trap_unit.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../core/minfo.sv
@@ -101,4 +104,3 @@ set_global_assignment -name SYSTEMVERILOG_FILE ../core/ram.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../core/core.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../core/alu.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ../core/regfile.sv
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

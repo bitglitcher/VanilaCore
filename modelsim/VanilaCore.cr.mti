@@ -33,6 +33,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	seven_segment
 
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/spi_interface.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/spi_interface.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling interface SPI
+
+Top level modules:
+	--none--
+
 } {} {}} C:/Users/camin/Documents/VanilaCore/core/event_int.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/event_int.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling interface EVENT_INT
@@ -61,6 +68,17 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	branch_unit
 
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv {0 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+** Error: (vlog-13069) C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv(7): near ";": syntax error, unexpected ';', expecting ')'.
+
+} {3.0 4.0} {}} C:/Users/camin/Documents/VanilaCore/core/uart_slave.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/uart_slave.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module uart_slave
+
+Top level modules:
+	uart_slave
+
 } {} {}} C:/Users/camin/Documents/VanilaCore/core/regfile.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/regfile.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module regfile
@@ -76,20 +94,6 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 
 Top level modules:
 	trap_unit
-
-} {} {}} C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module cross_bar
-
-Top level modules:
-	cross_bar
-
-} {} {}} C:/Users/camin/Documents/VanilaCore/core/uart_slave.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/uart_slave.sv
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling module uart_slave
-
-Top level modules:
-	uart_slave
 
 } {} {}} C:/Users/camin/Documents/VanilaCore/core/wishbone.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/wishbone.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
@@ -167,6 +171,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	core
 
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/global_pkg.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/global_pkg.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling package global_pkg
+
+Top level modules:
+	--none--
+
 } {} {}} C:/Users/camin/Documents/VanilaCore/core/memory_access.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/memory_access.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling package memory_access_sv_unit
@@ -175,13 +186,6 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 
 Top level modules:
 	memory_access
-
-} {} {}} C:/Users/camin/Documents/VanilaCore/core/global_pkg.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/global_pkg.sv
-Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
--- Compiling package global_pkg
-
-Top level modules:
-	--none--
 
 } {} {}} C:/Users/camin/Documents/VanilaCore/core/console.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/console.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
@@ -213,7 +217,16 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	--none--
 
-} {} {}} C:/Users/camin/Documents/VanilaCore/core/fetch_stm.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/fetch_stm.sv
+} {} {}} C:/Users/camin/Documents/VanilaCore/core/spi.sv {0 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/spi.sv
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module spi_controller
+** Error: (vlog-13069) C:/Users/camin/Documents/VanilaCore/core/spi.sv(68): near ";": syntax error, unexpected ';'.
+** Error: C:/Users/camin/Documents/VanilaCore/core/spi.sv(94): (vlog-2730) Undefined variable: 'BASE_ADDR'.
+** Error: C:/Users/camin/Documents/VanilaCore/core/spi.sv(133): (vlog-2730) Undefined variable: 'wb_states'.
+** Error: C:/Users/camin/Documents/VanilaCore/core/spi.sv(137): (vlog-2730) Undefined variable: 'wb_states'.
+** Error: C:/Users/camin/Documents/VanilaCore/core/spi.sv(146): (vlog-2730) Undefined variable: 'BASE_ADDR'.
+
+} {4.0 9.0} {}} C:/Users/camin/Documents/VanilaCore/core/fetch_stm.sv {1 {vlog -work work -sv -stats=none C:/Users/camin/Documents/VanilaCore/core/fetch_stm.sv
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module fetch_stm
 

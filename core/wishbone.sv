@@ -1,5 +1,6 @@
 interface WB4(input clk, input rst);
     logic ACK;
+    logic ERR;
     logic STB;
     logic [31:0] ADR;
     logic CYC;
@@ -13,6 +14,7 @@ interface WB4(input clk, input rst);
     output DAT_I,
     input  DAT_O,
     output ACK,
+    output ERR,
     input WE);
     modport master(input clk, rst,
     output STB,
@@ -21,5 +23,6 @@ interface WB4(input clk, input rst);
     input  DAT_I,
     output DAT_O,
     input ACK,
+    input ERR,
     output WE);
 endinterface //WB4

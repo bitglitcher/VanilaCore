@@ -1,15 +1,16 @@
 
+import global_pkg::*;
 
-
+//This is a crossbar switch that allows to have multiple masters cummunicating to slave devices
 module cross_bar
+#(
+    parameter N_SLAVES = 2;    
+    parameter N_MASTER = 1;    
+)
 (
-    //Define master
-    WB4.slave cpu,
-    WB4.master memory, //New masters
-    WB4.master uart, //New masters
-    //WB4.master seven_segments,
-    WB4.master uart_rx,
-    WB4.master timer_dev    
+    WB4 [N_SLAVES-1:0] masters;
+    WB4 [N_MASTER-1:0] slaves;
+    memory_map_t [N_SLAVES-1:0] slave_memory_map;
 );
 
 parameter MEMORY_START = 32'h00000000;
@@ -70,7 +71,7 @@ begin
         begin
             cpu.DAT_I = uart.DAT_I; //Data input to CPU
             uart.STB <= cpu.STB; //Strobe select
-            memory.STB <= 0; //Strobe 0 on other devices
+            memory.STB <= 0; //Strobe 0 pon other devices
             //seven_segments.STB <= 0; //Strobe 0 on other devices
             uart_rx.STB = 0;
             timer_dev.STB <= 0;
@@ -118,6 +119,59 @@ begin
             cpu.ACK <= 1;
         end
 end
+
+
+typedef struct packed {
+    logic [31:0] DAT;
+    logic [$clog2(N_MASTER)-1:0] STB;
+    logic [$clog2(N_MASTER)-1:0] WE;
+} CONNECT_LAYER;
+
+logic [31:0] DAT;
+logic [$clog2(N_MASTER)-1:0] STB;
+logic [$clog2(N_MASTER)-1:0] WE;
+
+
+
+//Arbitrer, this will chosse which master will take the bus
+always_comb begin : arbitrer
+    
+end
+
+
+//Select lines for the master multiplexer
+logic [$clog2(N_MASTER)-1:0] select;
+
+//Multiplexer for ACK, DAT and WE
+genvar i;
+generate
+    for(i = 0; i < N_MASTER;i++)
+    begin
+        if(select == i)
+        begin
+            DAT = masters[i].DAT_O;
+            ADR = masters[i].ADR;
+            WE = masters[i].WE;
+            STB = masters[i].STB;
+        end
+    end
+endgenerate
+
+
+//Connect the outputs of the multiplxer to the corresponfing slave inputs
+genvar i;
+generate
+    for(i = 0; i < N_MASTER;i++)
+    begin
+        if(select == i)
+        begin
+            DAT = masters[i].DAT_O;
+            ADR = masters[i].ADR;
+            WE = masters[i].WE;
+            STB = masters[i].STB;
+        end
+    end
+endgenerate
 
 
 

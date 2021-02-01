@@ -9,4 +9,9 @@ typedef enum logic[3:0] { MEM_NONE, LOAD_DATA, STORE_DATA} memory_operation_t;
 typedef enum logic[3:0] { CSR_SET, CSR_CLEAR, CSR_WRITE } write_mode_t;
 typedef enum logic[3:0] { VAL_IR, VAL_PC, VAL_ADDR } val_src_t;
 
+typedef struct packed { //Device Map
+    logic [31:0] high;
+    logic [31:0] low;
+} memory_map_t;
+
 endpackage
