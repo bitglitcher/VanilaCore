@@ -1,5 +1,5 @@
 # VanilaCore
-RISC-V Implementation in System Verilog. This is now a fully working RV32I core with machine mode, the only thing that its missing is the MPU.
+RISC-V Implementation in System Verilog. This is now a fully working RV32I core with machine mode, the only missing feature to have a complete machine mode implementation is the memory protection unit (MPU).
 
 ## Missing Features
   ### Core
