@@ -24,6 +24,7 @@ RISC-V Implementation in System Verilog. This is now a fully working RV32I core 
   - Machine mode
   - Most CSRs for machine mode
   - Unaligned Load Stores
+  - UART
   
  ## Goal
  The main goal is to have a fully working application processor that can run the linux kernel. 
