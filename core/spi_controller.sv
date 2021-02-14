@@ -7,8 +7,7 @@
 module spi_controller #(parameter BASE_ADDR = 0)
 (
     WB4.slave wb,
-    SPI spi,
-    output logic [7:0] CS
+    SPI spi
 );
 
 
@@ -96,7 +95,7 @@ fifo #(.DATA_WIDTH(8), .MEMORY_DEPTH(8'hff)) spi_read_buffer
     .count(rd_count),
 
     //Read
-    .rd(rd_rd_buff),
+    .rd((~BRBF & rd_full) | rd_rd_buff),
     .dout(rd_dout),
 
     //Write
@@ -582,6 +581,6 @@ always_comb begin : master_dout
     end
 end
 
-assign CS = (CS_EN)? cs_mask : 0;
+assign spi.CS = (CS_EN)? cs_mask : 0;
 
 endmodule
