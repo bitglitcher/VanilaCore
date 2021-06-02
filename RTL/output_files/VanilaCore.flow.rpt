@@ -1,5 +1,5 @@
 Flow report for VanilaCore
-Wed Jan 27 17:01:35 2021
+Fri Mar 26 21:47:40 2021
 Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
 
 
@@ -41,20 +41,20 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Wed Jan 27 17:01:35 2021       ;
+; Flow Status                        ; Successful - Fri Mar 26 21:47:40 2021       ;
 ; Quartus Prime Version              ; 19.1.0 Build 670 09/22/2019 SJ Lite Edition ;
 ; Revision Name                      ; VanilaCore                                  ;
-; Top-level Entity Name              ; ZeltaSoC                                    ;
+; Top-level Entity Name              ; core                                        ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE115F23C7                               ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 10,861                                      ;
-;     Total combinational functions  ; 8,530                                       ;
-;     Dedicated logic registers      ; 3,949                                       ;
-; Total registers                    ; 3949                                        ;
-; Total pins                         ; 4                                           ;
+; Total logic elements               ; 9,977                                       ;
+;     Total combinational functions  ; 7,704                                       ;
+;     Dedicated logic registers      ; 3,658                                       ;
+; Total registers                    ; 3658                                        ;
+; Total pins                         ; 209                                         ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 2,098,048                                   ;
+; Total memory bits                  ; 0                                           ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
 ; Total PLLs                         ; 0                                           ;
 +------------------------------------+---------------------------------------------+
@@ -65,7 +65,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 01/27/2021 16:55:34 ;
+; Start date & time ; 03/26/2021 21:41:23 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; VanilaCore          ;
 +-------------------+---------------------+
@@ -76,23 +76,23 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id     ;
 +-------------------------------------+----------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 929355256320.161178453428596           ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 929355256320.161681288327636           ; --            ; --          ; --             ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --             ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --          ; --             ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                      ; --            ; --          ; --             ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                      ; --            ; --          ; --             ;
 ; OUTPUT_IO_TIMING_NEAR_END_VMEAS     ; Half Vccio                             ; --            ; --          ; --             ;
 ; OUTPUT_IO_TIMING_NEAR_END_VMEAS     ; Half Vccio                             ; --            ; --          ; --             ;
-; PARTITION_COLOR                     ; -- (Not supported for targeted family) ; --            ; ZeltaSoC    ; Top            ;
-; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family) ; --            ; ZeltaSoC    ; Top            ;
-; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family) ; --            ; ZeltaSoC    ; Top            ;
+; PARTITION_COLOR                     ; -- (Not supported for targeted family) ; --            ; core        ; Top            ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family) ; --            ; core        ; Top            ;
+; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family) ; --            ; core        ; Top            ;
 ; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                    ; --            ; --          ; --             ;
 ; POWER_DEFAULT_INPUT_IO_TOGGLE_RATE  ; 12.5 %                                 ; 12.5%         ; --          ; --             ;
-; POWER_INPUT_FILE_NAME               ; VanilaCore.vcd                         ; --            ; ZeltaSoC    ; vanilacore.vcd ;
+; POWER_INPUT_FILE_NAME               ; VanilaCore.vcd                         ; --            ; core        ; vanilacore.vcd ;
 ; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --            ; --          ; --             ;
 ; POWER_USE_INPUT_FILES               ; On                                     ; Off           ; --          ; --             ;
 ; PROJECT_OUTPUT_DIRECTORY            ; output_files                           ; --            ; --          ; --             ;
-; TOP_LEVEL_ENTITY                    ; ZeltaSoC                               ; VanilaCore    ; --          ; --             ;
+; TOP_LEVEL_ENTITY                    ; core                                   ; VanilaCore    ; --          ; --             ;
 ; VERILOG_INPUT_VERSION               ; SystemVerilog_2005                     ; Verilog_2001  ; --          ; --             ;
 ; VERILOG_SHOW_LMF_MAPPING_MESSAGES   ; Off                                    ; --            ; --          ; --             ;
 +-------------------------------------+----------------------------------------+---------------+-------------+----------------+
@@ -103,8 +103,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:06:00     ; 1.0                     ; 5082 MB             ; 00:06:08                           ;
-; Total                ; 00:06:00     ; --                      ; --                  ; 00:06:08                           ;
+; Analysis & Synthesis ; 00:06:17     ; 1.0                     ; 4890 MB             ; 00:06:24                           ;
+; Total                ; 00:06:17     ; --                      ; --                  ; 00:06:24                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

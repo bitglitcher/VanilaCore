@@ -10,7 +10,7 @@ cModel Technology
 dC:/intelFPGA_lite/19.1
 valu
 Z0 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z1 !s110 1611979865
+Z1 !s110 1616679822
 !i10b 1
 !s100 MePaOAEQUDBS=Oc9LSUi]0
 IbkjMCYeY=kSa@<V<7bR<c3
@@ -26,7 +26,7 @@ Z4 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z5 !s108 1611979865.000000
+Z5 !s108 1616679822.000000
 !s107 C:/Users/camin/Documents/VanilaCore/core/alu.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/alu.sv|
 !i113 1
@@ -34,7 +34,7 @@ Z6 o-work work -sv
 Z7 tCvgOpt 0
 vbranch_unit
 R0
-R1
+Z8 !s110 1616679823
 !i10b 1
 !s100 >TzMG6[O01XQM]NaLPWS93
 ICIkD=nMF:KQNd`7KR_Vm62
@@ -58,7 +58,7 @@ R6
 R7
 vconsole
 R0
-R1
+R8
 !i10b 1
 !s100 ilhgK6:EWCGId>240fhiT0
 IzFaBzQ2^9Q7cAWPVh]ORm3
@@ -74,7 +74,7 @@ R4
 r1
 !s85 0
 31
-R5
+Z9 !s108 1616679823.000000
 !s107 C:/Users/camin/Documents/VanilaCore/core/console.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/console.sv|
 !i113 1
@@ -82,7 +82,7 @@ R6
 R7
 vconsole_tb
 R0
-Z8 !s110 1611979866
+R8
 !i10b 1
 !s100 nScdP<T7dEHBVFITEEec91
 Ik]Vz^WXln8ia^m?Q8ZeDS0
@@ -90,7 +90,7 @@ R2
 !s105 console_tb_sv_unit
 S1
 R3
-Z9 w1604942238
+Z10 w1604942238
 8C:/Users/camin/Documents/VanilaCore/core/console_tb.sv
 FC:/Users/camin/Documents/VanilaCore/core/console_tb.sv
 L0 4
@@ -98,7 +98,7 @@ R4
 r1
 !s85 0
 31
-Z10 !s108 1611979866.000000
+R9
 !s107 C:/Users/camin/Documents/VanilaCore/core/console_tb.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/console_tb.sv|
 !i113 1
@@ -106,8 +106,8 @@ R6
 R7
 vcontrol_unit
 R0
-Z11 DXx4 work 10 global_pkg 0 22 [<8LI4Y@GZa:fdgfo44852
-DXx4 work 20 control_unit_sv_unit 0 22 PLaU07Ja58h<=3SEI<EXg2
+Z11 DXx4 work 10 global_pkg 0 22 zzmWTzNj?]0?0P<JoUlz;1
+DXx4 work 20 control_unit_sv_unit 0 22 <Bf7DN@=YEZa13FWRFUVI2
 R2
 r1
 !s85 0
@@ -123,7 +123,7 @@ Z13 8C:/Users/camin/Documents/VanilaCore/core/control_unit.sv
 Z14 FC:/Users/camin/Documents/VanilaCore/core/control_unit.sv
 L0 4
 R4
-Z15 !s108 1611979867.000000
+Z15 !s108 1616679826.000000
 Z16 !s107 C:/Users/camin/Documents/VanilaCore/core/control_unit.sv|
 Z17 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/control_unit.sv|
 !i113 1
@@ -132,13 +132,13 @@ R7
 Xcontrol_unit_sv_unit
 R0
 R11
-VPLaU07Ja58h<=3SEI<EXg2
+V<Bf7DN@=YEZa13FWRFUVI2
 r1
 !s85 0
 31
 !i10b 1
 !s100 Bo^5FOZXjMSg=mIV_XP9G2
-IPLaU07Ja58h<=3SEI<EXg2
+I<Bf7DN@=YEZa13FWRFUVI2
 !i103 1
 S1
 R3
@@ -156,7 +156,7 @@ R7
 vcore
 R0
 R11
-DXx4 work 12 core_sv_unit 0 22 1:@KH:=>N>IejmB4CMMVV0
+DXx4 work 12 core_sv_unit 0 22 kao7i@@9O70oY[mIQ4J?>1
 R2
 r1
 !s85 0
@@ -172,7 +172,7 @@ Z19 8C:/Users/camin/Documents/VanilaCore/core/core.sv
 Z20 FC:/Users/camin/Documents/VanilaCore/core/core.sv
 L0 6
 R4
-R10
+R9
 Z21 !s107 C:\Users\camin\Documents\VanilaCore\core\debug_def.sv|C:/Users/camin/Documents/VanilaCore/core/core.sv|
 Z22 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/core.sv|
 !i113 1
@@ -181,13 +181,13 @@ R7
 Xcore_sv_unit
 R0
 R11
-V1:@KH:=>N>IejmB4CMMVV0
+Vkao7i@@9O70oY[mIQ4J?>1
 r1
 !s85 0
 31
 !i10b 1
 !s100 Wk@lk>o6O?26DNf]nGP9Y3
-I1:@KH:=>N>IejmB4CMMVV0
+Ikao7i@@9O70oY[mIQ4J?>1
 !i103 1
 S1
 R3
@@ -197,7 +197,7 @@ R20
 Z23 FC:\Users\camin\Documents\VanilaCore\core\debug_def.sv
 L0 2
 R4
-R10
+R9
 R21
 R22
 !i113 1
@@ -207,30 +207,78 @@ vcross_bar
 R0
 R8
 !i10b 1
-!s100 SZMjJf8RaLl3AcjYQ80Of0
-I^lBi9;`D[LN5D2Y`mb]fS3
+!s100 8cC2f^39=XlgF=lazh[iG1
+I]8@Tmn3S69mBKA5MEeebz0
 R2
 !s105 cross_bar_sv_unit
 S1
 R3
-w1611722865
-8C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv
-FC:/Users/camin/Documents/VanilaCore/core/cross_bar.sv
+w1616100608
+Z24 8C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv
+Z25 FC:/Users/camin/Documents/VanilaCore/core/cross_bar.sv
 L0 4
 R4
 r1
 !s85 0
 31
-R10
-!s107 C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv|
+R9
+Z26 !s107 C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv|
+Z27 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/cross_bar.sv|
+!i113 1
+R6
+R7
+Xcross_bar_sv_unit
+R0
+R11
+VL703^2aP0NK`T[YR?XO`52
+r1
+!s85 0
+31
+!i10b 1
+!s100 HL9`<TE_LnF68^D9Y_6j?1
+IL703^2aP0NK`T[YR?XO`52
+!i103 1
+S1
+R3
+w1614503162
+R24
+R25
+L0 2
+R4
+!s108 1614503166.000000
+R26
+R27
+!i113 1
+R6
+R7
+vcross_bar_tb
+R0
+!s110 1614503144
+!i10b 1
+!s100 CJJ:M`ncknEb]jBQGoRzn3
+IdaHZ1U1E3dhJFDC9jRo;U3
+R2
+!s105 cross_bar_tb_sv_unit
+S1
+R3
+w1614503140
+8C:/Users/camin/Documents/VanilaCore/core/cross_bar_tb.sv
+FC:/Users/camin/Documents/VanilaCore/core/cross_bar_tb.sv
+L0 7
+R4
+r1
+!s85 0
+31
+!s108 1614503144.000000
+!s107 C:/Users/camin/Documents/VanilaCore/core/cross_bar_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/cross_bar_tb.sv|
 !i113 1
 R6
 R7
 vcsr_unit
 R0
 R11
-DXx4 work 16 csr_unit_sv_unit 0 22 <Te^Y^b`:Vf<3O[M2_6O<1
+DXx4 work 16 csr_unit_sv_unit 0 22 k9=9oN73elS:<W2X4;O5I2
 R2
 r1
 !s85 0
@@ -241,46 +289,46 @@ I_0;5ZSQjR4=eT2E8b3i>]0
 !s105 csr_unit_sv_unit
 S1
 R3
-Z24 w1611719119
-Z25 8C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv
-Z26 FC:/Users/camin/Documents/VanilaCore/core/csr_unit.sv
+Z28 w1611719119
+Z29 8C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv
+Z30 FC:/Users/camin/Documents/VanilaCore/core/csr_unit.sv
 L0 5
 R4
 R15
-Z27 !s107 C:\Users\camin\Documents\VanilaCore\core\debug_def.sv|C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv|
-Z28 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv|
+Z31 !s107 C:\Users\camin\Documents\VanilaCore\core\debug_def.sv|C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv|
+Z32 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/csr_unit.sv|
 !i113 1
 R6
 R7
 Xcsr_unit_sv_unit
 R0
 R11
-V<Te^Y^b`:Vf<3O[M2_6O<1
+Vk9=9oN73elS:<W2X4;O5I2
 r1
 !s85 0
 31
 !i10b 1
 !s100 501bDlYd:`^ChcBG3PhE=3
-I<Te^Y^b`:Vf<3O[M2_6O<1
+Ik9=9oN73elS:<W2X4;O5I2
 !i103 1
 S1
 R3
-R24
-R25
-R26
+R28
+R29
+R30
 R23
 L0 2
 R4
 R15
-R27
-R28
+R31
+R32
 !i113 1
 R6
 R7
 vcsr_unit_tb
 R0
 R11
-DXx4 work 19 csr_unit_tb_sv_unit 0 22 UVQT61i?ebm;@c7Q>Me4I3
+DXx4 work 19 csr_unit_tb_sv_unit 0 22 [>EDbS8k?m1Sa_lMN^HW[2
 R2
 r1
 !s85 0
@@ -291,38 +339,38 @@ IaPCh5VTjmMT^zS5BR5E2_2
 !s105 csr_unit_tb_sv_unit
 S1
 R3
-Z29 w1611557345
-Z30 8C:/Users/camin/Documents/VanilaCore/core/csr_unit_tb.sv
-Z31 FC:/Users/camin/Documents/VanilaCore/core/csr_unit_tb.sv
+Z33 w1611557345
+Z34 8C:/Users/camin/Documents/VanilaCore/core/csr_unit_tb.sv
+Z35 FC:/Users/camin/Documents/VanilaCore/core/csr_unit_tb.sv
 L0 5
 R4
-R15
-Z32 !s107 C:/Users/camin/Documents/VanilaCore/core/csr_unit_tb.sv|
-Z33 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/csr_unit_tb.sv|
+Z36 !s108 1616679827.000000
+Z37 !s107 C:/Users/camin/Documents/VanilaCore/core/csr_unit_tb.sv|
+Z38 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/csr_unit_tb.sv|
 !i113 1
 R6
 R7
 Xcsr_unit_tb_sv_unit
 R0
 R11
-VUVQT61i?ebm;@c7Q>Me4I3
+V[>EDbS8k?m1Sa_lMN^HW[2
 r1
 !s85 0
 31
 !i10b 1
 !s100 P3@H95nD8IZ^9c5YCl<<U0
-IUVQT61i?ebm;@c7Q>Me4I3
+I[>EDbS8k?m1Sa_lMN^HW[2
 !i103 1
 S1
 R3
-R29
-R30
-R31
+R33
+R34
+R35
 L0 2
 R4
-R15
-R32
-R33
+R36
+R37
+R38
 !i113 1
 R6
 R7
@@ -344,7 +392,7 @@ R4
 r1
 !s85 0
 31
-R10
+R9
 !s107 C:/Users/camin/Documents/VanilaCore/core/debounce.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/debounce.sv|
 !i113 1
@@ -352,7 +400,7 @@ R6
 R7
 Ydecode
 R0
-R8
+Z39 !s110 1616679824
 !i10b 1
 !s100 I:3R]7o3i>O6Hi:Pcamkm0
 I42Ud7T`FY[NVUZjzFCAZk3
@@ -368,7 +416,7 @@ R4
 r1
 !s85 0
 31
-R10
+Z40 !s108 1616679824.000000
 !s107 C:/Users/camin/Documents/VanilaCore/core/decode.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/decode.sv|
 !i113 1
@@ -376,7 +424,7 @@ R6
 R7
 vdecoder
 R0
-R8
+R39
 !i10b 1
 !s100 ;7Y>]FcC4P5JnLDBfH[am1
 IJWKV7eC8JcC0m?=BZ=TC<1
@@ -392,7 +440,7 @@ R4
 r1
 !s85 0
 31
-R10
+R40
 !s107 C:/Users/camin/Documents/VanilaCore/core/decoder.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/decoder.sv|
 !i113 1
@@ -400,7 +448,7 @@ R6
 R7
 vdecoder_tb
 R0
-R8
+R39
 !i10b 1
 !s100 fihiz91b]]ek0K`K?GjEo3
 I?5[>7H^6MbJ4`9gh2C00K0
@@ -416,7 +464,7 @@ R4
 r1
 !s85 0
 31
-R10
+R40
 !s107 C:/Users/camin/Documents/VanilaCore/core/decoder_tb.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/decoder_tb.sv|
 !i113 1
@@ -424,7 +472,7 @@ R6
 R7
 YEVENT_INT
 R0
-Z34 !s110 1611979867
+Z41 !s110 1616679827
 !i10b 1
 !s100 C]bX9EdLIHjj6<cVcOzfM3
 I`@b;8;Rczo;1S1h05KkN@1
@@ -440,7 +488,7 @@ R4
 r1
 !s85 0
 31
-R15
+R36
 !s107 C:/Users/camin/Documents/VanilaCore/core/event_int.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/event_int.sv|
 !i113 1
@@ -449,7 +497,7 @@ R7
 n@e@v@e@n@t_@i@n@t
 vfetch_stm
 R0
-R8
+R39
 !i10b 1
 !s100 bP:@dLD<6o<ak;RfMaUE33
 I9W?7UPnnLV>jBT`]l0W@?1
@@ -465,7 +513,7 @@ R4
 r1
 !s85 0
 31
-R10
+R40
 !s107 C:\Users\camin\Documents\VanilaCore\core\debug_def.sv|C:/Users/camin/Documents/VanilaCore/core/fetch_stm.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/fetch_stm.sv|
 !i113 1
@@ -473,7 +521,7 @@ R6
 R7
 vfetch_stm_tb
 R0
-R8
+R39
 !i10b 1
 !s100 L?[AfdRGa6VIGoaMPRhVe3
 IO<@bOS_AB5]4=Aa69RU6I3
@@ -489,7 +537,7 @@ R4
 r1
 !s85 0
 31
-R10
+R40
 !s107 C:/Users/camin/Documents/VanilaCore/core/fetch_stm_tb.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/fetch_stm_tb.sv|
 !i113 1
@@ -497,7 +545,7 @@ R6
 R7
 vfifo
 R0
-R8
+Z42 !s110 1616679825
 !i10b 1
 !s100 XRWb6I9df=emN[b^P]1G72
 I<mjV4ZCAbh_WoFSLcVmkJ0
@@ -505,7 +553,7 @@ R2
 !s105 fifo_sv_unit
 S1
 R3
-w1607080317
+w1613327761
 8C:/Users/camin/Documents/VanilaCore/core/fifo.sv
 FC:/Users/camin/Documents/VanilaCore/core/fifo.sv
 L0 5
@@ -513,7 +561,7 @@ R4
 r1
 !s85 0
 31
-R10
+R40
 !s107 C:/Users/camin/Documents/VanilaCore/core/fifo.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/fifo.sv|
 !i113 1
@@ -521,7 +569,7 @@ R6
 R7
 vfifo_tb
 R0
-R8
+R42
 !i10b 1
 !s100 6@5E>C2DEcSCjY>?^oakf1
 IdPAk;cfK4Z?3YKEd;hC2o1
@@ -537,7 +585,7 @@ R4
 r1
 !s85 0
 31
-R10
+Z43 !s108 1616679825.000000
 !s107 C:/Users/camin/Documents/VanilaCore/core/fifo_tb.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/fifo_tb.sv|
 !i113 1
@@ -545,7 +593,7 @@ R6
 R7
 Xglobal_pkg
 R0
-Z35 !s110 1612129430
+R42
 !i10b 1
 !s100 62FLOBfjGDP>=V4M?J=Kg3
 IzzmWTzNj?]0?0P<JoUlz;1
@@ -560,7 +608,7 @@ R4
 r1
 !s85 0
 31
-Z36 !s108 1612129430.000000
+R43
 !s107 C:/Users/camin/Documents/VanilaCore/core/global_pkg.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/global_pkg.sv|
 !i113 1
@@ -593,7 +641,7 @@ R7
 vmcounters
 R0
 R11
-DXx4 work 17 mcounters_sv_unit 0 22 TFPWLkSjLaI3Ne;kH93zj1
+DXx4 work 17 mcounters_sv_unit 0 22 SbJYdEl9>mQo8g9ThW]NJ2
 R2
 r1
 !s85 0
@@ -604,46 +652,46 @@ Iiz992nH_SN`dHUWzA^mK33
 !s105 mcounters_sv_unit
 S1
 R3
-Z37 w1611555919
-Z38 8C:/Users/camin/Documents/VanilaCore/core/mcounters.sv
-Z39 FC:/Users/camin/Documents/VanilaCore/core/mcounters.sv
+Z44 w1611555919
+Z45 8C:/Users/camin/Documents/VanilaCore/core/mcounters.sv
+Z46 FC:/Users/camin/Documents/VanilaCore/core/mcounters.sv
 L0 5
 R4
 R15
-Z40 !s107 C:\Users\camin\Documents\VanilaCore\core\debug_def.sv|C:/Users/camin/Documents/VanilaCore/core/mcounters.sv|
-Z41 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/mcounters.sv|
+Z47 !s107 C:\Users\camin\Documents\VanilaCore\core\debug_def.sv|C:/Users/camin/Documents/VanilaCore/core/mcounters.sv|
+Z48 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/mcounters.sv|
 !i113 1
 R6
 R7
 Xmcounters_sv_unit
 R0
 R11
-VTFPWLkSjLaI3Ne;kH93zj1
+VSbJYdEl9>mQo8g9ThW]NJ2
 r1
 !s85 0
 31
 !i10b 1
 !s100 UW4j_]aJG1UK6CVaHzbGL0
-ITFPWLkSjLaI3Ne;kH93zj1
+ISbJYdEl9>mQo8g9ThW]NJ2
 !i103 1
 S1
 R3
-R37
-R38
-R39
+R44
+R45
+R46
 R23
 L0 1
 R4
 R15
-R40
-R41
+R47
+R48
 !i113 1
 R6
 R7
 vmemory_access
 R0
 R11
-DXx4 work 21 memory_access_sv_unit 0 22 eK@Wn4YVRY5T3XzNbBm[d0
+DXx4 work 21 memory_access_sv_unit 0 22 OY=]27BXGRkCaO5eMPzHK2
 R2
 r1
 !s85 0
@@ -654,44 +702,44 @@ IzNfGoG>E_MKVZ2;9Mj`WA2
 !s105 memory_access_sv_unit
 S1
 R3
-Z42 w1610721716
-Z43 8C:/Users/camin/Documents/VanilaCore/core/memory_access.sv
-Z44 FC:/Users/camin/Documents/VanilaCore/core/memory_access.sv
+Z49 w1610721716
+Z50 8C:/Users/camin/Documents/VanilaCore/core/memory_access.sv
+Z51 FC:/Users/camin/Documents/VanilaCore/core/memory_access.sv
 L0 3
 R4
-R10
-Z45 !s107 C:/Users/camin/Documents/VanilaCore/core/memory_access.sv|
-Z46 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/memory_access.sv|
+R43
+Z52 !s107 C:/Users/camin/Documents/VanilaCore/core/memory_access.sv|
+Z53 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/memory_access.sv|
 !i113 1
 R6
 R7
 Xmemory_access_sv_unit
 R0
 R11
-VeK@Wn4YVRY5T3XzNbBm[d0
+VOY=]27BXGRkCaO5eMPzHK2
 r1
 !s85 0
 31
 !i10b 1
 !s100 G2k3Rz>ACBgGME2N]ZI0c3
-IeK@Wn4YVRY5T3XzNbBm[d0
+IOY=]27BXGRkCaO5eMPzHK2
 !i103 1
 S1
 R3
-R42
-R43
-R44
+R49
+R50
+R51
 L0 1
 R4
-R10
-R45
-R46
+R43
+R52
+R53
 !i113 1
 R6
 R7
 vminfo
 R0
-R34
+R41
 !i10b 1
 !s100 aa]H2C@]0W]`KWSZRdbVG0
 Im2=2al1;iladLOdOJlVZY1
@@ -707,7 +755,7 @@ R4
 r1
 !s85 0
 31
-R15
+R36
 !s107 C:/Users/camin/Documents/VanilaCore/core/minfo.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/minfo.sv|
 !i113 1
@@ -715,7 +763,7 @@ R6
 R7
 vmodel_verify
 R0
-R34
+Z54 !s110 1616679826
 !i10b 1
 !s100 <Y;od`PfD1;eUUeMCdSbe3
 IhP1=hDQVzznX1LV[W;G1]3
@@ -739,7 +787,7 @@ R6
 R7
 vram
 R0
-R34
+R42
 !i10b 1
 !s100 =o?XZDNBNWAa>OML8eBeY1
 IToP:d_j>Nc4_fFnNN6KCj1
@@ -755,7 +803,7 @@ R4
 r1
 !s85 0
 31
-R15
+R43
 !s107 C:\Users\camin\Documents\VanilaCore\core\debug_def.sv|C:/Users/camin/Documents/VanilaCore/core/ram.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/ram.sv|
 !i113 1
@@ -763,7 +811,7 @@ R6
 R7
 vram_wb
 R0
-R34
+R42
 !i10b 1
 !s100 ?JN4JiHL>iXMLGJWn4[4X3
 ITS:nIWAfARzPTb6[6b0dd1
@@ -779,7 +827,7 @@ R4
 r1
 !s85 0
 31
-R15
+R43
 !s107 C:\Users\camin\Documents\VanilaCore\core\debug_def.sv|C:/Users/camin/Documents/VanilaCore/core/ram_wb.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/ram_wb.sv|
 !i113 1
@@ -787,7 +835,7 @@ R6
 R7
 vregfile
 R0
-R34
+R54
 !i10b 1
 !s100 >WP9_[8KFOV2;=zTUCG6O2
 IP8Q[9OiRka=<QKmceh7`D1
@@ -803,7 +851,7 @@ R4
 r1
 !s85 0
 31
-R15
+R43
 !s107 C:\Users\camin\Documents\VanilaCore\core\debug_def.sv|C:/Users/camin/Documents/VanilaCore/core/regfile.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/regfile.sv|
 !i113 1
@@ -811,7 +859,7 @@ R6
 R7
 vseven_segment
 R0
-R34
+R54
 !i10b 1
 !s100 8`4HU55LjT]LaB]C8]CC33
 I=kWVP5`;3]lLf0o^dm^Lg1
@@ -819,7 +867,7 @@ R2
 !s105 seven_segment_sv_unit
 S1
 R3
-R9
+R10
 8C:/Users/camin/Documents/VanilaCore/core/seven_segment.sv
 FC:/Users/camin/Documents/VanilaCore/core/seven_segment.sv
 L0 1
@@ -835,7 +883,7 @@ R6
 R7
 vsoc
 R0
-R1
+!s110 1616679821
 !i10b 1
 !s100 9_TU2ZCO@U9SFkgYX?T8;3
 I3Ek1F93i3z:0=23Y>4;Sa1
@@ -851,7 +899,7 @@ R4
 r1
 !s85 0
 31
-R5
+Z55 !s108 1616679821.000000
 !s107 C:/Users/camin/Documents/VanilaCore/core/soc.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/soc.sv|
 !i113 1
@@ -859,7 +907,7 @@ R6
 R7
 YSPI
 R0
-Z47 !s110 1611979868
+R41
 !i10b 1
 !s100 eF5RFDI;nD4nk]GcjBY_d3
 Il><`hOb>4a^P;]<?JfLhn2
@@ -875,7 +923,7 @@ R4
 r1
 !s85 0
 31
-Z48 !s108 1611979868.000000
+R36
 !s107 C:/Users/camin/Documents/VanilaCore/core/spi_interface.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/spi_interface.sv|
 !i113 1
@@ -884,31 +932,55 @@ R7
 n@s@p@i
 vspi_controller
 R0
-!s110 1611990037
+Z56 !s110 1616679828
 !i10b 1
-!s100 5aM_?;ZGHNImDV9EIn>Uk1
-I9]c1;FTd5cZ=Z1VCI^gbB3
+!s100 6]X>92EGb@E0EdaX?1KR=2
+IkE6<B678nVoXlDz?ga?LW2
 R2
-!s105 spi_sv_unit
+!s105 spi_controller_sv_unit
 S1
 R3
-w1611990028
-8C:/Users/camin/Documents/VanilaCore/core/spi.sv
-FC:/Users/camin/Documents/VanilaCore/core/spi.sv
+w1613347778
+8C:/Users/camin/Documents/VanilaCore/core/spi_controller.sv
+FC:/Users/camin/Documents/VanilaCore/core/spi_controller.sv
 L0 7
 R4
 r1
 !s85 0
 31
-!s108 1611990037.000000
-!s107 C:/Users/camin/Documents/VanilaCore/core/spi.sv|
-!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/spi.sv|
+Z57 !s108 1616679828.000000
+!s107 C:\Users\camin\Documents\VanilaCore\core\debug_def.sv|C:/Users/camin/Documents/VanilaCore/core/spi_controller.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/spi_controller.sv|
+!i113 1
+R6
+R7
+vspi_tb
+R0
+R56
+!i10b 1
+!s100 NF1WMWJD]]Nf?U8;DKZ882
+I_L7U`[Ro3dzj]6Noic>CH3
+R2
+!s105 spi_tb_sv_unit
+S1
+R3
+w1613269687
+8C:/Users/camin/Documents/VanilaCore/core/spi_tb.sv
+FC:/Users/camin/Documents/VanilaCore/core/spi_tb.sv
+L0 3
+R4
+r1
+!s85 0
+31
+R57
+!s107 C:/Users/camin/Documents/VanilaCore/core/spi_tb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/spi_tb.sv|
 !i113 1
 R6
 R7
 vtimer
 R0
-R34
+R54
 !i10b 1
 !s100 0cLn6RibmdX@[abzYJC2X1
 Ij@b<BnSCE6>VLSPko7lz@2
@@ -932,7 +1004,7 @@ R6
 R7
 YTRAP_INT
 R0
-R47
+R41
 !i10b 1
 !s100 e<C2o5ClG=Am;1j_JfB?R1
 IVWhUFG>nHNjU>_LP_K2K_3
@@ -948,7 +1020,7 @@ R4
 r1
 !s85 0
 31
-R48
+R36
 !s107 C:/Users/camin/Documents/VanilaCore/core/trap_int.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/trap_int.sv|
 !i113 1
@@ -958,7 +1030,7 @@ n@t@r@a@p_@i@n@t
 vtrap_unit
 R0
 R11
-DXx4 work 17 trap_unit_sv_unit 0 22 8;2b8_V_65e5HI:E60K9b1
+DXx4 work 17 trap_unit_sv_unit 0 22 [k>@e;0dgb[]ia3IJKJIW3
 R2
 r1
 !s85 0
@@ -969,45 +1041,45 @@ I4Vjd4nJRDmFGXzkoPlJlQ1
 !s105 trap_unit_sv_unit
 S1
 R3
-Z49 w1611726194
-Z50 8C:/Users/camin/Documents/VanilaCore/core/trap_unit.sv
-Z51 FC:/Users/camin/Documents/VanilaCore/core/trap_unit.sv
+Z58 w1611726194
+Z59 8C:/Users/camin/Documents/VanilaCore/core/trap_unit.sv
+Z60 FC:/Users/camin/Documents/VanilaCore/core/trap_unit.sv
 L0 13
 R4
-R15
-Z52 !s107 C:\Users\camin\Documents\VanilaCore\core\debug_def.sv|C:/Users/camin/Documents/VanilaCore/core/trap_unit.sv|
-Z53 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/trap_unit.sv|
+R36
+Z61 !s107 C:\Users\camin\Documents\VanilaCore\core\debug_def.sv|C:/Users/camin/Documents/VanilaCore/core/trap_unit.sv|
+Z62 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/trap_unit.sv|
 !i113 1
 R6
 R7
 Xtrap_unit_sv_unit
 R0
 R11
-V8;2b8_V_65e5HI:E60K9b1
+V[k>@e;0dgb[]ia3IJKJIW3
 r1
 !s85 0
 31
 !i10b 1
 !s100 SoV72h=?l@bC^9`SVXXUh0
-I8;2b8_V_65e5HI:E60K9b1
+I[k>@e;0dgb[]ia3IJKJIW3
 !i103 1
 S1
 R3
-R49
-R50
-R51
+R58
+R59
+R60
 R23
 L0 1
 R4
-R15
-R52
-R53
+R36
+R61
+R62
 !i113 1
 R6
 R7
 vuart_slave
 R0
-!s110 1611989487
+R1
 !i10b 1
 !s100 O9?hG:dXjoYI>cjJTdgln3
 IbQ8RchM4EaKlY59_H5IG<1
@@ -1023,7 +1095,7 @@ R4
 r1
 !s85 0
 31
-!s108 1611989487.000000
+R55
 !s107 C:/Users/camin/Documents/VanilaCore/core/uart_slave.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/uart_slave.sv|
 !i113 1
@@ -1055,15 +1127,15 @@ R6
 R7
 YWB4
 R0
-R35
+R1
 !i10b 1
-!s100 bO^DQgNKHghjnFJfl?oR_3
-Ib5DDYde:8_KA<e4LoZ<Wz1
+!s100 QbeT>;GPKLn@2IJKnPPjY0
+IE9dndRZlmaPHie74`2Z>a1
 R2
 !s105 wishbone_sv_unit
 S1
 R3
-w1612038887
+w1613332082
 8C:/Users/camin/Documents/VanilaCore/core/wishbone.sv
 FC:/Users/camin/Documents/VanilaCore/core/wishbone.sv
 L0 1
@@ -1071,13 +1143,37 @@ R4
 r1
 !s85 0
 31
-R36
+R5
 !s107 C:/Users/camin/Documents/VanilaCore/core/wishbone.sv|
 !s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/wishbone.sv|
 !i113 1
 R6
 R7
 n@w@b4
+vwb_bus_ctrl_cmb
+R0
+R56
+!i10b 1
+!s100 o7HQ]TaEfK_HmZWXM^3km3
+I^]3Ed>6Jb^CPXV]85=`NE3
+R2
+!s105 wb_bus_ctrl_cmb_sv_unit
+S1
+R3
+w1616085409
+8C:/Users/camin/Documents/VanilaCore/core/wb_bus_ctrl_cmb.sv
+FC:/Users/camin/Documents/VanilaCore/core/wb_bus_ctrl_cmb.sv
+L0 8
+R4
+r1
+!s85 0
+31
+R57
+!s107 C:/Users/camin/Documents/VanilaCore/core/wb_bus_ctrl_cmb.sv|
+!s90 -reportprogress|300|-work|work|-sv|-stats=none|C:/Users/camin/Documents/VanilaCore/core/wb_bus_ctrl_cmb.sv|
+!i113 1
+R6
+R7
 vwishbone_arbitrer
 R0
 R1
@@ -1112,7 +1208,7 @@ R2
 !s105 ZeltaSoC_sv_unit
 S1
 R3
-w1611720015
+w1616081352
 8C:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv
 FC:/Users/camin/Documents/VanilaCore/core/ZeltaSoC.sv
 L0 4

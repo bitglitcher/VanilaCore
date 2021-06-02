@@ -4,19 +4,683 @@
 			"name" : "Top",
 			"pins" : [
 				{
-					"name" : "uart_tx",
+					"name" : "inst_bus.CYC",
 					"strict" : false
 				},
 				{
-					"name" : "clk",
+					"name" : "inst_bus.ADR[0]",
 					"strict" : false
 				},
 				{
-					"name" : "rst",
+					"name" : "inst_bus.ADR[1]",
 					"strict" : false
 				},
 				{
-					"name" : "uart_rx",
+					"name" : "inst_bus.ADR[2]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[3]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[4]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[5]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[6]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[7]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[8]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[9]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[10]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[11]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[12]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[13]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[14]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[15]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[16]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[17]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[18]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[19]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[20]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[21]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[22]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[23]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[24]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[25]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[26]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[27]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[28]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[29]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[30]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ADR[31]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.STB",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.WE",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[0]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[1]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[2]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[3]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[4]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[5]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[6]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[7]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[8]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[9]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[10]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[11]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[12]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[13]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[14]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[15]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[16]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[17]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[18]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[19]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[20]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[21]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[22]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[23]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[24]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[25]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[26]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[27]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[28]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[29]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[30]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_O[31]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.CYC",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[0]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[1]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[2]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[3]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[4]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[5]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[6]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[7]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[8]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[9]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[10]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[11]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[12]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[13]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[14]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[15]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[16]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[17]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[18]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[19]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[20]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[21]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[22]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[23]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[24]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[25]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[26]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[27]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[28]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[29]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[30]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ADR[31]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.STB",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.ACK",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.clk",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.rst",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.ACK",
+					"strict" : false
+				},
+				{
+					"name" : "timer_irq",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[16]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[15]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[17]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[18]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[19]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[20]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[13]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[22]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[23]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[21]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[24]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[12]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[14]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[8]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[9]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[10]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[11]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[25]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[26]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[27]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[28]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[29]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[30]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[31]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[7]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[0]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[1]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[2]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[3]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[4]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[5]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[6]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[7]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[8]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[9]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[10]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[11]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[12]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[13]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[14]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[15]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[16]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[17]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[18]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[19]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[20]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[21]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[22]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[23]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[24]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[25]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[26]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[27]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[28]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[29]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[30]",
+					"strict" : false
+				},
+				{
+					"name" : "data_bus.DAT_I[31]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[5]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[0]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[1]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[6]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[2]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[3]",
+					"strict" : false
+				},
+				{
+					"name" : "inst_bus.DAT_I[4]",
 					"strict" : false
 				}
 			]

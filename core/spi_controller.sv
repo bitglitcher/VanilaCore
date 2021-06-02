@@ -1,9 +1,9 @@
+`include "debug_def.sv"
 //Benjamin Herrera Navarro.
 //11:15PM
 //12/17/2020
 
-
-
+//The spi controller will not support burst mode because the rate at which data is consumed is slower than the bus data feed.
 module spi_controller #(parameter BASE_ADDR = 0)
 (
     WB4.slave wb,
@@ -13,10 +13,10 @@ module spi_controller #(parameter BASE_ADDR = 0)
 
 //Writes on DATA go to the Write buffer, and Reads are from the read buffer
 
-//8bits address granularity
+//8bits address granularity 
 //Memory Map
 //0x00 RW DATA
-//0x04 RO Count Reads //Avaliable bytes to recieve
+//0x04 RO Count Reads //Avaliable bytes to receive
 //0x05 RO Count Writes //Avaliable byte to send
 //0x06 RW Config
 //0x07 RW CS_EN
@@ -48,10 +48,22 @@ reg   [7:0] cs_mask;
 logic [7:0] conf; //Configuration register
 logic [31:0] div;
 
-initial begin
-    cs_mask = 0;
-    conf = 8'b00100;
-end
+`ifdef sim
+    initial begin
+        cs_mask = 0;
+        conf = 8'b00100;
+    end
+
+    //
+    always_comb begin
+        if(wb.ACK != 1'bx) assert(wb.ACK != wb.ERR) else $stop;
+        if(wb.ACK != 1'bx) assert(wb.ACK != wb.RTY) else $stop;
+        if(wb.ERR != 1'bx) assert(wb.ERR != wb.RTY) else $stop;
+        if(wb.ERR != 1'bx) assert(wb.ERR != wb.ACK) else $stop;
+        if(wb.RTY != 1'bx) assert(wb.RTY != wb.ACK) else $stop;
+        if(wb.RTY != 1'bx) assert(wb.RTY != wb.ERR) else $stop;
+    end
+`endif
 
 //Split the bus into separate signals
 wire XSB = conf[0:0];
@@ -76,14 +88,14 @@ logic wr_full;
 logic [31:0] rd_dout;
 logic [31:0] wr_dout;
 
-logic [$clog2(8'hff)-1:0] rd_count;
-logic [$clog2(8'hff)-1:0] wr_count;
+logic [$clog2(16-1):0] rd_count;
+logic [$clog2(16-1):0] wr_count;
 
 //This is the data from the SPI master input data
 wire [7:0] rd_buff_din;
 
 //This is the read buffer, data is stored here
-fifo #(.DATA_WIDTH(8), .MEMORY_DEPTH(8'hff)) spi_read_buffer
+fifo #(.DATA_WIDTH(8), .MEMORY_DEPTH(16)) spi_read_buffer
 (
     //Syscon
     .clk(wb.clk),
@@ -104,7 +116,7 @@ fifo #(.DATA_WIDTH(8), .MEMORY_DEPTH(8'hff)) spi_read_buffer
 );
 
 //This is the write buffer, data is stored here before sending it
-fifo #(.DATA_WIDTH(8), .MEMORY_DEPTH(8'hff)) spi_write_buffer
+fifo #(.DATA_WIDTH(8), .MEMORY_DEPTH(16)) spi_write_buffer
 (
     //Syscon
     .clk(wb.clk),
@@ -168,6 +180,7 @@ wishbone_states_t wb_states;
 
 logic ACK_S;
 logic ERR_S;
+logic RTY_S;
 
 //To push data into the fifo
 always@(posedge wb.clk)
@@ -201,6 +214,7 @@ begin
                                     rd_rd_buff = 1'b0;
                                     ACK_S = 1'b1;
                                     ERR_S = 1'b0;
+                                    RTY_S = 1'b0;
                                     wb_states = TAKE_WB;
                                 end
                                 else //Dont allow to take more writes, because the SPI read buffer is full and data can be lost
@@ -208,7 +222,8 @@ begin
                                     wr_wr_buff = 1'b0;
                                     rd_rd_buff = 1'b0; //Post an error
                                     ACK_S = 1'b0;
-                                    ERR_S = 1'b1; //Set error, so the master device doesn't wait for a ACK reply
+                                    RTY_S = 1'b1; //Set retry, so the master device doesn't wait for a ACK reply
+                                    ERR_S = 1'b0; 
                                     wb_states = TAKE_WB;
                                 end
                             end
@@ -221,15 +236,17 @@ begin
                                     rd_rd_buff = 1'b0;
                                     ACK_S = 1'b1;
                                     ERR_S = 1'b0;
+                                    RTY_S = 1'b0; 
                                     wb_states = TAKE_WB;
                                 end
-                                else //Else do nothing and wait until buffer is empty
+                                else //Tell the master device to retry
                                 begin
                                     wr_wr_buff = 1'b0;
                                     rd_rd_buff = 1'b0;
                                     ACK_S = 1'b0;
-                                    ERR_S = 1'b0;
-                                    wb_states = IDDLE_WB; //Stay the same, until the buffer is not full
+                                    RTY_S = 1'b1;
+                                    ERR_S = 1'b0; 
+                                    wb_states = TAKE_WB;
                                 end
 
                             end
@@ -241,6 +258,7 @@ begin
                             rd_rd_buff = 1'b0;
                             ACK_S = 1'b1;
                             ERR_S = 1'b0;
+                            RTY_S = 1'b0;
                             wb_states = TAKE_WB;
                             conf = wb.DAT_O [7:0];
                         end
@@ -251,6 +269,7 @@ begin
                             rd_rd_buff = 1'b0;
                             ACK_S = 1'b1;
                             ERR_S = 1'b0;
+                            RTY_S = 1'b0;
                             wb_states = TAKE_WB;
                             cs_mask = wb.DAT_O [7:0];
                         end
@@ -261,6 +280,7 @@ begin
                             rd_rd_buff = 1'b0;
                             ACK_S = 1'b1;
                             ERR_S = 1'b0;
+                            RTY_S = 1'b0;
                             wb_states = TAKE_WB;
                             div = wb.DAT_O [7:0];
                         end
@@ -270,6 +290,7 @@ begin
                             rd_rd_buff = 1'b0;
                             ACK_S = 1'b0;
                             ERR_S = 1'b1; //Set error, so the master device doesn't wait for a ACK reply
+                            RTY_S = 1'b0;
                             wb_states = TAKE_WB;
                         end
                     end
@@ -284,14 +305,16 @@ begin
                                 wr_wr_buff = 1'b0;
                                 ACK_S = 1'b1;
                                 ERR_S = 1'b0;
+                                RTY_S = 1'b0;
                                 wb_states = TAKE_WB;
                             end
-                            else //Read error because buffer empty
+                            else //Read retry because empty buffer
                             begin
                                 rd_rd_buff = 1'b0;
                                 wr_wr_buff = 1'b0;
                                 ACK_S = 1'b0;
-                                ERR_S = 1'b1;
+                                ERR_S = 1'b0;
+                                RTY_S = 1'b1;
                                 wb_states = TAKE_WB;
                             end
                         end
@@ -301,6 +324,7 @@ begin
                             wr_wr_buff = 1'b0;
                             ACK_S = 1'b1;
                             ERR_S = 1'b0;
+                            RTY_S = 1'b0;
                             wb_states = TAKE_WB;
                         end
                         else
@@ -308,6 +332,7 @@ begin
                             //Read error
                             rd_rd_buff = 1'b0;
                             wr_wr_buff = 1'b0;
+                            RTY_S = 1'b0;
                             ACK_S = 1'b0;
                             ERR_S = 1'b1;
                             wb_states = TAKE_WB;
@@ -320,6 +345,7 @@ begin
                     wr_wr_buff = 1'b0;
                     ACK_S = 1'b0;
                     ERR_S = 1'b0;
+                    RTY_S = 1'b0;
                     wb_states = IDDLE_WB;
                 end
             end
@@ -329,6 +355,7 @@ begin
                 wr_wr_buff = 1'b0;
                 ACK_S = 1'b0;
                 ERR_S = 1'b0;
+                RTY_S = 1'b0;
                 wb_states = IDDLE_WB;
             end
             default:
@@ -337,6 +364,7 @@ begin
                 wr_wr_buff = 1'b0;
                 ACK_S = 1'b0;
                 ERR_S = 1'b0;
+                RTY_S = 1'b0;
                 wb_states = IDDLE_WB;
             end
         endcase
@@ -345,6 +373,7 @@ end
 
 assign wb.ACK = ACK_S & wb.STB & wb.CYC;
 assign wb.ERR = ERR_S & wb.STB & wb.CYC;
+assign wb.RTY = RTY_S & wb.STB & wb.CYC;
 
 /////////////////////////////////////////////////////////////////////////
 //                                SPI Logic                            //

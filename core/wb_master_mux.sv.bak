@@ -1,0 +1,54 @@
+
+//Author: Benjamin Herrera Navarro
+//Date: 2/26/2021
+//7:38 PM
+
+
+module wb_master_mux
+(
+    input logic sel,
+    WB4.master slave0, //Slave BUS 0
+    WB4.master slave1, //Slave BUS 1
+    WB4.slave muxed_out //This bus is the output of the multiplexer
+);
+
+always_comb begin
+    if(sel) 
+    begin
+        slave1.STB = muxed_out.STB;
+        slave1.ADR = muxed_out.ADR;
+        slave1.CYC = muxed_out.CYC;
+        slave1.WE = muxed_out.WE;
+        slave1.DAT_O = muxed_out.DAT_O;
+        slave0.STB = 0;
+        slave0.ADR = 0;
+        slave0.CYC = 0;
+        slave0.WE =  0;
+        slave0.DAT_O = 0;
+        muxed_out.ACK = slave1.ACK;
+        muxed_out.ERR = slave1.ERR;
+        muxed_out.RTY = slave1.RTY;
+        muxed_out.DAT_I = slave1.DAT_I;
+    end
+    else
+    begin
+        slave0.STB = muxed_out.STB;
+        slave0.ADR = muxed_out.ADR;
+        slave0.CYC = muxed_out.CYC;
+        slave0.WE = muxed_out.WE;
+        slave0.DAT_O = muxed_out.DAT_O;
+        slave0.STB = 1;
+        slave0.ADR = 1;
+        slave0.CYC = 1;
+        slave0.WE =  1;
+        slave0.DAT_O = 1;
+        muxed_out.ACK = slave0.ACK;
+        muxed_out.ERR = slave0.ERR;
+        muxed_out.RTY = slave0.RTY;
+        muxed_out.DAT_I = slave0.DAT_I;
+    end
+end
+
+
+
+endmodule
